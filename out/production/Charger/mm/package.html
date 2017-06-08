@@ -1,0 +1,85 @@
+<html>
+
+<body>
+Classes for managing Mental Models (MM) and metrics related to data acquired in MMAT experiments.
+Mental models are conceptual graphs created by users under controlled conditions (usually a constrained
+CG editor) so that they can be compared and analyzed. The CGs are all assumed to reside in a single
+folder, which is the folder from which Charger should be reading when it is launched (see the -p command 
+line argument to Charger). There is an auxiliary folder, with the same parent as the startup folder,
+called "Saved" that may contain models that are in progress. A few MM classes may access this "sideways" folder 
+in order to tell if a model is valid or not.
+
+<p>Some terminology will be helpful:</p>
+
+<dl>
+    <dt>Project</dt>
+    <dd>A long term effort for collecting models. Often there will only be one active project in a given time period.</dd> 
+    <dd>A set of groups, where a group is usually a course (e.g., "py102") or any other group of subjects.</dd>
+    
+    <dt>Group</dt>
+    <dd>A set of teams, all either part of a course (e.g., "py102") or any other group of subjects.</dd>
+    
+    <dt>Team</dt>
+    <dd>The basic unit of analysis in this research -- a collection of each team member's models over the 
+    phases of project life (see Phase below)</dd>
+    <dd>There should be three team-phases for a completely acquired team.</dd>
+
+    <dt>Team-Phase</dt>
+    <dd>A set of models, one for each team member, all acquired at the same phase of project life (beginning, middle, end)</dd>
+
+    <dt>Phase</dt>
+    <dd>A point in time at which a particular model is acquired. For example, one version of these experiments
+        gathers models at the beginning, middle and end of a process. Each such time is the phase attribute of 
+        a model.</dd>
+
+    <dt>Component Kind</dt>
+    <dt>Kind</dt>
+    <dd>A point of view with respect to a user's model, focusing on either concepts (congruence, singletons, etc.) or relations/tuples. 
+    Since most of the metrics involve similar calculations for each, it is useful to consider this as an additional dimension.</dd>
+    
+    <dt>Model</dt>
+    <dd>A single instance of a user's model. Acquired by an interactive user editor, these are
+        then stored as a cgx file for Charger (and MM) to read.</dd>
+    
+    <dt>Distinct concept/tuples</dt>
+    <dd>The set of concepts (or tuples, etc.) that are distinct from one another. These are derived
+        from the point of view of a matcher. It is intended that no distinct concept matches any other
+        distinct concept. Likewise for relationship tuples and any other feature being analyzed.</dd>
+
+    <dt>Coreferent set</dt>
+    <dt>Counterpart set</dt>
+    <dd>The set of concepts (or tuples, etc.) that all refer to the same thing/individual.  This may be
+        established by using synonyms for matching, or a regular match. By whatever means it is established,
+        its meaning is that all concepts in the set are counterparts to each other in their respective models.
+        Each distinct concept (whether there's actually one or multiple concepts) forms a coreferent set, although
+        in many cases, the "set" consists of just one concept. </dd>
+
+    <dt>Singleton</dt>
+    <dd>A component (concept or tuple) that appears in exactly one model of a group.</dd>
+
+</dl>
+<p>
+    Metrics are generally considered to hold over a set of two or more models. For different purposes, different
+    combinations of models can be analyzed for each team. The following analysis methods are supported:
+<ul>
+    <li>Team congruence - the measures of how much agreement there exists between models. Depending on the parameters chosen,
+        a special "observer" and/or a special "combined" model may be included in the set of models.
+    </li>
+    <li>
+        Pair-wise congruence - the measures of model agreement treated entirely between pairs of models. Again, observer and/or
+        combined models may or may not be included.
+    </li>
+    <li>
+        Group-as-team congruence - this measures an entire group of teams all as a single team. In effect this measures the levels 
+        of overall congruence between every model in the group.
+    </li>
+</ul>
+</p>
+
+<p>
+    The models themselves are stored in an MTeamPhase object. Each MTeamPhase object also contains an MCongruenceMetrics object for
+    both concepts and relations. An MTeamMetrics object is used purely for assembling the analysis results for output.
+</p>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conceptualgraph editor="CharGer" version="3.5b1" created="Dec 12, 2005 1:54:04 PM" user="David Phillips">
+<graph id="77899990938" owner="0">
+    <type>
+        <label>Proposition</label>
+    </type>
+    <layout>
+        <rectangle x="5.0" y="5.0" width="900.0" height="750.0"/>
+        <color foreground="0,0,175" background="0,0,175"/>
+    </layout>
+    <relation id="77899990940" owner="77899990938">
+        <type>
+            <label>link</label>
+        </type>
+        <layout>
+            <rectangle x="359.0" y="59.0" width="40.0" height="18.0"/>
+            <color foreground="0,0,0" background="255,231,100"/>
+        </layout>
+    </relation>
+    <concept id="77899990942" owner="77899990938">
+        <type>
+            <label>T</label>
+        </type>
+        <layout>
+            <rectangle x="464.0" y="113.5" width="40.0" height="25.0"/>
+            <color foreground="255,255,255" background="0,0,175"/>
+        </layout>
+    </concept>
+    <concept id="77899990939" owner="77899990938">
+        <type>
+            <label>T</label>
+        </type>
+        <layout>
+            <rectangle x="101.0" y="52.5" width="40.0" height="25.0"/>
+            <color foreground="255,255,255" background="0,0,175"/>
+        </layout>
+    </concept>
+    <arrow id="77899990941" owner="77899990938" label="-" from="77899990939" to="77899990940">
+        <layout>
+            <rectangle x="247.92188" y="64.004906" width="6.0" height="6.0"/>
+            <color foreground="0,0,0" background="255,255,255"/>
+        </layout>
+    </arrow>
+    <arrow id="77899990943" owner="77899990938" label="-" from="77899990940" to="77899990942">
+        <layout>
+            <rectangle x="425.0625" y="92.325" width="6.0" height="6.0"/>
+            <color foreground="0,0,0" background="255,255,255"/>
+        </layout>
+    </arrow>
+</graph>
+
+</conceptualgraph>
+

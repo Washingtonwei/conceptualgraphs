@@ -839,4 +839,281 @@ public class OperManager {
         f.setTheText( "<font face=\"sans-serif\" size=\"-1\">\n" + summary + detail );
         f.setVisible( true );
     }
+
+    /**
+     * called after rules are selected, hook this up with the button "Apply
+     * Selected" in the Applying Rules to CGs frame,
+     *
+     * @param g
+     *            the graph on which we apply a list of rules
+     * @param the
+     *            list of rules we are about to apply to the CG g
+     */
+    public void performActionApplyRules(Graph g, ArrayList<Graph> rules) {
+        // Iterator iter = new DeepIterator(g);
+        // while (iter.hasNext()) {
+        //
+        // String text = ((GraphObject) (iter.next())).getTextLabel();
+        // System.out.println(text + " ");
+        //
+        // }
+
+        for (Graph r : rules) {
+            System.out.println("Applying one rule now:");
+            applyRule(g, r);
+        }
+
+        // for (Graph r : rules) {
+        // Iterator iter = r.graphObjects();
+        // while (iter.hasNext()) {
+        // GraphObject go = (GraphObject) iter.next();
+        // if (go instanceof Graph) {
+        // String text = go.getTextLabel();
+        // System.out.println(text + " ");
+        // } else if (go instanceof Concept) {
+        // String text = go.getTextLabel();
+        // System.out.println(text + " ");
+        // }
+        // }
+        // }
+
+        System.out.println("Rules have all been applied to the graph!");
+    }
+
+    /**
+     *
+     * @param graph
+     *            the graph on which rule is applied
+     * @param rule
+     *            rule is in the form of if...then...
+     */
+    public void applyRule(Graph graph, Graph rule) {
+        Rule r = parseRuleGraph(rule);
+
+        // This snippet can print the concepts and relations in Antecedent
+        // Iterator iter = r.getAntecedent().graphObjects();
+        // while (iter.hasNext()) {
+        // GraphObject go = (GraphObject) iter.next();
+        // if (go instanceof Graph) {
+        //
+        // } else if (go instanceof GNode) {
+        // String text = go.getTextLabel();
+        // System.out.println(text + " ");
+        // }
+        // }
+
+        // look for the structure of antecedent of r in the conceptHashStore of
+        // graph
+        // and update the current graph with consequent of r
+
+        // first, obtain a random concept from the antecedent of the rule
+        Iterator iter = r.getAntecedent().graphObjects();
+        GraphObject go = null;
+        while (iter.hasNext()) {
+            go = (GraphObject) iter.next();
+            if (go instanceof Graph) {
+                continue;
+            } else if (go instanceof Concept) {
+                break;
+            } else {
+                continue;
+            }
+        }
+        Concept c = (Concept) go;
+
+        // second, get the type of c
+        String type = c.getTypeLabel();
+
+        // third, look for this type in graph, the returned value is a graph of
+        // concepts
+        if (graph.conceptHashStore.containsKey(type)) {
+            Graph cg = graph.conceptHashStore.get(type);
+            System.out.println("About to match all");
+            matchAll(cg, c);
+        } else {
+            System.out.println("Cannot apply this rule.");
+        }
+
+    }
+
+    /**
+     * cg is from the graph, c is from the antecedent of the rule An issue if we
+     * need to pass the rule itself as well
+     *
+     * @param cg
+     *            a graph of concepts with the same type C
+     * @param c
+     *            a concept with type C from the antecedent of a rule
+     */
+    private void matchAll(Graph cg, Concept c) {
+
+        // go is a concept in graph that has the same type of c
+        // we want to investigate from go
+        for (GraphObject go : cg.objectHashStore.values()) {
+            System.out.println(match((GNode) go, c) + "!!!");
+        }
+
+    }
+
+    private boolean match(GNode nG, GNode nR) {
+
+        int flag = 0;// flag is 0 if no mismatch is found, it becomes 1 if the
+        // rule doesn't
+        // match the graph
+        // before match go and c, create a data structure to keep track of
+        // discovered (gray) and visited nodes (black)
+        HashMap<String, GNode> discovered1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited2 = new HashMap<String, GNode>();
+        Queue<GNode> q1 = new LinkedList<GNode>();
+        Queue<GNode> q2 = new LinkedList<GNode>();
+
+        discovered1.put(nG.objectID.toString(), nG);
+        discovered2.put(nR.objectID.toString(), nR);
+        q1.add(nG);
+        q2.add(nR);
+        while (!q2.isEmpty() && flag == 0) {
+            GNode nRule = q2.remove();
+            GNode nGraph = q1.remove();
+
+            // get all neighbors of nRule, FROM in fromListR and TO in toListR
+            ArrayList fromListR = nRule.getLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListR = nRule.getLinkedNodes(GEdge.Direction.TO);
+
+            // get all neighbors of nGraph, FROM in fromListG and TO in toListG
+            ArrayList fromListG = nGraph.getLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListG = nGraph.getLinkedNodes(GEdge.Direction.TO);
+
+            // match fromListR with fromListG
+            for (Object o : fromListR) {
+                GNode nodeRule = (GNode) o;// nodeRule is a neighbor of nRule
+
+                // if this is the time time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRule.objectID.toString())
+                        && !discovered2.containsKey(nodeRule.objectID.toString())) {
+                    discovered2.put(nodeRule.objectID.toString(), nodeRule);
+
+                    // see if we can find a match in fromListG for nodeRule
+                    GNode n = null;
+                    for (Object object : fromListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTypeLabel().equals(nodeRule.getTypeLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            break;
+                        }
+                    }
+                    // after we traverse through from list, we didn't find a
+                    // match,terminate everything
+                    if (n == null) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRule);
+                    q1.add(n);
+                }
+            }
+            // enqueue all unvisited neighbors (TO)
+            for (Object o : toListR) {
+                GNode nodeRule = (GNode) o;// nodeRule is a neighbor of nRule
+
+                // if this is the time time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRule.objectID.toString())
+                        && !discovered2.containsKey(nodeRule.objectID.toString())) {
+                    discovered2.put(nodeRule.objectID.toString(), nodeRule);
+
+                    // see if we can find a match in fromListG for nodeRule
+                    GNode n = null;
+                    for (Object object : fromListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTypeLabel().equals(nodeRule.getTypeLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            break;
+                        }
+                    }
+                    // after we traverse through from list, we didn't find a
+                    // match,terminate everything
+                    if (n == null) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRule);
+                    q1.add(n);
+                }
+            }
+            visited2.put(nRule.objectID.toString(), nRule);
+            visited1.put(nGraph.objectID.toString(), nGraph);
+        }
+        if (flag == 0)
+            return true;
+        else
+            return false;
+        // make sure go and c are matched
+        // TO-DO, figure out how to compare
+        // if (g.getTypeLabel().compareTo(c.getTypeLabel()) != 0) {
+        // return false;
+        // } else {
+        // // then match their neighbors
+        // // go "from" to match
+        // //
+        // //
+        // http://stackoverflow.com/questions/13501142/java-arraylist-how-can-i-tell-if-two-lists-are-equal-order-not-mattering
+        // // the two sets of nodes don't have to be equal, c's is contained in
+        // // g's
+        // ArrayList<GNode> cFrom = c.getLinkedNodes(GEdge.Direction.FROM);
+        // ArrayList<GNode> gFrom = g.getLinkedNodes(GEdge.Direction.FROM);
+        //
+        // if (gFrom.size() < cFrom.size()) {
+        // return false;
+        // } else {
+        // for (GNode cN : cFrom) {
+        // String cNType = cN.getTypeLabel();
+        // // compare each node in gFrom to cN (compare the type)
+        // for (GNode gN : gFrom) {
+        //
+        // }
+        // }
+        // }
+
+        // }
+
+    }
+
+    /**
+     * return a rule object that contains the Antecedent and Consequent contexts
+     * as two graphs
+     *
+     * @param rule
+     * @return
+     */
+    private Rule parseRuleGraph(Graph rule) {
+        Rule result = new Rule();
+        Iterator iter = rule.graphObjects();
+        while (iter.hasNext()) {
+            GraphObject go = (GraphObject) iter.next();
+            // since we require that a file only contains one if...then... rule
+            // there will be only two graphs, one if_then relation and maybe
+            // other concepts used to coreference.
+            if (go instanceof Graph) {
+                Graph g = (Graph) go;
+                // if the graph "points to" relation "if_then", this is
+                // antecedent
+                if (g.getLinkedNodes(GEdge.Direction.FROM).size() == 0) {
+                    result.setAntecedent(g);
+                } else {
+                    result.setConsequent(g);
+                }
+            } else if (go instanceof Concept) {
+                // figure out co-reference!!!
+                // TBD
+            }
+        }
+        return result;
+    }
+
+    // end by Bingyang Wei
 } // class end

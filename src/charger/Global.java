@@ -285,6 +285,12 @@ public class Global {
      * initialized.
      */
     public static HubFrame CharGerMasterFrame;
+
+    /**
+     * By Bingyang Wei
+     */
+    public static RulesSelectionFrame RuleSelectionFrame;
+
     /**
      * keep a global page format instance for all the editing windows to use
      */
@@ -1476,6 +1482,76 @@ public class Global {
         } else {
             return null; // throw new CGFileException( "user cancelled." );
         }
+    }
+
+    /**
+     * Opens a new graph in its own editframe.
+     *
+     * @param filename the file from which to open a graph; null if a dialog is
+     * to be invoked. Called from various open menus, buttons and routines. Has
+     * two parts: getting the graph from the file and then setting up the
+     * editing window. Not responsible for focus, etc.
+     * @return the (short) filename of the file actually opened, generally only
+     * useful when passed "null" to let the invoker know what file the user
+     * chose. Returns null if the user canceled a dialog or there was any kind
+     * of error.
+     *
+     * Should return a full File descriptor so that we can use it all over the
+     * place
+     */
+    public synchronized static EditFrame openRuleInNewFrame( String filename ) {
+        EditFrame ef = null;
+        File sourceFile = null;
+        File sourceAbsoluteFile = null;
+        File sourceDirectoryFile = Global.GraphFolderFile;
+        NumberFormat nformat = NumberFormat.getNumberInstance();
+        nformat.setMaximumFractionDigits( 2 );
+        nformat.setMinimumFractionDigits( 2 );
+        Global.info( nformat.format( Runtime.getRuntime().freeMemory() / ( 1024d * 1024d ) ) + " M free" );
+
+        if ( filename != null ) {
+            sourceFile = new File( filename );
+            if ( sourceFile.isAbsolute() ) {
+                sourceAbsoluteFile = sourceFile;
+            } else {
+                sourceAbsoluteFile = new File( sourceDirectoryFile, sourceFile.getName() );
+            }
+            sourceDirectoryFile = sourceAbsoluteFile.getParentFile();
+        } else {
+            sourceAbsoluteFile = queryForGraphFile( sourceDirectoryFile );
+        }
+
+
+
+        File newFile = null;
+
+        try {
+            Graph attempt = new Graph( null );
+            IOManager iomgr = new IOManager( CharGerMasterFrame );
+//                Global.info("in openGraphInFrame, file about to open is " + sourceAbsoluteFile.getAbsolutePath());
+            newFile = IOManager.FileToGraph( sourceAbsoluteFile, attempt );
+//                Global.info("file just opened is " + newFile.getAbsolutePath());
+
+
+            ef = new EditFrame( newFile, attempt, false );
+            if ( ef != null ) {
+                if ( Global.enableEditFrameThreads ) {
+                    new Thread( Global.EditFrameThreadGroup, ef, newFile.getName() ).start();
+                }
+            }
+        } catch ( CGFileException cgfe ) {
+            //{ Hub.warning( "Problem opening " + filename + ": " + cgfe.getMessage() );
+            JFrame current = CharGerMasterFrame;
+            if ( CurrentEditFrame != null ) {
+                current = CurrentEditFrame;
+            }
+            JOptionPane.showMessageDialog( current, cgfe.getMessage(), "Input File Error",
+                    JOptionPane.ERROR_MESSAGE );
+            // Should probably collect all warnings here and just dump them when done (if loading multiple files)
+        } catch ( CGStorageError cgse ) { //Hub.warning( "Problem creating graph for " + newFile.getAbsolutePath() + ": " + cgse.getMessage());
+        }
+        return ef;
+
     }
 
     /**

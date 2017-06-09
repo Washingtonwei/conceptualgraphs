@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45d69f91-02ed-44af-9003-dbcaa302dfde" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/charger/obj/Rule.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/obj/Graph.java" afterPath="$PROJECT_DIR$/src/charger/obj/Graph.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/Global.java" afterPath="$PROJECT_DIR$/src/charger/Global.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/OperManager.java" afterPath="$PROJECT_DIR$/src/charger/OperManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,21 +32,48 @@
       <file leaf-file-name="OperManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="599">
-              <caret line="840" column="5" lean-forward="true" selection-start-line="840" selection-start-column="5" selection-end-line="840" selection-end-column="5" />
+            <state relative-caret-position="811">
+              <caret line="1117" column="26" lean-forward="false" selection-start-line="1117" selection-start-column="26" selection-end-line="1117" selection-end-column="26" />
+              <folding>
+                <element signature="e#40191#40206#0" expanded="true" />
+                <element signature="e#40266#40281#0" expanded="true" />
+                <element signature="e#40338#40353#0" expanded="true" />
+                <element signature="e#40410#40425#0" expanded="true" />
+                <element signature="e#40469#40476#0" expanded="true" />
+                <element signature="e#40520#40527#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="1538" column="38" lean-forward="true" selection-start-line="1538" selection-start-column="38" selection-end-line="1538" selection-end-column="38" />
+              <folding>
+                <element signature="e#4138#4153#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RulesSelectionFrame.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/charger/RulesSelectionFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="454" column="42" lean-forward="true" selection-start-line="454" selection-start-column="42" selection-end-line="454" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+      <file leaf-file-name="PragmaticSense.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/charger/PragmaticSense.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="1552" column="5" lean-forward="false" selection-start-line="1552" selection-start-column="5" selection-end-line="1552" selection-end-column="5" />
-              <folding>
-                <element signature="e#4138#4153#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="306">
+              <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -83,8 +112,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/charger/EditManager.java" />
-        <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/Graph.java" />
+        <option value="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" />
+        <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
+        <option value="$PROJECT_DIR$/src/charger/Global.java" />
       </list>
     </option>
   </component>
@@ -210,6 +241,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger\obj" />
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger" />
       <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src" />
     </key>
   </component>
@@ -658,12 +691,20 @@
       <workItem from="1495812347273" duration="791000" />
       <workItem from="1496947554525" duration="26000" />
       <workItem from="1496948676900" duration="1297000" />
-      <workItem from="1497014877855" duration="1585000" />
+      <workItem from="1497014877855" duration="2701000" />
     </task>
+    <task id="LOCAL-00001" summary="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()">
+      <created>1497016852809</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1497016852809</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3699000" />
+    <option name="totallyTimeSpent" value="4815000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -705,6 +746,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -770,21 +815,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="840" column="5" lean-forward="true" selection-start-line="840" selection-start-column="5" selection-end-line="840" selection-end-column="5" />
+        <state relative-caret-position="349">
+          <caret line="1538" column="38" lean-forward="true" selection-start-line="1538" selection-start-column="38" selection-end-line="1538" selection-end-column="38" />
+          <folding>
+            <element signature="e#4138#4153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/PragmaticSense.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Rule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="811">
-          <caret line="1552" column="5" lean-forward="false" selection-start-line="1552" selection-start-column="5" selection-end-line="1552" selection-end-column="5" />
+          <caret line="1117" column="26" lean-forward="false" selection-start-line="1117" selection-start-column="26" selection-end-line="1117" selection-end-column="26" />
           <folding>
-            <element signature="e#4138#4153#0" expanded="true" />
+            <element signature="e#40191#40206#0" expanded="true" />
+            <element signature="e#40266#40281#0" expanded="true" />
+            <element signature="e#40338#40353#0" expanded="true" />
+            <element signature="e#40410#40425#0" expanded="true" />
+            <element signature="e#40469#40476#0" expanded="true" />
+            <element signature="e#40520#40527#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/Global.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="1554" column="5" lean-forward="false" selection-start-line="1554" selection-start-column="5" selection-end-line="1554" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/RulesSelectionFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="454" column="42" lean-forward="true" selection-start-line="454" selection-start-column="42" selection-end-line="454" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -720,7 +720,9 @@ public class EditManager implements ItemListener, ActionListener, ClipboardOwner
             OperManager.performActionValidate( ef.TheGraph );
         } else if ( e.getActionCommand().equals( "Show Internals" ) ) {
             ef.omgr.performActionShowInternals( sortSelectionObjects() );
-        } else if ( e.getActionCommand().equals( Global.strs( "AttachOntologyLabel" ) ) ) {
+        } else if(e.getActionCommand().equals( "Select Rules" )){
+            ef.omgr.performActionSelectRules( ef.TheGraph );
+        }else if ( e.getActionCommand().equals( Global.strs( "AttachOntologyLabel" ) ) ) {
             ef.omgr.performActionAttachOntologyLabel( sortSelectionObjects() );
         } else if ( e.getActionCommand().equals( Global.strs( "DeleteOntologyLabel" ) ) ) {
             ef.omgr.performActionDeleteOntologyLabel( sortSelectionObjects() );

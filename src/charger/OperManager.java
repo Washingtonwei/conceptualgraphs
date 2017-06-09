@@ -146,6 +146,7 @@ public class OperManager {
             ef.emgr.makeNewMenuItem( ef.examineMenu, "Show Internals", 0 );
             ef.emgr.makeNewMenuItem( ef.examineMenu, ValidateCmdLabel, 0 );
             ef.emgr.makeNewMenuItem( ef.examineMenu, VerifyInternalLabel, 0 );
+            ef.emgr.makeNewMenuItem(ef.examineMenu, "Select Rules", 0);
             ef.emgr.makeNewMenuItem( ef.operateMenu, CommitToKBLabel, 0 );
             ef.operateMenu.getItem( ef.operateMenu.getItemCount() - 1 ).setEnabled( false );
 
@@ -840,13 +841,26 @@ public class OperManager {
         f.setVisible( true );
     }
 
+    // By Bingyang Wei
+    public void performActionSelectRules(Graph theGraph) {
+        // first, generate concept subgraph for the current CG
+        theGraph.generateConceptSubgraphs();
+        // second, start up a wizard to select rules
+        try {
+            Global.RuleSelectionFrame = new RulesSelectionFrame(ef);
+        } catch (ExceptionInInitializerError e) {
+            charger.Global.error("RuleFrame.setup error: can't create rules frame: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     /**
      * called after rules are selected, hook this up with the button "Apply
      * Selected" in the Applying Rules to CGs frame,
      *
      * @param g
      *            the graph on which we apply a list of rules
-     * @param the
+     * @param rules
      *            list of rules we are about to apply to the CG g
      */
     public void performActionApplyRules(Graph g, ArrayList<Graph> rules) {

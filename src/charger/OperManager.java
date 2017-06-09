@@ -43,7 +43,7 @@ import javax.swing.*;
  * variable.
  *
  * @author Harry S. Delugach ( delugach@uah.edu ) Copyright (c) 1998-2014 by
- * Harry S. Delugach.
+ *         Harry S. Delugach.
  * @see EditFrame
  * @see CanvasPanel
  * @see EditManager
@@ -64,12 +64,12 @@ public class OperManager {
     public static String JoinWithOpenGraphsLabel = "Join selected nodes in open graphs";
     public static String CommitToKBLabel = "Commit to knowledge base";
     public static String ModifyMatchingSchemeLabel = "Modify matching scheme";
-    public JMenuItem operationSummarize = new JMenuItem( Global.knowledgeManager.summarizeKnowledgeAction );
-    public JMenuItem operationMakeTypeHierarchy = new JMenuItem( kb.ConceptManager.makeTypeHierarchyAction );
+    public JMenuItem operationSummarize = new JMenuItem(Global.knowledgeManager.summarizeKnowledgeAction);
+    public JMenuItem operationMakeTypeHierarchy = new JMenuItem(kb.ConceptManager.makeTypeHierarchyAction);
     public JMenuItem operationBinaryRelationMatching = null;
     public JMenuItem operationBestBinaryRelationMatching = null;
 
-    public OperManager( EditFrame outerFrame ) {
+    public OperManager(EditFrame outerFrame) {
         // Link to the outer frame
         ef = outerFrame;
         makeMenus();
@@ -87,76 +87,76 @@ public class OperManager {
          * @see #binaryRelationMatchScorer
          */
         binaryRelationMatchingAction = new AbstractAction() {
-            public Object getValue( String s ) {
-                if ( s.equals( Action.NAME ) ) {
-                    return Global.strs( "RelationMatchingLabel" );
+            public Object getValue(String s) {
+                if (s.equals(Action.NAME)) {
+                    return Global.strs("RelationMatchingLabel");
                 }
-                return super.getValue( s );
+                return super.getValue(s);
             }
 
-            public void actionPerformed( ActionEvent e ) {
+            public void actionPerformed(ActionEvent e) {
                 performActionRelationMatching();
             }
         };
-        operationBinaryRelationMatching = new JMenuItem( binaryRelationMatchingAction );
+        operationBinaryRelationMatching = new JMenuItem(binaryRelationMatchingAction);
 
         bestBinaryRelationMatchingAction = new AbstractAction() {
-            public Object getValue( String s ) {
-                if ( s.equals( Action.NAME ) ) {
-                    return Global.strs( "BestRelationMatchingLabel" );
+            public Object getValue(String s) {
+                if (s.equals(Action.NAME)) {
+                    return Global.strs("BestRelationMatchingLabel");
                 }
-                return super.getValue( s );
+                return super.getValue(s);
             }
 
-            public void actionPerformed( ActionEvent e ) {
+            public void actionPerformed(ActionEvent e) {
                 performActionBestRelationMatching();
             }
         };
-        operationBestBinaryRelationMatching = new JMenuItem( bestBinaryRelationMatchingAction );
+        operationBestBinaryRelationMatching = new JMenuItem(bestBinaryRelationMatchingAction);
 
         // Here's where the "Examine" and "Operation" menu is arranged and initialized.
 
-        if ( Global.wordnetEnabled ) {
-            ef.emgr.makeNewMenuItem( ef.operateMenu, Global.strs( "AttachOntologyLabel" ), 0 );
+        if (Global.wordnetEnabled) {
+            ef.emgr.makeNewMenuItem(ef.operateMenu, Global.strs("AttachOntologyLabel"), 0);
             // odd code because menu items are anonymous variables
-            ef.operateMenu.getItem( ef.operateMenu.getMenuComponentCount() - 1 ).setAccelerator(
-                    KeyStroke.getKeyStroke( KeyEvent.VK_A, Global.AcceleratorKey | InputEvent.SHIFT_MASK ) );
-            ef.emgr.makeNewMenuItem( ef.operateMenu, Global.strs( "DeleteOntologyLabel" ), 0 );
+            ef.operateMenu.getItem(ef.operateMenu.getMenuComponentCount() - 1).setAccelerator(
+                    KeyStroke.getKeyStroke(KeyEvent.VK_A, Global.AcceleratorKey | InputEvent.SHIFT_MASK));
+            ef.emgr.makeNewMenuItem(ef.operateMenu, Global.strs("DeleteOntologyLabel"), 0);
             ef.operateMenu.addSeparator();
         }
 
         // Here's where any new MMAT operations should be added! HSD 
 
-        ef.operateMenu.add( operationBinaryRelationMatching );
-        ef.operateMenu.add( operationBestBinaryRelationMatching );
+        ef.operateMenu.add(operationBinaryRelationMatching);
+        ef.operateMenu.add(operationBestBinaryRelationMatching);
 
 
         ef.operateMenu.addSeparator();
 
-        if ( !Global.OfficialRelease ) {
+        if (!Global.OfficialRelease) {
             //ef.operateMenu.getItem(ef.operateMenu.getItemCount()-1).setEnabled( false );
-            ef.emgr.makeNewMenuItem( ef.operateMenu, MaxJoinWithOpenGraphsLabel, 0 );
+            ef.emgr.makeNewMenuItem(ef.operateMenu, MaxJoinWithOpenGraphsLabel, 0);
         }
-        ef.emgr.makeNewMenuItem( ef.operateMenu, JoinWithOpenGraphsLabel, 0 );
+        ef.emgr.makeNewMenuItem(ef.operateMenu, JoinWithOpenGraphsLabel, 0);
         // REMOVE-NOTIO  ef.emgr.makeNewMenuItem( ef.operateMenu, MatchToOpenGraphsLabel, 0 );
-        ef.emgr.makeNewMenuItem( ef.operateMenu, MakeGenericCmdLabel, 0 );
+        ef.emgr.makeNewMenuItem(ef.operateMenu, MakeGenericCmdLabel, 0);
         //ef.operateMenu.addSeparator();
 
-        if ( !Global.OfficialRelease ) {
-            ef.emgr.makeNewMenuItem( ef.examineMenu, "Show Internals", 0 );
-            ef.emgr.makeNewMenuItem( ef.examineMenu, ValidateCmdLabel, 0 );
-            ef.emgr.makeNewMenuItem( ef.examineMenu, VerifyInternalLabel, 0 );
+        if (!Global.OfficialRelease) {
+            ef.emgr.makeNewMenuItem(ef.examineMenu, "Show Internals", 0);
+            ef.emgr.makeNewMenuItem(ef.examineMenu, ValidateCmdLabel, 0);
+            ef.emgr.makeNewMenuItem(ef.examineMenu, VerifyInternalLabel, 0);
             ef.emgr.makeNewMenuItem(ef.examineMenu, "Select Rules", 0);
-            ef.emgr.makeNewMenuItem( ef.operateMenu, CommitToKBLabel, 0 );
-            ef.operateMenu.getItem( ef.operateMenu.getItemCount() - 1 ).setEnabled( false );
+            ef.emgr.makeNewMenuItem(ef.operateMenu, CommitToKBLabel, 0);
+            ef.operateMenu.getItem(ef.operateMenu.getItemCount() - 1).setEnabled(false);
 
             //makeNewMenuItem( ef.operateMenu, "Create KB... (unimplemented)", 0 );
             //ef.operateMenu.getItem(ef.operateMenu.getItemCount()-1).setEnabled( false );
         }
         ef.operateMenu.addSeparator();
 
-        ef.operateMenu.add( operationMakeTypeHierarchy );
-        ef.operateMenu.add( operationSummarize );
+        ef.operateMenu.add(operationMakeTypeHierarchy);
+        ef.operateMenu.add(operationSummarize);
 
         ef.operateMenu.addSeparator();
 
@@ -214,44 +214,43 @@ public class OperManager {
      */
     public void setMenuItems() {
 
-        for ( int num = 0; num < ef.examineMenu.getItemCount(); num++ ) {
-            JMenuItem mi = ef.examineMenu.getItem( num );
-            if ( mi == null ) {
-                continue; 		// a separator
+        for (int num = 0; num < ef.examineMenu.getItemCount(); num++) {
+            JMenuItem mi = ef.examineMenu.getItem(num);
+            if (mi == null) {
+                continue;        // a separator
             }
             String s = mi.getText();
-            if ( s.equals( MakeGenericCmdLabel ) ) {
-                mi.setEnabled( ef.somethingHasBeenSelected );
+            if (s.equals(MakeGenericCmdLabel)) {
+                mi.setEnabled(ef.somethingHasBeenSelected);
             }
         }
 
-        for ( int num = 0; num < ef.operateMenu.getItemCount(); num++ ) {
-            JMenuItem mi = ef.operateMenu.getItem( num );
-            if ( mi == null ) {
-                continue; 		// a separator
+        for (int num = 0; num < ef.operateMenu.getItemCount(); num++) {
+            JMenuItem mi = ef.operateMenu.getItem(num);
+            if (mi == null) {
+                continue;        // a separator
             }
             String s = mi.getText();
-            if ( s.equals( MakeGenericCmdLabel ) ) {
-                mi.setEnabled( ef.somethingHasBeenSelected );
-            } else if ( s.equals( JoinWithOpenGraphsLabel ) ) {
-                mi.setEnabled( ef.somethingHasBeenSelected );
-            } else if ( s.equals( Global.strs( "AttachOntologyLabel" ) ) ) {
-                mi.setEnabled( ef.somethingHasBeenSelected );
-            } else if ( s.equals( Global.strs( "DeleteOntologyLabel" ) ) ) {
-                mi.setEnabled( ef.somethingHasBeenSelected );
+            if (s.equals(MakeGenericCmdLabel)) {
+                mi.setEnabled(ef.somethingHasBeenSelected);
+            } else if (s.equals(JoinWithOpenGraphsLabel)) {
+                mi.setEnabled(ef.somethingHasBeenSelected);
+            } else if (s.equals(Global.strs("AttachOntologyLabel"))) {
+                mi.setEnabled(ef.somethingHasBeenSelected);
+            } else if (s.equals(Global.strs("DeleteOntologyLabel"))) {
+                mi.setEnabled(ef.somethingHasBeenSelected);
             }
         }
 
     }
 
 
-    
     protected void finalize() throws Throwable {
         try {
-            Global.info( "finalizing oper manager of frame " + ef.editFrameNum );
+            Global.info("finalizing oper manager of frame " + ef.editFrameNum);
 
             super.finalize();
-        } catch ( Throwable t ) {
+        } catch (Throwable t) {
             throw t;
         } finally {
             super.finalize();
@@ -276,87 +275,87 @@ public class OperManager {
      *
      * @param g The graph to be checked.
      */
-    public static void performActionValidate( Graph g ) {
+    public static void performActionValidate(Graph g) {
         //    Global.info( "  validating graph " + ((g.getOwnerFrame() != null) ? g.getOwnerFrame().getFilename() : "null") );
 
-        
+
         // Remove incomplete edges that don't have two non-null ends
-        DeepIterator edges = new DeepIterator( g, GraphObject.Kind.GEDGE );
+        DeepIterator edges = new DeepIterator(g, GraphObject.Kind.GEDGE);
         int numIncomplete = 0;
 
-        while ( edges.hasNext() ) {
-            GEdge edge = (GEdge)edges.next();        // possible incomplete edge
+        while (edges.hasNext()) {
+            GEdge edge = (GEdge) edges.next();        // possible incomplete edge
             boolean isIncomplete = false;
-            if ( edge.toObj == null || edge.fromObj == null ) {
+            if (edge.toObj == null || edge.fromObj == null) {
                 edge.detachFromGNodes();
-                edge.getOwnerGraph().forgetObject( edge );
+                edge.getOwnerGraph().forgetObject(edge);
                 numIncomplete++;
             }
         }
-        if ( numIncomplete > 0 ) {
-            Global.info( "Removed " + numIncomplete + " incomplete edges (i.e., connecting null objects)." );
+        if (numIncomplete > 0) {
+            Global.info("Removed " + numIncomplete + " incomplete edges (i.e., connecting null objects).");
         }
 
         // Remove duplicate arrows
-        DeepIterator arrows = new DeepIterator( g, new Arrow() );
+        DeepIterator arrows = new DeepIterator(g, new Arrow());
         ArrayList<Arrow> noduplicates = new ArrayList<Arrow>();
         int numDuplicates = 0;
 
-        while ( arrows.hasNext() ) {
-            Arrow a = (Arrow)arrows.next();        // possible duplicate arrow
+        while (arrows.hasNext()) {
+            Arrow a = (Arrow) arrows.next();        // possible duplicate arrow
             boolean isDuplicate = false;
             int k = 0;
-            while ( k < noduplicates.size() && !isDuplicate ) {
+            while (k < noduplicates.size() && !isDuplicate) {
                 //Global.info( "looking at arrow from id " + a.fromObj.getTextLabel() + " to id " + a.toObj.getTextLabel() );
 //                if ( ( a.toObj.objectID == noduplicates.get( k ).toObj.objectID )
 //                        && ( a.fromObj.objectID == noduplicates.get( k ).fromObj.objectID ) ) // duplicate arrow
-                if ( ( a.toObj.objectID.equals( noduplicates.get( k ).toObj.objectID ))
-                        && ( a.fromObj.objectID.equals( noduplicates.get( k ).fromObj.objectID ) ) ) // duplicate arrow
+                if ((a.toObj.objectID.equals(noduplicates.get(k).toObj.objectID))
+                        && (a.fromObj.objectID.equals(noduplicates.get(k).fromObj.objectID))) // duplicate arrow
                 {
                     isDuplicate = true;
                     numDuplicates++;
-                    Global.info( "Found DUPLICATE arrow from id " + a.fromObj.getTextLabel() + " to id " + a.toObj.getTextLabel() );
+                    Global.info("Found DUPLICATE arrow from id " + a.fromObj.getTextLabel() + " to id " + a.toObj.getTextLabel());
                     a.detachFromGNodes();
-                    a.getOwnerGraph().forgetObject( a );
+                    a.getOwnerGraph().forgetObject(a);
                 } else {
                     k++;
                 }
             }
-            if ( !isDuplicate ) {
-                noduplicates.add( a );
+            if (!isDuplicate) {
+                noduplicates.add(a);
             }
         }
-        if ( numDuplicates > 0 ) {
-            Global.info( "Removed " + numDuplicates + " duplicate arrows." );
+        if (numDuplicates > 0) {
+            Global.info("Removed " + numDuplicates + " duplicate arrows.");
         }
-                // check edges:
-                // perform placeEdge to make sure it's in the right place.
-                // check for edges that aren't owned by the same graph as their linked nodes
-        DeepIterator iter = new DeepIterator( g, GraphObject.Kind.GEDGE );
-        while ( iter.hasNext() ) {
+        // check edges:
+        // perform placeEdge to make sure it's in the right place.
+        // check for edges that aren't owned by the same graph as their linked nodes
+        DeepIterator iter = new DeepIterator(g, GraphObject.Kind.GEDGE);
+        while (iter.hasNext()) {
             GEdge edge = (GEdge) iter.next();
             edge.placeEdge();
             Graph owner = edge.getOwnerGraph();
             Graph fromOwner = edge.fromObj.getOwnerGraph();
             Graph toOwner = edge.toObj.getOwnerGraph();
-                    // if edge's owner is also both nodes' owner, then it's okay
-            if ( fromOwner == owner && toOwner == owner ) 
+            // if edge's owner is also both nodes' owner, then it's okay
+            if (fromOwner == owner && toOwner == owner)
                 continue;
-                        // if both nodes have same owner, it should be the edge's owner too
-            if ( fromOwner == toOwner ) 
-                edge.setOwnerGraph( fromOwner);
+            // if both nodes have same owner, it should be the edge's owner too
+            if (fromOwner == toOwner)
+                edge.setOwnerGraph(fromOwner);
             else {  // need to set the edge as owned by the 
                 Graph dominantContext;
                 try {
-                    dominantContext = GraphObject.findDominantContext( new ArrayList<GraphObject>(Arrays.asList(fromOwner, toOwner) )  );
-                   edge.setOwnerGraph( dominantContext );
-             } catch ( CGContextException ex ) {
-                    Global.error( "Trying to validate graph." + ex.getMessage() );
+                    dominantContext = GraphObject.findDominantContext(new ArrayList<GraphObject>(Arrays.asList(fromOwner, toOwner)));
+                    edge.setOwnerGraph(dominantContext);
+                } catch (CGContextException ex) {
+                    Global.error("Trying to validate graph." + ex.getMessage());
                 }
             }
         }
-        
-                // check for arrow rectangle that out of whack
+
+        // check for arrow rectangle that out of whack
     }
 
     /**
@@ -392,30 +391,30 @@ public class OperManager {
      * the default.
      *
      * @param objectList list of graph objects. Only GNodes are considered, others are
-     * ignored.
+     *                   ignored.
      */
-    public void performActionAttachOntologyLabel( ArrayList objectList ) {
+    public void performActionAttachOntologyLabel(ArrayList objectList) {
         // NEED to change this sometime so that it's connected to some more permanent wordnet mgr
-        charger.gloss.wn.WordnetManager wnmgr = charger.gloss.wn.WordnetManager.getInstance( new Transcript() );
+        charger.gloss.wn.WordnetManager wnmgr = charger.gloss.wn.WordnetManager.getInstance(new Transcript());
         Iterator iter = objectList.iterator();
         boolean changed = false;
-        while ( iter.hasNext() ) {
-            GraphObject go = (GraphObject)iter.next();
-            if ( go instanceof GNode ) {
-                charger.gloss.AbstractTypeDescriptor descr = ( (GNode)go ).getTypeDescriptor();
+        while (iter.hasNext()) {
+            GraphObject go = (GraphObject) iter.next();
+            if (go instanceof GNode) {
+                charger.gloss.AbstractTypeDescriptor descr = ((GNode) go).getTypeDescriptor();
                 //if ( descr == null )
                 // NEED a parameter for charger preferences indicating whether to try generic
                 // for now, force to try generic
                 // NEED to pass type label as a phrase into this.
                 changed = changed | wnmgr.attachDescriptor(
-                        kb.ConceptManager.getSensesFromPhrase( ( (GNode)go ).getTypeLabel(), wnmgr ), (GNode)go );
+                        kb.ConceptManager.getSensesFromPhrase(((GNode) go).getTypeLabel(), wnmgr), (GNode) go);
                 //else
                 //	changed = changed | wnmgr.attachDescriptor(  
                 //		wnmgr.queryForSense( ((GNode)go).getTypeLabel(), descr, true ), (GNode)go );
             }
         }
-        if ( changed ) {
-            ef.emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
+        if (changed) {
+            ef.emgr.setChangedContent(EditChange.SEMANTICS, EditChange.UNDOABLE);
         }
     }
 
@@ -423,16 +422,16 @@ public class OperManager {
      * Shows a brief internal summary for the selected objects.
      *
      * @param objectList vector of graph objects. Only GNodes are considered, others are
-     * ignored.
+     *                   ignored.
      */
-    public void performActionShowInternals( ArrayList objectList ) {
+    public void performActionShowInternals(ArrayList objectList) {
         // NEED to change this sometime so that it's connected to some more permanent wordnet mgr
         Iterator iter = objectList.iterator();
         boolean changed = false;
-        while ( iter.hasNext() ) {
-            GraphObject go = (GraphObject)iter.next();
-            if ( go instanceof GNode ) {
-                Global.consoleMsg( go.toString() );
+        while (iter.hasNext()) {
+            GraphObject go = (GraphObject) iter.next();
+            if (go instanceof GNode) {
+                Global.consoleMsg(go.toString());
             }
         }
     }
@@ -442,31 +441,31 @@ public class OperManager {
      * in the vector.
      *
      * @param objectList vector of graph objects. Only GNodes are considered, others are
-     * ignored.
+     *                   ignored.
      */
-    public void performActionDeleteOntologyLabel( ArrayList objectList ) {
-        if ( JOptionPane.NO_OPTION
-                == JOptionPane.showConfirmDialog( ef, "You're deleting glossary entries. Are you sure?",
-                "Deleting glossary text", JOptionPane.YES_NO_OPTION ) ) {
+    public void performActionDeleteOntologyLabel(ArrayList objectList) {
+        if (JOptionPane.NO_OPTION
+                == JOptionPane.showConfirmDialog(ef, "You're deleting glossary entries. Are you sure?",
+                "Deleting glossary text", JOptionPane.YES_NO_OPTION)) {
             return;
         }
 
-        charger.gloss.wn.WordnetManager wnmgr = charger.gloss.wn.WordnetManager.getInstance( new Transcript() );
+        charger.gloss.wn.WordnetManager wnmgr = charger.gloss.wn.WordnetManager.getInstance(new Transcript());
         Iterator iter = objectList.iterator();
         boolean changed = false;
         int entrycount = 0;
-        while ( iter.hasNext() ) {
-            GraphObject go = (GraphObject)iter.next();
-            if ( go instanceof GNode ) {
-                boolean b = wnmgr.forgetDescriptors( (GNode)go );
-                if ( b ) {
+        while (iter.hasNext()) {
+            GraphObject go = (GraphObject) iter.next();
+            if (go instanceof GNode) {
+                boolean b = wnmgr.forgetDescriptors((GNode) go);
+                if (b) {
                     entrycount++;
                 }
                 changed = changed | b;
             }
         }
-        ef.emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
-        ef.displayOneLiner( "Deleted " + entrycount + " glossary entries." );
+        ef.emgr.setChangedContent(EditChange.SEMANTICS, EditChange.UNDOABLE);
+        ef.displayOneLiner("Deleted " + entrycount + " glossary entries.");
     }
 
     /**
@@ -527,6 +526,7 @@ public class OperManager {
 						
      }
      * */
+
     /**
      * Operates a maximal join operation between graphs. Attempts to join, in
      * sequence, all the open graphs, according to a general matching scheme
@@ -534,16 +534,15 @@ public class OperManager {
      * new window.
      *
      * @param g The current graph
-     *
      */
-    public void performActionMaxJoinWithOpenGraphs( Graph g ) {
+    public void performActionMaxJoinWithOpenGraphs(Graph g) {
         Iterator opengraphs = Global.editFrameList.values().iterator();
         boolean joinMade = false;
         //notio.Graph joinGraph = g.nxConcept.getReferent().getDescriptor();
         //notio.Graph joinGraph = g.nxGraph;
-        while ( opengraphs.hasNext() && !joinMade ) {
-            EditFrame next = ( (EditFrame)opengraphs.next() );
-            if ( next != Global.getCurrentEditFrame() ) {
+        while (opengraphs.hasNext() && !joinMade) {
+            EditFrame next = ((EditFrame) opengraphs.next());
+            if (next != Global.getCurrentEditFrame()) {
                 /*try {
                  //Global.info( "joining 1st graph from joining edit frame " + next.graphName );
                  //Global.info( "current graph is " + Ops.showWholeCharGerGraph( g, false ) );
@@ -573,14 +572,14 @@ public class OperManager {
                  */
             }
         }
-        if ( joinMade ) {
+        if (joinMade) {
             //Global.info( "joined graph is " + NotioTrans.generateCGIFString( Hub.KB, //ef.TheKB, 
             //		new notio.TranslationContext(),  joinGraph ) );
             EditFrame newef = new EditFrame();
-            if ( newef != null ) {
-                if ( Global.enableEditFrameThreads ) {
-                    new Thread( Global.EditFrameThreadGroup, newef ).start();	// added 
-                }			    //Graph join = NotioTrans.notioGraphToCharGer( joinGraph, new charger.obj.Graph( null ) );
+            if (newef != null) {
+                if (Global.enableEditFrameThreads) {
+                    new Thread(Global.EditFrameThreadGroup, newef).start();    // added
+                }                //Graph join = NotioTrans.notioGraphToCharGer( joinGraph, new charger.obj.Graph( null ) );
                 //Global.info( "join = " + Ops.showWholeCharGerGraph( join, true ) );
                 //Global.info( "TheGraph = " + Ops.showWholeCharGerGraph( newef.TheGraph, true ) );
                 //newef.attachGraphToFrame( ef.graphName + "-join", join, true );
@@ -597,18 +596,17 @@ public class OperManager {
      * attempted. The joined graph is opened in a new window.
      *
      * @param g The current graph
-     *
      */
-    public void performActionJoinWithOpenGraphsBROKEN( Graph g ) {
+    public void performActionJoinWithOpenGraphsBROKEN(Graph g) {
         Iterator opengraphs = Global.editFrameList.values().iterator();
         boolean joinMade = false;
         //notio.Graph joinGraph = g.nxConcept.getReferent().getDescriptor();
-       // notio.Graph joinGraph = g.nxGraph;
-        while ( opengraphs.hasNext() && !joinMade ) {
-            EditFrame next = ( (EditFrame)opengraphs.next() );
-            if ( next != Global.getCurrentEditFrame() ) {
+        // notio.Graph joinGraph = g.nxGraph;
+        while (opengraphs.hasNext() && !joinMade) {
+            EditFrame next = ((EditFrame) opengraphs.next());
+            if (next != Global.getCurrentEditFrame()) {
                 //notio.Concept[] selectedNotioNodes = CGUtil.setSelectedNotioNodes( ef );
-				/*try {
+                /*try {
                  //Global.info( "joining 1st graph from joining edit frame " + next.graphName );
                  //Global.info( "current graph is " + Ops.showWholeCharGerGraph( g, false ) );
                  //Global.info( "edit frame's graph is " + Ops.showWholeCharGerGraph( next.TheGraph, false ) );
@@ -636,13 +634,13 @@ public class OperManager {
                  */
             }
         }
-        if ( joinMade ) {
+        if (joinMade) {
             //Global.info( "joined graph is " + NotioTrans.generateCGIFString( Hub.KB, //ef.TheKB, 
             //		new notio.TranslationContext(),  joinGraph ) );
             EditFrame newef = new EditFrame();
-            if ( newef != null ) {
-                if ( Global.enableEditFrameThreads ) {
-                    new Thread( Global.EditFrameThreadGroup, newef ).start();	// added 
+            if (newef != null) {
+                if (Global.enableEditFrameThreads) {
+                    new Thread(Global.EditFrameThreadGroup, newef).start();    // added
                 }
                 //Graph join = NotioTrans.notioGraphToCharGer( joinGraph, new charger.obj.Graph( null ) );
                 //Global.info( "join = " + Ops.showWholeCharGerGraph( join, true ) );
@@ -656,17 +654,17 @@ public class OperManager {
      * Used whenever a co-referent link appears, to bring referents into
      * consistency.
      */
-    public boolean joinReferents( GraphObject go1, GraphObject go2 ) {
+    public boolean joinReferents(GraphObject go1, GraphObject go2) {
         boolean change = false;
-        String ref1 = ( (Concept)go1 ).getReferent();
-        String ref2 = ( (Concept)go2 ).getReferent();
-        if ( !ref2.equals( ref1 ) ) {
-            if ( ref2.equals( "" ) ) {
-                ( (Concept)go2 ).setReferent( ref1, true );
+        String ref1 = ((Concept) go1).getReferent();
+        String ref2 = ((Concept) go2).getReferent();
+        if (!ref2.equals(ref1)) {
+            if (ref2.equals("")) {
+                ((Concept) go2).setReferent(ref1, true);
                 change = true;
             }
-            if ( ref1.equals( "" ) ) {
-                ( (Concept)go1 ).setReferent( ref2, true );
+            if (ref1.equals("")) {
+                ((Concept) go1).setReferent(ref2, true);
                 change = true;
             }
         }
@@ -683,21 +681,21 @@ public class OperManager {
         // algorithm:
         //		enumerate all selected objects
         //		if object is selected, then execute a delete operation on it
-        if ( ef.somethingHasBeenSelected ) {
-            if ( ! ef.emgr.useNewUndoRedo ) ef.emgr.makeHoldGraph();
-            for ( int k = 0; k < ef.EFSelectedObjects.size(); k++ ) {
-                GraphObject go = (GraphObject)ef.EFSelectedObjects.get( k );
-                if ( go instanceof Concept ) {
-                    ( (Concept)go ).setTextLabel( ( (Concept)go ).getTypeLabel() );
+        if (ef.somethingHasBeenSelected) {
+            if (!ef.emgr.useNewUndoRedo) ef.emgr.makeHoldGraph();
+            for (int k = 0; k < ef.EFSelectedObjects.size(); k++) {
+                GraphObject go = (GraphObject) ef.EFSelectedObjects.get(k);
+                if (go instanceof Concept) {
+                    ((Concept) go).setTextLabel(((Concept) go).getTypeLabel());
                 }
-                if ( go instanceof Graph ) {
-                    ( (Graph)go ).setTextLabel( ( (Graph)go ).getTypeLabel() );
+                if (go instanceof Graph) {
+                    ((Graph) go).setTextLabel(((Graph) go).getTypeLabel());
                 }
             }
-            ef.emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
+            ef.emgr.setChangedContent(EditChange.SEMANTICS, EditChange.UNDOABLE);
             //ef.resetSelection();	// shouldn't be necessary; we already forgot all the selected objects
         } else {
-            ef.displayOneLiner( "Please select some thing(s) you want to make generic." );
+            ef.displayOneLiner("Please select some thing(s) you want to make generic.");
         }
         ef.repaint();
     }
@@ -707,7 +705,7 @@ public class OperManager {
      *
      * @param g
      */
-    public void performActionCommitToKB( Graph g ) {
+    public void performActionCommitToKB(Graph g) {
     }
 
     /**
@@ -718,17 +716,17 @@ public class OperManager {
      * @see #matchMasterToOpenGraphs
      */
     public void performActionRelationMatching() {
-        kb.matching.BinaryRelationMatchGroupMetrics matches = matchMasterToOpenGraphs( ef );
+        kb.matching.BinaryRelationMatchGroupMetrics matches = matchMasterToOpenGraphs(ef);
 
         String detail = "";
 
         // display detail for the master once
-        kb.matching.BinaryRelationMatch match = new BinaryRelationMatch( ef.TheGraph, ef.getGraphName() );
+        kb.matching.BinaryRelationMatch match = new BinaryRelationMatch(ef.TheGraph, ef.getGraphName());
 
 
         AbstractTupleMatcher tupleMatcher = Global.knowledgeManager.createCurrentTupleMatcher();
 
-        match.setTupleMatcher( tupleMatcher );
+        match.setTupleMatcher(tupleMatcher);
         // Here is where the BinaryRelationMatch class needs to provide some interface to talk to the
         // concept matcher.
 
@@ -737,21 +735,21 @@ public class OperManager {
 
         String summary = matches.getCompleteSummaryHTML();
         ArrayList listOfMatches = matches.getMatches();
-        for ( int k = 0; k < listOfMatches.size(); k++ ) {
-            detail += ( (BinaryRelationMatch)listOfMatches.get( k ) ).matchedDetailToHTML();
+        for (int k = 0; k < listOfMatches.size(); k++) {
+            detail += ((BinaryRelationMatch) listOfMatches.get(k)).matchedDetailToHTML();
         }
 
-        GenericTextFrame f = new GenericTextFrame( ef, "Binary relation matching", ef.getFilename(), null, null );
+        GenericTextFrame f = new GenericTextFrame(ef, "Binary relation matching", ef.getFilename(), null, null);
         //  render as HTML
         String suggestedPath =
-                Util.stripFileExtension( ef.graphAbsoluteFile.getAbsolutePath() );
-        File suggestedFile = new File( suggestedPath + ".html" );
+                Util.stripFileExtension(ef.graphAbsoluteFile.getAbsolutePath());
+        File suggestedFile = new File(suggestedPath + ".html");
         //         HSD  ef.textFormDisplay.setSuggestedFile( suggestedFile );
-        f.setSuggestedFile( suggestedFile );
+        f.setSuggestedFile(suggestedFile);
 
-        f.theText.setContentType( "text/html" );
-        f.setTheText( "<font face=\"sans-serif\" size=\"-1\">\n" + summary + detail );
-        f.setVisible( true );
+        f.theText.setContentType("text/html");
+        f.setTheText("<font face=\"sans-serif\" size=\"-1\">\n" + summary + detail);
+        f.setVisible(true);
 
     }
 
@@ -759,32 +757,32 @@ public class OperManager {
      * Consider the set of open graphs and prepare a match table in HTML.
      *
      * @param masterForMatch edit frame containing the graph to be considered as
-     * the master.
+     *                       the master.
      * @see GenericTextFrame
      */
-    public kb.matching.BinaryRelationMatchGroupMetrics matchMasterToOpenGraphs( EditFrame masterForMatch ) {
-        kb.matching.BinaryRelationMatchGroupMetrics matches = 
-                new kb.matching.BinaryRelationMatchGroupMetrics( "Matches based on " + masterForMatch.getGraphName() + " as master." );
+    public kb.matching.BinaryRelationMatchGroupMetrics matchMasterToOpenGraphs(EditFrame masterForMatch) {
+        kb.matching.BinaryRelationMatchGroupMetrics matches =
+                new kb.matching.BinaryRelationMatchGroupMetrics("Matches based on " + masterForMatch.getGraphName() + " as master.");
 
 
         // for each edit frame (other than the current one!) 
         Iterator graphiter = Global.editFrameList.values().iterator();
-        
+
         AbstractTupleMatcher currentTupleMatcher = Global.knowledgeManager.createCurrentTupleMatcher();
-                            // Here would be a good place to call a method defined on the abstract tuple matcher 
-                    // so that any matcher can perform additional setup (e.g., finding its synonym list).
+        // Here would be a good place to call a method defined on the abstract tuple matcher
+        // so that any matcher can perform additional setup (e.g., finding its synonym list).
 
 
-        while ( graphiter.hasNext() ) {
+        while (graphiter.hasNext()) {
             // create a new match each time so that the match group can do stats
-            BinaryRelationMatch match = new BinaryRelationMatch( masterForMatch.TheGraph, masterForMatch.getGraphName() );
-            match.setTupleMatcher( currentTupleMatcher );
-            EditFrame nextef = (EditFrame)graphiter.next();
+            BinaryRelationMatch match = new BinaryRelationMatch(masterForMatch.TheGraph, masterForMatch.getGraphName());
+            match.setTupleMatcher(currentTupleMatcher);
+            EditFrame nextef = (EditFrame) graphiter.next();
 
-            if ( nextef != masterForMatch ) {
+            if (nextef != masterForMatch) {
                 Graph g = nextef.TheGraph;
-                match.matchAGraph( g, nextef.getGraphName() );
-                matches.addMatch( match );
+                match.matchAGraph(g, nextef.getGraphName());
+                matches.addMatch(match);
                 //summary += match.getSummaryHTML();
             }
         }
@@ -811,12 +809,12 @@ public class OperManager {
         // for each edit frame 
         Iterator graphiter = Global.editFrameList.values().iterator();
 
-        while ( graphiter.hasNext() ) {
-            EditFrame currentef = (EditFrame)graphiter.next();
-            kb.matching.BinaryRelationMatchGroupMetrics matches = matchMasterToOpenGraphs( currentef );
+        while (graphiter.hasNext()) {
+            EditFrame currentef = (EditFrame) graphiter.next();
+            kb.matching.BinaryRelationMatchGroupMetrics matches = matchMasterToOpenGraphs(currentef);
             matches.scanAllMatches();
             float score = matches.getOverallScore();
-            if ( score >= maxOverall ) {
+            if (score >= maxOverall) {
                 maxOverall = score;
                 bestMatch = matches;
             }
@@ -829,16 +827,16 @@ public class OperManager {
 
         summary += bestMatch.getCompleteSummaryHTML();
 
-        GenericTextFrame f = new GenericTextFrame( ef, "Best binary relation matching", bestMatch.getName(), null, null );
+        GenericTextFrame f = new GenericTextFrame(ef, "Best binary relation matching", bestMatch.getName(), null, null);
         //  render as HTML
         String suggestedPath =
-                Util.stripFileExtension( ef.graphAbsoluteFile.getAbsolutePath() );
-        File suggestedFile = new File( suggestedPath + ".html" );
+                Util.stripFileExtension(ef.graphAbsoluteFile.getAbsolutePath());
+        File suggestedFile = new File(suggestedPath + ".html");
         //  HSD  ef.textFormDisplay.setSuggestedFile( suggestedFile );
-        f.setSuggestedFile( suggestedFile );
-        f.theText.setContentType( "text/html" );
-        f.setTheText( "<font face=\"sans-serif\" size=\"-1\">\n" + summary + detail );
-        f.setVisible( true );
+        f.setSuggestedFile(suggestedFile);
+        f.theText.setContentType("text/html");
+        f.setTheText("<font face=\"sans-serif\" size=\"-1\">\n" + summary + detail);
+        f.setVisible(true);
     }
 
     // By Bingyang Wei
@@ -855,13 +853,11 @@ public class OperManager {
     }
 
     /**
-     * called after rules are selected, hook this up with the button "Apply
-     * Selected" in the Applying Rules to CGs frame,
+     * This method is called after the button "Apply
+     * Selected" in the Applying Rules to CGs frame is clicked.
      *
-     * @param g
-     *            the graph on which we apply a list of rules
-     * @param rules
-     *            list of rules we are about to apply to the CG g
+     * @param g     the graph on which we apply a list of selected rules
+     * @param rules list of rules we are about to apply to the CG g
      */
     public void performActionApplyRules(Graph g, ArrayList<Graph> rules) {
         // Iterator iter = new DeepIterator(g);
@@ -872,9 +868,11 @@ public class OperManager {
         //
         // }
 
+        int count = 1;
         for (Graph r : rules) {
-            System.out.println("Applying one rule now:");
+            System.out.println("Applying rule " + count + " :");
             applyRule(g, r);
+            count++;
         }
 
         // for (Graph r : rules) {
@@ -890,18 +888,18 @@ public class OperManager {
         // }
         // }
         // }
-
         System.out.println("Rules have all been applied to the graph!");
     }
 
     /**
+     * Apply one rule to a CG
      *
-     * @param graph
-     *            the graph on which rule is applied
-     * @param rule
-     *            rule is in the form of if...then...
+     * @param graph the graph on which rule is applied
+     * @param rule  rule is in the form of if...then...
      */
     public void applyRule(Graph graph, Graph rule) {
+
+        //The rule Graph is parsed to a Rule object r which contains an antecedent and a consequent
         Rule r = parseRuleGraph(rule);
 
         // This snippet can print the concepts and relations in Antecedent
@@ -917,14 +915,15 @@ public class OperManager {
         // }
 
         // look for the structure of antecedent of r in the conceptHashStore of
-        // graph
-        // and update the current graph with consequent of r
+        // graph and update the current graph with consequent of r
 
         // first, obtain a random concept from the antecedent of the rule
         Iterator iter = r.getAntecedent().graphObjects();
         GraphObject go = null;
+
         while (iter.hasNext()) {
             go = (GraphObject) iter.next();
+            //Since graph is a kind of concept, we need to rule it out first
             if (go instanceof Graph) {
                 continue;
             } else if (go instanceof Concept) {
@@ -938,26 +937,23 @@ public class OperManager {
         // second, get the type of c
         String type = c.getTypeLabel();
 
-        // third, look for this type in graph, the returned value is a graph of
-        // concepts
+        // third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of
+        // concepts that share the same type
         if (graph.conceptHashStore.containsKey(type)) {
             Graph cg = graph.conceptHashStore.get(type);
-            System.out.println("About to match all");
+            System.out.println("About to match all:");
             matchAll(cg, c);
         } else {
             System.out.println("Cannot apply this rule.");
         }
-
     }
 
     /**
-     * cg is from the graph, c is from the antecedent of the rule An issue if we
-     * need to pass the rule itself as well
+     * The method repeatedly matches every cg's concept, which has the same type as c (from the antecedent of a rule)
+     * An issue if we need to pass the rule itself as well
      *
-     * @param cg
-     *            a graph of concepts with the same type C
-     * @param c
-     *            a concept with type C from the antecedent of a rule
+     * @param cg a graph of concepts with the same type C
+     * @param c  a concept with type C from the antecedent of a rule
      */
     private void matchAll(Graph cg, Concept c) {
 
@@ -969,13 +965,23 @@ public class OperManager {
 
     }
 
+    /**
+     * Core subgraph isomorphism algorithm. Looks for the antecedent pattern in Graph cg
+     * Starting from a concept c of the antecedent of the rule, this method traverse both graphs to see
+     * if a match exists or not.
+     *
+     * @param nG a node in a conceptual graph
+     * @param nR a node in the antecedent of a rule
+     * @return true if a subgraph match is found
+     */
     private boolean match(GNode nG, GNode nR) {
 
-        int flag = 0;// flag is 0 if no mismatch is found, it becomes 1 if the
-        // rule doesn't
-        // match the graph
-        // before match go and c, create a data structure to keep track of
-        // discovered (gray) and visited nodes (black)
+        int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is mismatch is found
+
+        // before matching go and c, create data structures to keep track of
+        // discovered and visited nodes
+        //1 is for graph
+        //2 is for antecedent of the rule
         HashMap<String, GNode> discovered1 = new HashMap<String, GNode>();
         HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
         HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
@@ -983,10 +989,15 @@ public class OperManager {
         Queue<GNode> q1 = new LinkedList<GNode>();
         Queue<GNode> q2 = new LinkedList<GNode>();
 
+        //First nodes discovered in graph and antecedent are the nG and nR
         discovered1.put(nG.objectID.toString(), nG);
         discovered2.put(nR.objectID.toString(), nR);
+
+        //Since they are also matched, we put them on queues
         q1.add(nG);
         q2.add(nR);
+
+        //this while loop is used to find the match
         while (!q2.isEmpty() && flag == 0) {
             GNode nRule = q2.remove();
             GNode nGraph = q1.remove();
@@ -999,24 +1010,26 @@ public class OperManager {
             ArrayList fromListG = nGraph.getLinkedNodes(GEdge.Direction.FROM);
             ArrayList toListG = nGraph.getLinkedNodes(GEdge.Direction.TO);
 
-            // match fromListR with fromListG
+            // match fromListR to fromListG
+//            matchNeighbors(fromListR);
+//            matchNeighbors(toListR);
             for (Object o : fromListR) {
-                GNode nodeRule = (GNode) o;// nodeRule is a neighbor of nRule
+                GNode nodeRuleNeighbor = (GNode) o;// nodeRuleNeighbor is a neighbor of nRule
 
-                // if this is the time time we discover this node in rule graph
-                if (!visited2.containsKey(nodeRule.objectID.toString())
-                        && !discovered2.containsKey(nodeRule.objectID.toString())) {
-                    discovered2.put(nodeRule.objectID.toString(), nodeRule);
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
 
-                    // see if we can find a match in fromListG for nodeRule
+                    // see if we can find a matching concept in fromListG for nodeRuleNeighbor
                     GNode n = null;
                     for (Object object : fromListG) {
                         n = (GNode) object;
                         if (!visited1.containsKey(n.objectID.toString())
                                 && !discovered1.containsKey(n.objectID.toString())
-                                && n.getTypeLabel().equals(nodeRule.getTypeLabel())) {
+                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
                             discovered1.put(n.objectID.toString(), n);
-                            break;
+                            break;//if we find one, break
                         }
                     }
                     // after we traverse through from list, we didn't find a
@@ -1025,76 +1038,50 @@ public class OperManager {
                         flag = 1;
                         break;
                     }
-                    q2.add(nodeRule);
+                    q2.add(nodeRuleNeighbor);
                     q1.add(n);
                 }
             }
-            // enqueue all unvisited neighbors (TO)
+            // match toListR to toListG
             for (Object o : toListR) {
-                GNode nodeRule = (GNode) o;// nodeRule is a neighbor of nRule
+                GNode nodeRuleNeighbor = (GNode) o;// nodeRule is a neighbor of nRule
 
-                // if this is the time time we discover this node in rule graph
-                if (!visited2.containsKey(nodeRule.objectID.toString())
-                        && !discovered2.containsKey(nodeRule.objectID.toString())) {
-                    discovered2.put(nodeRule.objectID.toString(), nodeRule);
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
 
-                    // see if we can find a match in fromListG for nodeRule
+                    // see if we can find a matching concept in toListG for nodeRuleNeighbor
                     GNode n = null;
-                    for (Object object : fromListG) {
+                    for (Object object : toListG) {
                         n = (GNode) object;
                         if (!visited1.containsKey(n.objectID.toString())
                                 && !discovered1.containsKey(n.objectID.toString())
-                                && n.getTypeLabel().equals(nodeRule.getTypeLabel())) {
+                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
                             discovered1.put(n.objectID.toString(), n);
                             break;
                         }
                     }
-                    // after we traverse through from list, we didn't find a
+                    // after we traverse through tolist, we didn't find a
                     // match,terminate everything
                     if (n == null) {
                         flag = 1;
                         break;
                     }
-                    q2.add(nodeRule);
+                    q2.add(nodeRuleNeighbor);
                     q1.add(n);
                 }
             }
+
+            //After match from to from, to to to, we can add nRule and nGraph to visited queues
             visited2.put(nRule.objectID.toString(), nRule);
             visited1.put(nGraph.objectID.toString(), nGraph);
         }
+
         if (flag == 0)
             return true;
         else
             return false;
-        // make sure go and c are matched
-        // TO-DO, figure out how to compare
-        // if (g.getTypeLabel().compareTo(c.getTypeLabel()) != 0) {
-        // return false;
-        // } else {
-        // // then match their neighbors
-        // // go "from" to match
-        // //
-        // //
-        // http://stackoverflow.com/questions/13501142/java-arraylist-how-can-i-tell-if-two-lists-are-equal-order-not-mattering
-        // // the two sets of nodes don't have to be equal, c's is contained in
-        // // g's
-        // ArrayList<GNode> cFrom = c.getLinkedNodes(GEdge.Direction.FROM);
-        // ArrayList<GNode> gFrom = g.getLinkedNodes(GEdge.Direction.FROM);
-        //
-        // if (gFrom.size() < cFrom.size()) {
-        // return false;
-        // } else {
-        // for (GNode cN : cFrom) {
-        // String cNType = cN.getTypeLabel();
-        // // compare each node in gFrom to cN (compare the type)
-        // for (GNode gN : gFrom) {
-        //
-        // }
-        // }
-        // }
-
-        // }
-
     }
 
     /**
@@ -1128,6 +1115,5 @@ public class OperManager {
         }
         return result;
     }
-
     // end by Bingyang Wei
 } // class end

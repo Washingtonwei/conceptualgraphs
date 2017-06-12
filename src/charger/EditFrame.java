@@ -1170,6 +1170,7 @@ public class EditFrame extends JFrame
                 currentGraph.insertObject( currentNode );
                 currentNode.setCenter( ThisPt );
                 emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
+                System.out.println("You have created a concept!");
             } else if ( editingToolbar.getMode() == EditToolbar.Mode.Actor ) {
                 currentNode = new Actor();
                 currentGraph.insertObject( currentNode );

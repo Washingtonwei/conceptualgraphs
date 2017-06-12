@@ -7,6 +7,8 @@ import kb.matching.AbstractTupleMatcher;
 import charger.util.*;
 import charger.obj.*;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.io.*;
 import java.awt.event.*;
@@ -942,7 +944,7 @@ public class OperManager {
         if (graph.conceptHashStore.containsKey(type)) {
             Graph cg = graph.conceptHashStore.get(type);
             System.out.println("About to match all:");
-            matchAll(cg, c);
+            matchAll(cg, c, r);
         } else {
             System.out.println("Cannot apply this rule.");
         }
@@ -955,14 +957,228 @@ public class OperManager {
      * @param cg a graph of concepts with the same type C
      * @param c  a concept with type C from the antecedent of a rule
      */
-    private void matchAll(Graph cg, Concept c) {
+    private void matchAll(Graph cg, Concept c, Rule rule) {
 
         // go is a concept in graph that has the same type of c
         // we want to investigate from go
         for (GraphObject go : cg.objectHashStore.values()) {
-            System.out.println(match((GNode) go, c) + "!!!");
+//            System.out.println(match((GNode) go, c) + "!!!");
+            if (match((GNode) go, c)) {
+                addConsequent(ef.TheGraph, c, rule);
+            }
         }
+    }
 
+    private void addConsequent(Graph currentGraph, Concept cc, Rule rule) {
+        //we do have to clone the rule.consequent
+        //currentGraph.addAugmentedGraphObjects(rule.getConsequent());
+        addAugmentedGraphObjects(currentGraph, rule.getConsequent());
+        ef.emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
+    }
+
+    public void addAugmentedGraphObjects(Graph currentGraph, Graph consequent) {
+        // first, obtain a random GNode from the graph
+        Iterator iter = consequent.graphObjects();
+        GraphObject go = null;
+
+        while (iter.hasNext()) {
+            go = (GraphObject) iter.next();
+            //Since graph is a kind of concept, we need to rule it out first
+            if (go instanceof Graph) {
+                continue;
+            } else if (go instanceof Concept) {
+                break;
+            } else {
+                continue;
+            }
+        }
+        Concept c = (Concept) go;//one concept in consequent graph
+
+        Concept c_cpy = new Concept();
+        c_cpy.setTextLabel(c.getTextLabel());
+        c_cpy.setReferent(c.getReferent());
+        c_cpy.setTypeLabel(c.getTypeLabel());
+        c_cpy.setCenter(c.getCenter());
+        c_cpy.setBackground(Color.red);
+
+        // before matching go and c, create data structures to keep track of
+        // discovered and visited nodes
+        //1 is for consequent graph
+        //2 is for clone
+        HashMap<String, GNode> discovered1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited2 = new HashMap<String, GNode>();
+        Queue<GNode> q1 = new LinkedList<GNode>();
+        Queue<GNode> q2 = new LinkedList<GNode>();
+
+        discovered1.put(c.objectID.toString(), c);
+        discovered2.put(c_cpy.objectID.toString(), c_cpy);
+
+        q1.add(c);
+        q2.add(c_cpy);
+
+        while (!q1.isEmpty()) {
+            GNode n = q1.remove();
+            GNode n_cpy = q2.remove();
+
+            ArrayList edgesR = n.getEdges();//many edges here
+            ArrayList edgesG = n_cpy.getEdges();//empty the first time
+
+            for (Object o : edgesR) {
+                GEdge edge = (GEdge) o;
+                GEdge edge_cpy = null;
+
+                if (n == edge.fromObj) {
+                    //if the node at toobj is NOT already discovered
+                    //we need create a copy of it
+                    if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
+                        discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
+
+                        if (edge.toObj instanceof Graph) {
+                            //TODO
+                        } else if (edge.toObj instanceof Concept) {
+                            Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
+                            Concept concept_cpy = new Concept();
+                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                            concept_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, concept_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (o instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, concept_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+
+                            q1.add((Concept) edge.toObj);
+                            q2.add(concept_cpy);
+
+                        } else if (edge.toObj instanceof Relation) {
+                            Relation relationRuleNeighbor = (Relation) edge.toObj;
+                            Relation relation_cpy = new Relation();
+                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                            relation_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+
+                            q1.add((Relation) edge.toObj);
+                            q2.add(relation_cpy);
+
+                        } else if (edge.toObj instanceof Actor) {
+                            Actor actorRuleNeighbor = (Actor) edge.toObj;
+                            Actor actor_cpy = new Actor();
+                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                            actor_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Actor) edge.toObj);
+                            q2.add(actor_cpy);
+                        }
+                    }
+                } else {//if n == edge.toobj
+                    //if the node at toobj is NOT already discovered
+                    //we need create a copy of it
+                    if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
+                        discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
+                        if (edge.fromObj instanceof Graph) {
+                            //TODO
+                        } else if (edge.fromObj instanceof Concept) {
+                            Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
+                            Concept concept_cpy = new Concept();
+                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                            concept_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(concept_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(concept_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Concept) edge.fromObj);
+                            q2.add(concept_cpy);
+
+                        } else if (edge.fromObj instanceof Relation) {
+                            Relation relationRuleNeighbor = (Relation) edge.fromObj;
+                            Relation relation_cpy = new Relation();
+                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                            relation_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Relation) edge.fromObj);
+                            q2.add(relation_cpy);
+                        } else if (edge.fromObj instanceof Actor) {
+                            Actor actorRuleNeighbor = (Actor) edge.fromObj;
+                            Actor actor_cpy = new Actor();
+                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                            actor_cpy.setBackground(Color.red);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Actor) edge.fromObj);
+                            q2.add(actor_cpy);
+                        }
+                    }
+                }
+                //add edge_cpy to n_cpy
+                if (edge_cpy != null)
+                    n_cpy.getEdges().add(edge_cpy);
+            }
+            visited1.put(n.objectID.toString(), n);
+            visited2.put(n_cpy.objectID.toString(), n_cpy);
+            currentGraph.insertObject(n_cpy);//add this GNode to the current graph, edges have already been added in above code
+        }//end of while
+    }//end of method
+
+    private GraphObject changeColor(Graph g) {
+
+        Iterator iter = g.graphObjects();
+        while ( iter.hasNext() ) {
+            Object o = iter.next();
+            if(o instanceof GNode){
+                GNode gnode = (GNode)o;
+                gnode.setBackground(Color.red);
+            }
+        }
+        return g;
     }
 
     /**

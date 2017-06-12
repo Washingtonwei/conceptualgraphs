@@ -660,6 +660,15 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
             objectHashStore.remove(go.objectID.toString());
             //Global.info("removing from graph's object list: " + CGUtil.shortClassName( go ) );
             //Global.info( "Removing object " + go.objectID + " from graph " + this.objectID );
+
+            //by Bingyang Wei
+            if(go instanceof Concept){
+                Graph chs = ((Graph) conceptHashStore.get(((Concept) go).getTypeLabel()));
+                if(chs != null) {
+                    chs.objectHashStore.remove(go.objectID.toString());
+                    System.out.println("Concept " + ((Concept) go).getReferent() + " is removed from conceptHashStore");
+                }
+            }
         }
     }
 
@@ -1548,11 +1557,13 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
                 String type = ((Concept) go).getTypeLabel();
                 if (conceptHashStore.containsKey(type)) {
                     ((Graph) conceptHashStore.get(type)).objectHashStore.put(go.objectID.toString(), go);
+                    System.out.println(((Concept) go).getReferent() + " is added into conceptHashStore!");
                 } else {
                     Graph g = new Graph();
                     g.objectHashStore.put(go.objectID.toString(), go);
                     conceptHashStore.put(type, g);
                     System.out.println("Type   " + type + "  is added into conceptHashStore!");
+                    System.out.println(((Concept) go).getReferent() + " is added into conceptHashStore!");
                 }
             }
         }

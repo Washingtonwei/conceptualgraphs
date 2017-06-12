@@ -894,33 +894,16 @@ public class OperManager {
     }
 
     /**
-     * Apply one rule to a CG
-     *
-     * @param graph the graph on which rule is applied
-     * @param rule  rule is in the form of if...then...
+     * Before we apply a rule to a CG, we need to verify the current CG doesn't already
+     * have the consequent part of the rule to be applied.
+     * If so, we apply the rule,
+     * otherwise, we don't apply the rule
+     * @param graph
+     * @param rule
+     * @return true if the current CG has the consequent part of the rule to be applied
      */
-    public void applyRule(Graph graph, Graph rule) {
-
-        //The rule Graph is parsed to a Rule object r which contains an antecedent and a consequent
-        Rule r = parseRuleGraph(rule);
-
-        // This snippet can print the concepts and relations in Antecedent
-        // Iterator iter = r.getAntecedent().graphObjects();
-        // while (iter.hasNext()) {
-        // GraphObject go = (GraphObject) iter.next();
-        // if (go instanceof Graph) {
-        //
-        // } else if (go instanceof GNode) {
-        // String text = go.getTextLabel();
-        // System.out.println(text + " ");
-        // }
-        // }
-
-        // look for the structure of antecedent of r in the conceptHashStore of
-        // graph and update the current graph with consequent of r
-
-        // first, obtain a random concept from the antecedent of the rule
-        Iterator iter = r.getAntecedent().graphObjects();
+    public boolean checkConsequentExisting(Graph graph, Rule rule){
+        Iterator iter = rule.getConsequent().graphObjects();
         GraphObject go = null;
 
         while (iter.hasNext()) {
@@ -943,10 +926,80 @@ public class OperManager {
         // concepts that share the same type
         if (graph.conceptHashStore.containsKey(type)) {
             Graph cg = graph.conceptHashStore.get(type);
-            System.out.println("About to match all:");
-            matchAll(cg, c, r);
+            System.out.println("About to match consequent in the current CG:");
+            for (GraphObject go1 : cg.objectHashStore.values()) {
+                if (match((GNode) go1, c)) {
+                    return true;
+                }
+            }
+            return false;
         } else {
-            System.out.println("Cannot apply this rule.");
+            System.out.println("No consequent is found in the current CG");
+            return false;
+        }
+    }
+
+    /**
+     * Apply one rule to a CG
+     *
+     * @param graph the graph on which rule is applied
+     * @param rule  rule is in the form of if...then...
+     */
+    public void applyRule(Graph graph, Graph rule) {
+
+        //The rule Graph is parsed to a Rule object r which contains an antecedent and a consequent
+        Rule r = parseRuleGraph(rule);
+
+        //if the consequent graph is already in the current CG, no rule is needed to be applied
+        if(!checkConsequentExisting(graph, r)) {
+
+            // This snippet can print the concepts and relations in Antecedent
+            // Iterator iter = r.getAntecedent().graphObjects();
+            // while (iter.hasNext()) {
+            // GraphObject go = (GraphObject) iter.next();
+            // if (go instanceof Graph) {
+            //
+            // } else if (go instanceof GNode) {
+            // String text = go.getTextLabel();
+            // System.out.println(text + " ");
+            // }
+            // }
+
+            // look for the structure of antecedent of r in the conceptHashStore of
+            // graph and update the current graph with consequent of r
+
+            // first, obtain a random concept from the antecedent of the rule
+            Iterator iter = r.getAntecedent().graphObjects();
+            GraphObject go = null;
+
+            while (iter.hasNext()) {
+                go = (GraphObject) iter.next();
+                //Since graph is a kind of concept, we need to rule it out first
+                if (go instanceof Graph) {
+                    continue;
+                } else if (go instanceof Concept) {
+                    break;
+                } else {
+                    continue;
+                }
+            }
+            Concept c = (Concept) go;
+
+            // second, get the type of c
+            String type = c.getTypeLabel();
+
+            // third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of
+            // concepts that share the same type
+            if (graph.conceptHashStore.containsKey(type)) {
+                Graph cg = graph.conceptHashStore.get(type);
+                System.out.println("About to match all:");
+                matchAll(cg, c, r);
+            } else {
+                System.out.println("Cannot apply this rule.");
+            }
+
+        }else{
+            System.out.println("This rule doesn't need to be applied, either it has been applied or the consequent is already in the current CG");
         }
     }
 
@@ -1130,10 +1183,10 @@ public class OperManager {
                             relation_cpy.setBackground(Color.red);
 
                             if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(n_cpy, relation_cpy);
+                                edge_cpy = new Arrow(relation_cpy, n_cpy);
                                 currentGraph.insertObject(edge_cpy);
                             } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(n_cpy, relation_cpy);
+                                edge_cpy = new Coref(relation_cpy, n_cpy);
                                 currentGraph.insertObject(edge_cpy);
                             }
                             q1.add((Relation) edge.fromObj);
@@ -1147,10 +1200,10 @@ public class OperManager {
                             actor_cpy.setBackground(Color.red);
 
                             if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(n_cpy, actor_cpy);
+                                edge_cpy = new Arrow(actor_cpy, n_cpy);
                                 currentGraph.insertObject(edge_cpy);
                             } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(n_cpy, actor_cpy);
+                                edge_cpy = new Coref(actor_cpy, n_cpy);
                                 currentGraph.insertObject(edge_cpy);
                             }
                             q1.add((Actor) edge.fromObj);
@@ -1239,18 +1292,20 @@ public class OperManager {
 
                     // see if we can find a matching concept in fromListG for nodeRuleNeighbor
                     GNode n = null;
+                    boolean isMatch = false;
                     for (Object object : fromListG) {
                         n = (GNode) object;
                         if (!visited1.containsKey(n.objectID.toString())
                                 && !discovered1.containsKey(n.objectID.toString())
                                 && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
                             discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
                             break;//if we find one, break
                         }
                     }
                     // after we traverse through from list, we didn't find a
                     // match,terminate everything
-                    if (n == null) {
+                    if (!isMatch) {
                         flag = 1;
                         break;
                     }
@@ -1269,18 +1324,20 @@ public class OperManager {
 
                     // see if we can find a matching concept in toListG for nodeRuleNeighbor
                     GNode n = null;
+                    boolean isMatch = false;
                     for (Object object : toListG) {
                         n = (GNode) object;
                         if (!visited1.containsKey(n.objectID.toString())
                                 && !discovered1.containsKey(n.objectID.toString())
                                 && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
                             discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
                             break;
                         }
                     }
                     // after we traverse through tolist, we didn't find a
                     // match,terminate everything
-                    if (n == null) {
+                    if (!isMatch) {
                         flag = 1;
                         break;
                     }

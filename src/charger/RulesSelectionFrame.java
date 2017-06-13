@@ -66,7 +66,7 @@ public class RulesSelectionFrame extends JFrame implements ManagedWindow {
 																// can only be
 																// one Database
 																// frame per hub
-	public EditFrame currentEF;// to which CG we apply the list of rules
+	public EditFrame currentEF;// to which CG frame we apply the list of rules
 	public ArrayList<Graph> rules = new ArrayList<Graph>();// list of rules
 															// selected and
 															// opened
@@ -88,8 +88,8 @@ public class RulesSelectionFrame extends JFrame implements ManagedWindow {
 	CGButton OpenButton = new CGButton();
 	JMenuBar mainMenuBar = new JMenuBar();
 	public Action MMTeamAnalysisAction = null;
-	CGButton NewWindowButton = new CGButton();
-	CGButton QuitButton = new CGButton();
+//	CGButton NewWindowButton = new CGButton();
+//	CGButton QuitButton = new CGButton();
 	JLabel GraphFolderLabel = new JLabel();
 	JTextField GraphFolderField = new JTextField();
 	JTextArea Instructions = new JTextArea(5, 20);
@@ -165,13 +165,13 @@ public class RulesSelectionFrame extends JFrame implements ManagedWindow {
 			}
 		});
 
-		NewWindowButton.setLocation(new Point(670, 55));
-		NewWindowButton.setText(Global.strs("NewWindowLabel"));
-		NewWindowButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NewWindowButtonActionPerformed(e);
-			}
-		});
+//		NewWindowButton.setLocation(new Point(670, 55));
+//		NewWindowButton.setText(Global.strs("NewWindowLabel"));
+//		NewWindowButton.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				NewWindowButtonActionPerformed(e);
+//			}
+//		});
 
 		OpenButton.setLocation(new Point(670, 90));
 		OpenButton.setText("Apply Selected");
@@ -208,13 +208,13 @@ public class RulesSelectionFrame extends JFrame implements ManagedWindow {
 		});
 
 		// QuitButton.setForeground(new java.awt.Color(255, 255, 255));
-		QuitButton.setLocation(new Point(670, 270));
-		QuitButton.setText(Global.strs("QuitLabel"));
-		QuitButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				QuitButtonActionPerformed(e);
-			}
-		});
+//		QuitButton.setLocation(new Point(670, 270));
+//		QuitButton.setText(Global.strs("QuitLabel"));
+//		QuitButton.addActionListener(new java.awt.event.ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				QuitButtonActionPerformed(e);
+//			}
+//		});
 
 		// SET UP ACTUAL USEFUL CONTENT DISPLAYS
 		// GraphDisplayList.setMultipleMode( false ); // too many problems with
@@ -277,8 +277,8 @@ public class RulesSelectionFrame extends JFrame implements ManagedWindow {
 		getContentPane().add(OpenAllButton);
 		getContentPane().add(CloseAllButton);
 		getContentPane().add(SaveAllAsCGIFButton);
-		getContentPane().add(NewWindowButton);
-		getContentPane().add(QuitButton);
+//		getContentPane().add(NewWindowButton);
+//		getContentPane().add(QuitButton);
 		getContentPane().add(GraphFolderLabel);
 		getContentPane().add(GraphFolderField);
 		getContentPane().add(Instructions);

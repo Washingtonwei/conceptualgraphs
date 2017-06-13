@@ -106,6 +106,9 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
      * Holds a list of subgraphs (each subgraph contains concepts of the same
      * type) of the graph, each subgraph is indexed by the type shared by
      * concepts in it.
+     * E.g. String is Person (which is a type of a concept), Graph includes all concepts that are of type Person
+     * The reason I added this field is for the convenience of applying rules to the current graph
+     *
      * By Bingyang Wei
      */
     public HashMap<String, Graph> conceptHashStore = new HashMap<String, Graph>(10);
@@ -1546,15 +1549,22 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
         return v;
     }
 
-    // by Bingyang Wei, populate conceptHashStore of the current graph
+    /**
+     * populate conceptHashStore of the current graph
+     * See conceptHashStore for the reason
+     * by Bingyang Wei
+     */
     public void generateConceptSubgraphs() {
         Iterator iter = this.graphObjects();
+        //check each GNode object one by one, we are only intereted in Graph and Concept object
         while (iter.hasNext()) {
             GraphObject go = (GraphObject) iter.next();
             if (go instanceof Graph) {
                 ((Graph) go).generateConceptSubgraphs();
             } else if (go instanceof Concept) {
+                //get the type of this concept
                 String type = ((Concept) go).getTypeLabel();
+                //if this type has been seen before
                 if (conceptHashStore.containsKey(type)) {
                     ((Graph) conceptHashStore.get(type)).objectHashStore.put(go.objectID.toString(), go);
                     System.out.println(((Concept) go).getReferent() + " is added into conceptHashStore!");

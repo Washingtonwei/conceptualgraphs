@@ -722,6 +722,7 @@ public class EditManager implements ItemListener, ActionListener, ClipboardOwner
             ef.omgr.performActionShowInternals( sortSelectionObjects() );
         } else if(e.getActionCommand().equals( "Select Rules" )){
             ef.omgr.performActionSelectRules( ef.TheGraph );
+            //ef.TheGraph is the current CG in the current Edit Frame
         }else if ( e.getActionCommand().equals( Global.strs( "AttachOntologyLabel" ) ) ) {
             ef.omgr.performActionAttachOntologyLabel( sortSelectionObjects() );
         } else if ( e.getActionCommand().equals( Global.strs( "DeleteOntologyLabel" ) ) ) {

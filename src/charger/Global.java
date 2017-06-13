@@ -288,6 +288,7 @@ public class Global {
 
     /**
      * By Bingyang Wei
+     * This frame is very similar to HubFrame, but just for picking rules ro app
      */
     public static RulesSelectionFrame RuleSelectionFrame;
 

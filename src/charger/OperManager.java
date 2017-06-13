@@ -841,11 +841,16 @@ public class OperManager {
         f.setVisible(true);
     }
 
-    // By Bingyang Wei
+    /**
+     * This method launches a RuleSelectionFrame so users can start picking which rules to apply to the current CG
+     *
+     * @param theGraph By Bingyang Wei
+     */
     public void performActionSelectRules(Graph theGraph) {
         // first, generate concept subgraph for the current CG
+        //concept subgraph is a new field I added to class Graph
         theGraph.generateConceptSubgraphs();
-        // second, start up a wizard to select rules
+        // second, start up a wizard to select rules and pass the current Edit Frame to the new frame
         try {
             Global.RuleSelectionFrame = new RulesSelectionFrame(ef);
         } catch (ExceptionInInitializerError e) {
@@ -862,35 +867,13 @@ public class OperManager {
      * @param rules list of rules we are about to apply to the CG g
      */
     public void performActionApplyRules(Graph g, ArrayList<Graph> rules) {
-        // Iterator iter = new DeepIterator(g);
-        // while (iter.hasNext()) {
-        //
-        // String text = ((GraphObject) (iter.next())).getTextLabel();
-        // System.out.println(text + " ");
-        //
-        // }
-
         int count = 1;
         for (Graph r : rules) {
             System.out.println("Applying rule " + count + " :");
             applyRule(g, r);
             count++;
         }
-
-        // for (Graph r : rules) {
-        // Iterator iter = r.graphObjects();
-        // while (iter.hasNext()) {
-        // GraphObject go = (GraphObject) iter.next();
-        // if (go instanceof Graph) {
-        // String text = go.getTextLabel();
-        // System.out.println(text + " ");
-        // } else if (go instanceof Concept) {
-        // String text = go.getTextLabel();
-        // System.out.println(text + " ");
-        // }
-        // }
-        // }
-        System.out.println("Rules have all been applied to the graph!");
+        System.out.println("Rules have all been applied to the graph.");
     }
 
     /**
@@ -898,11 +881,12 @@ public class OperManager {
      * have the consequent part of the rule to be applied.
      * If so, we apply the rule,
      * otherwise, we don't apply the rule
+     *
      * @param graph
      * @param rule
      * @return true if the current CG has the consequent part of the rule to be applied
      */
-    public boolean checkConsequentExisting(Graph graph, Rule rule){
+    public boolean checkConsequentExisting(Graph graph, Rule rule) {
         Iterator iter = rule.getConsequent().graphObjects();
         GraphObject go = null;
 
@@ -947,24 +931,23 @@ public class OperManager {
      */
     public void applyRule(Graph graph, Graph rule) {
 
-        //The rule Graph is parsed to a Rule object r which contains an antecedent and a consequent
+        //The rule graph is parsed to a Rule object r which contains an antecedent and a consequent
         Rule r = parseRuleGraph(rule);
 
-        //if the consequent graph is already in the current CG, no rule is needed to be applied
-        if(!checkConsequentExisting(graph, r)) {
+        // This snippet can print the concepts and relations in Antecedent
+        // Iterator iter = r.getAntecedent().graphObjects();
+        // while (iter.hasNext()) {
+        // GraphObject go = (GraphObject) iter.next();
+        // if (go instanceof Graph) {
+        //
+        // } else if (go instanceof GNode) {
+        // String text = go.getTextLabel();
+        // System.out.println(text + " ");
+        // }
+        // }
 
-            // This snippet can print the concepts and relations in Antecedent
-            // Iterator iter = r.getAntecedent().graphObjects();
-            // while (iter.hasNext()) {
-            // GraphObject go = (GraphObject) iter.next();
-            // if (go instanceof Graph) {
-            //
-            // } else if (go instanceof GNode) {
-            // String text = go.getTextLabel();
-            // System.out.println(text + " ");
-            // }
-            // }
-
+        //if the consequent of a rule is already in the current CG, there is no need to apply the rule
+        if (!checkConsequentExisting(graph, r)) {
             // look for the structure of antecedent of r in the conceptHashStore of
             // graph and update the current graph with consequent of r
 
@@ -988,49 +971,62 @@ public class OperManager {
             // second, get the type of c
             String type = c.getTypeLabel();
 
-            // third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of
-            // concepts that share the same type
+            /*
+            third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of concepts           that share the same typeight now, we haven't consider subtype and supertype e.g. if a graph only has              subtype Student, and we are trying to apply a rule that only has supertype Person, we ought to apply              it, but this method is NOT doing that right now, this is a TODO
+             */
             if (graph.conceptHashStore.containsKey(type)) {
+                //cg has all concepts that share the exact same type
                 Graph cg = graph.conceptHashStore.get(type);
-                System.out.println("About to match all:");
                 matchAll(cg, c, r);
             } else {
                 System.out.println("Cannot apply this rule.");
             }
 
-        }else{
+        } else {
             System.out.println("This rule doesn't need to be applied, either it has been applied or the consequent is already in the current CG");
         }
     }
 
     /**
-     * The method repeatedly matches every cg's concept, which has the same type as c (from the antecedent of a rule)
-     * An issue if we need to pass the rule itself as well
+     * The method goes over every cg's concept, which has the same type as c (from the antecedent of a rule)
+     * The goal is to see if a pattern starts at a concept in cg can match the antecedent of the rule
+     * An issue is we may unnecessarily apply the rule more times than needed!
+     * TODO
      *
      * @param cg a graph of concepts with the same type C
      * @param c  a concept with type C from the antecedent of a rule
      */
     private void matchAll(Graph cg, Concept c, Rule rule) {
-
         // go is a concept in graph that has the same type of c
-        // we want to investigate from go
+        // we want to investigate from concept go
         for (GraphObject go : cg.objectHashStore.values()) {
-//            System.out.println(match((GNode) go, c) + "!!!");
+            //if there is a match, we need to add the consequent part of the rule to the current CG
             if (match((GNode) go, c)) {
-                addConsequent(ef.TheGraph, c, rule);
+                addConsequent(ef.TheGraph, rule);
             }
         }
     }
 
-    private void addConsequent(Graph currentGraph, Concept cc, Rule rule) {
+    /**
+     * Given a CG, adding the consequent part graph of rule to it.
+     * @param currentGraph
+     * @param rule
+     */
+    private void addConsequent(Graph currentGraph, Rule rule) {
         //we do have to clone the rule.consequent
-        //currentGraph.addAugmentedGraphObjects(rule.getConsequent());
         addAugmentedGraphObjects(currentGraph, rule.getConsequent());
-        ef.emgr.setChangedContent( EditChange.SEMANTICS, EditChange.UNDOABLE  );
+        //after this, we make the edit frame bottom right corner "red", so user needs to save the new graph
+        ef.emgr.setChangedContent(EditChange.SEMANTICS, EditChange.UNDOABLE);
     }
 
+    /**
+     * Clone consequent into currentGraph
+     * Deep copy
+     * @param currentGraph
+     * @param consequent
+     */
     public void addAugmentedGraphObjects(Graph currentGraph, Graph consequent) {
-        // first, obtain a random GNode from the graph
+        // first, obtain a random GNode from consequent graph
         Iterator iter = consequent.graphObjects();
         GraphObject go = null;
 
@@ -1052,7 +1048,7 @@ public class OperManager {
         c_cpy.setReferent(c.getReferent());
         c_cpy.setTypeLabel(c.getTypeLabel());
         c_cpy.setCenter(c.getCenter());
-        c_cpy.setBackground(Color.red);
+        c_cpy.setBackground(Color.gray);
 
         // before matching go and c, create data structures to keep track of
         // discovered and visited nodes
@@ -1078,18 +1074,20 @@ public class OperManager {
             ArrayList edgesR = n.getEdges();//many edges here
             ArrayList edgesG = n_cpy.getEdges();//empty the first time
 
+            //go over every edge
             for (Object o : edgesR) {
                 GEdge edge = (GEdge) o;
                 GEdge edge_cpy = null;
 
                 if (n == edge.fromObj) {
-                    //if the node at toobj is NOT already discovered
+                    //if the node at toObj is NOT already discovered
                     //we need create a copy of it
                     if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
                         discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
 
                         if (edge.toObj instanceof Graph) {
                             //TODO
+                            addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj);
                         } else if (edge.toObj instanceof Concept) {
                             Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
                             Concept concept_cpy = new Concept();
@@ -1097,12 +1095,12 @@ public class OperManager {
                             concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
                             concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
                             concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                            concept_cpy.setBackground(Color.red);
+                            concept_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(n_cpy, concept_cpy);
                                 currentGraph.insertObject(edge_cpy);
-                            } else if (o instanceof Coref) {
+                            } else if (edge instanceof Coref) {
                                 edge_cpy = new Coref(n_cpy, concept_cpy);
                                 currentGraph.insertObject(edge_cpy);
                             }
@@ -1116,7 +1114,7 @@ public class OperManager {
                             relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
                             relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
                             relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                            relation_cpy.setBackground(Color.red);
+                            relation_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(n_cpy, relation_cpy);
@@ -1135,7 +1133,7 @@ public class OperManager {
                             actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
                             actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
                             actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                            actor_cpy.setBackground(Color.red);
+                            actor_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(n_cpy, actor_cpy);
@@ -1148,13 +1146,14 @@ public class OperManager {
                             q2.add(actor_cpy);
                         }
                     }
-                } else {//if n == edge.toobj
-                    //if the node at toobj is NOT already discovered
+                } else {//if n == edge.toObj
+                    //if the node at fromObj is NOT already discovered
                     //we need create a copy of it
                     if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
                         discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
                         if (edge.fromObj instanceof Graph) {
                             //TODO
+                            addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj);
                         } else if (edge.fromObj instanceof Concept) {
                             Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
                             Concept concept_cpy = new Concept();
@@ -1162,7 +1161,7 @@ public class OperManager {
                             concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
                             concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
                             concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                            concept_cpy.setBackground(Color.red);
+                            concept_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(concept_cpy, n_cpy);
@@ -1180,7 +1179,7 @@ public class OperManager {
                             relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
                             relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
                             relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                            relation_cpy.setBackground(Color.red);
+                            relation_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(relation_cpy, n_cpy);
@@ -1197,7 +1196,7 @@ public class OperManager {
                             actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
                             actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
                             actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                            actor_cpy.setBackground(Color.red);
+                            actor_cpy.setBackground(Color.gray);
 
                             if (edge instanceof Arrow) {
                                 edge_cpy = new Arrow(actor_cpy, n_cpy);
@@ -1221,19 +1220,6 @@ public class OperManager {
         }//end of while
     }//end of method
 
-    private GraphObject changeColor(Graph g) {
-
-        Iterator iter = g.graphObjects();
-        while ( iter.hasNext() ) {
-            Object o = iter.next();
-            if(o instanceof GNode){
-                GNode gnode = (GNode)o;
-                gnode.setBackground(Color.red);
-            }
-        }
-        return g;
-    }
-
     /**
      * Core subgraph isomorphism algorithm. Looks for the antecedent pattern in Graph cg
      * Starting from a concept c of the antecedent of the rule, this method traverse both graphs to see
@@ -1245,16 +1231,19 @@ public class OperManager {
      */
     private boolean match(GNode nG, GNode nR) {
 
-        int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is mismatch is found
-
-        // before matching go and c, create data structures to keep track of
-        // discovered and visited nodes
-        //1 is for graph
-        //2 is for antecedent of the rule
+        int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is a mismatch is found
+                     //then, stop immediately
+        /*
+            before matching nG and nR, create data structures to keep track of
+            discovered and visited nodes
+            1 is for graph
+            2 is for antecedent of the rule
+         */
         HashMap<String, GNode> discovered1 = new HashMap<String, GNode>();
         HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
         HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
         HashMap<String, GNode> visited2 = new HashMap<String, GNode>();
+        //FIFO queue
         Queue<GNode> q1 = new LinkedList<GNode>();
         Queue<GNode> q2 = new LinkedList<GNode>();
 
@@ -1266,7 +1255,7 @@ public class OperManager {
         q1.add(nG);
         q2.add(nR);
 
-        //this while loop is used to find the match
+        //this while loop is used to find the match, but once a mismatch is found (flag == 1), break
         while (!q2.isEmpty() && flag == 0) {
             GNode nRule = q2.remove();
             GNode nGraph = q1.remove();
@@ -1280,8 +1269,12 @@ public class OperManager {
             ArrayList toListG = nGraph.getLinkedNodes(GEdge.Direction.TO);
 
             // match fromListR to fromListG
-//            matchNeighbors(fromListR);
-//            matchNeighbors(toListR);
+            /*
+            There are two ways that this for loop terminate:
+            1. for each concept in fromListR, we can find a match in fromListG
+            2. for one concept in fromListR, we cannot find a match, this makes flag == 1
+            so even though the next for loop aobut toListR is OK, we are not accepting it.
+             */
             for (Object o : fromListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRuleNeighbor is a neighbor of nRule
 
@@ -1313,6 +1306,11 @@ public class OperManager {
                     q1.add(n);
                 }
             }
+
+            //no need to verify the toListR
+            if (flag == 1)
+                break;
+
             // match toListR to toListG
             for (Object o : toListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRule is a neighbor of nRule
@@ -1346,11 +1344,12 @@ public class OperManager {
                 }
             }
 
-            //After match from to from, to to to, we can add nRule and nGraph to visited queues
+            //After match fromListR to fromListG, toListR to toListG, we can add nRule and nGraph to visited queues
             visited2.put(nRule.objectID.toString(), nRule);
             visited1.put(nGraph.objectID.toString(), nGraph);
-        }
+        }//end of while loop
 
+        //if the flag is still 0, we find a match
         if (flag == 0)
             return true;
         else
@@ -1360,6 +1359,10 @@ public class OperManager {
     /**
      * return a rule object that contains the Antecedent and Consequent contexts
      * as two graphs
+     *
+     * I think if there is a coref link from outside to inside of a context, it is treated as the same graph
+     * We need to figure this out
+     * TODO
      *
      * @param rule
      * @return
@@ -1383,7 +1386,7 @@ public class OperManager {
                 }
             } else if (go instanceof Concept) {
                 // figure out co-reference!!!
-                // TBD
+                // TODO
             }
         }
         return result;

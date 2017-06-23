@@ -912,7 +912,9 @@ public class OperManager {
             Graph cg = graph.conceptHashStore.get(type);
             System.out.println("Looking for Consequent pattern in the current CG:");
             for (GraphObject go1 : cg.objectHashStore.values()) {
-                if (match((GNode) go1, c)) {
+                //if there is a match, we need to add the consequent part of the rule to the current CG
+                HashMap<GNode, GNode> match = match((GNode) go1, c);
+                if(match != null){
                     return true;
                 }
             }
@@ -999,33 +1001,37 @@ public class OperManager {
         // we want to investigate from concept go
         for (GraphObject go : cg.objectHashStore.values()) {
             //if there is a match, we need to add the consequent part of the rule to the current CG
-            if (match((GNode) go, c)) {
-                addConsequent(ef.TheGraph, rule);
+            HashMap<GNode, GNode> match = match((GNode) go, c);
+            if(match != null){
+                addConsequent(ef.TheGraph, rule, match);
             }
         }
     }
 
     /**
-     * Given a CG, adding the consequent part graph of rule to it.
+     * Given a CG, adding the consequent part graph of rule to it based on match info, since we may need to add
+     * stuff on the original graph, so the match info is critical
      *
      * @param currentGraph
      * @param rule
+     * @param match
      */
-    private void addConsequent(Graph currentGraph, Rule rule) {
+    private void addConsequent(Graph currentGraph, Rule rule, HashMap<GNode, GNode> match) {
         //we do have to clone the rule.consequent
-        addAugmentedGraphObjects(currentGraph, rule.getConsequent());
+        addAugmentedGraphObjects(currentGraph, rule.getConsequent(), match);
         //after this, we make the edit frame bottom right corner "red", so user needs to save the new graph
         ef.emgr.setChangedContent(EditChange.SEMANTICS, EditChange.UNDOABLE);
     }
 
     /**
-     * Clone consequent into currentGraph
+     * Clone consequent into currentGraph based on the match info
      * Deep copy
      *
      * @param currentGraph
      * @param consequent
+     * @param match
      */
-    public void addAugmentedGraphObjects(Graph currentGraph, Graph consequent) {
+    public void addAugmentedGraphObjects(Graph currentGraph, Graph consequent, HashMap<GNode, GNode> match) {
         // first, obtain a random GNode from consequent graph
         Iterator iter = consequent.graphObjects();
         GraphObject go = null;
@@ -1078,7 +1084,7 @@ public class OperManager {
             for (Object o : edgesR) {
                 GEdge edge = (GEdge) o;
                 GEdge edge_cpy = null;
-                //if o is not coref, we are not copying coref and coref linked nodes
+                //if o is not coref, we are not copying coref linked nodes, see else part
                 if(!(o instanceof Coref)) {
                     if (n == edge.fromObj) {
                         //if the node at toObj is NOT already discovered
@@ -1088,7 +1094,7 @@ public class OperManager {
 
                             if (edge.toObj instanceof Graph) {
                                 //TODO
-                                addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj);
+                                addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj, match);
                             } else if (edge.toObj instanceof Concept) {
                                 Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
                                 Concept concept_cpy = new Concept();
@@ -1154,7 +1160,7 @@ public class OperManager {
                             discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
                             if (edge.fromObj instanceof Graph) {
                                 //TODO
-                                addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj);
+                                addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj, match);
                             } else if (edge.fromObj instanceof Concept) {
                                 Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
                                 Concept concept_cpy = new Concept();
@@ -1211,6 +1217,35 @@ public class OperManager {
                             }
                         }
                     }
+                }else{//if the edge we are copying is a coref, then we are linking it to the graph to which we applied this rule
+                    Concept cc = null;
+                    if (n == edge.fromObj) {
+                        ArrayList<GEdge> edges = ((GNode)(edge.toObj)).getEdges();//only two edges
+                        for (GEdge e:edges) {
+                            if(e.fromObj != n){//if this is the edge that connects outside concept to concept in antecedent
+                                if(e.fromObj != edge.toObj){
+                                    cc = (Concept)e.fromObj;
+                                }else{
+                                    cc= (Concept)e.toObj;
+                                }
+                            }
+                        }
+                        edge_cpy = new Coref(n_cpy, match.get(cc));
+                        currentGraph.insertObject(edge_cpy);
+                    } else {//if n == edge.toObj
+                        ArrayList<GEdge> edges = ((GNode)(edge.fromObj)).getEdges();//only two edges
+                        for (GEdge e:edges) {
+                            if(e.toObj != n){//if this is the edge that connects outside concept to concept in antecedent
+                                if(e.fromObj != edge.fromObj){
+                                    cc = (Concept)e.fromObj;
+                                }else{
+                                    cc= (Concept)e.toObj;
+                                }
+                            }
+                        }
+                        edge_cpy = new Coref(n_cpy, match.get(cc));
+                        currentGraph.insertObject(edge_cpy);
+                    }
                 }
                 //add edge_cpy to n_cpy
                 if (edge_cpy != null)
@@ -1231,7 +1266,9 @@ public class OperManager {
      * @param nR a node in the antecedent of a rule
      * @return true if a subgraph match is found
      */
-    private boolean match(GNode nG, GNode nR) {
+    private HashMap<GNode, GNode> match(GNode nG, GNode nR) {
+
+        HashMap<GNode, GNode> match = new HashMap<GNode, GNode>();
 
         int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is a mismatch is found
         //then, stop immediately
@@ -1245,6 +1282,13 @@ public class OperManager {
         HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
         HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
         HashMap<String, GNode> visited2 = new HashMap<String, GNode>();
+
+        //FIFO queue, this queue is used to record the order we traverse both graphs
+        //This is useful when we later on try to augment the consequent part of the rule
+        //we need to relate the antecedent concept to the concept in the graph
+        Queue<GNode> pattern1 = new LinkedList<GNode>();
+        Queue<GNode> pattern2 = new LinkedList<GNode>();
+
         //FIFO queue
         Queue<GNode> q1 = new LinkedList<GNode>();
         Queue<GNode> q2 = new LinkedList<GNode>();
@@ -1322,7 +1366,6 @@ public class OperManager {
                     if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
                             && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
                         discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
-
                         // see if we can find a matching concept in toListG for nodeRuleNeighbor
                         GNode n = null;
                         boolean isMatch = false;
@@ -1350,30 +1393,15 @@ public class OperManager {
             //After match fromListR to fromListG, toListR to toListG, we can add nRule and nGraph to visited queues
             visited2.put(nRule.objectID.toString(), nRule);
             visited1.put(nGraph.objectID.toString(), nGraph);
+            match.put(nRule, nGraph);
         }//end of while loop
 
         //if the flag is still 0, we find a match
-        if (flag == 0)
-            return true;
+        if (flag == 0) {
+            return match;
+        }
         else
-            return false;
-    }
-
-    /**
-     * Returns true if nRule and nodeRuleNeighbor are equivalent concept, in other words, they are linked through a coref link
-     * @param nRule
-     * @param nodeRuleNeighbor
-     * @return
-     */
-    private boolean isCorefLinkedNode(GNode nRule, GNode nodeRuleNeighbor) {
-        ArrayList<GEdge> edges = nRule.getEdges();
-
-
-
-        if(true)
-            return true;
-        else
-            return false;
+            return null;
     }
 
     /**

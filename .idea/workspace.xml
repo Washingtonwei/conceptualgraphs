@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/charger/obj/Graph.java" line="841" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="45d69f91-02ed-44af-9003-dbcaa302dfde" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$10.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$10.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$11.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$11.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$12.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$12.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$8.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$8.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$9.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$9.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global$1.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global$2.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/obj/Graph.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/obj/Graph.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/EditManager.java" afterPath="$PROJECT_DIR$/src/charger/EditManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/Global.java" afterPath="$PROJECT_DIR$/src/charger/Global.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/OperManager.java" afterPath="$PROJECT_DIR$/src/charger/OperManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" afterPath="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/obj/Graph.java" afterPath="$PROJECT_DIR$/src/charger/obj/Graph.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,45 +18,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OperManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1539">
-              <caret line="1217" column="59" lean-forward="true" selection-start-line="1217" selection-start-column="59" selection-end-line="1217" selection-end-column="59" />
-              <folding>
-                <element signature="method#OperManager#0;class#OperManager#0" expanded="true" />
-                <element signature="method#makeMenus#0;class#OperManager#0" expanded="true" />
-                <element signature="method#getValue#0;class#3506:3886" expanded="true" />
-                <element signature="method#getValue#0;class#4023:4411" expanded="true" />
-                <element signature="method#setMenuItems#0;class#OperManager#0" expanded="true" />
-                <element signature="method#finalize#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionValidate#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionAttachOntologyLabel#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionShowInternals#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionDeleteOntologyLabel#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionMaxJoinWithOpenGraphs#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionJoinWithOpenGraphsBROKEN#0;class#OperManager#0" expanded="true" />
-                <element signature="method#joinReferents#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionMakeGeneric#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionCommitToKB#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionRelationMatching#0;class#OperManager#0" expanded="true" />
-                <element signature="method#matchMasterToOpenGraphs#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionBestRelationMatching#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionSelectRules#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionApplyRules#0;class#OperManager#0" expanded="true" />
-                <element signature="method#checkConsequentExisting#0;class#OperManager#0" expanded="true" />
-                <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
-                <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
-                <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-                <element signature="method#match#0;class#OperManager#0" expanded="true" />
-                <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -113,10 +60,10 @@
       <list>
         <option value="$PROJECT_DIR$/src/charger/EditFrame.java" />
         <option value="$PROJECT_DIR$/src/charger/EditManager.java" />
-        <option value="$PROJECT_DIR$/src/charger/obj/Graph.java" />
         <option value="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" />
         <option value="$PROJECT_DIR$/src/charger/Global.java" />
         <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
+        <option value="$PROJECT_DIR$/src/charger/obj/Graph.java" />
       </list>
     </option>
   </component>
@@ -148,9 +95,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -187,26 +131,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -672,7 +601,12 @@
       <workItem from="1496947554525" duration="26000" />
       <workItem from="1496948676900" duration="1297000" />
       <workItem from="1497014877855" duration="37980000" />
-      <workItem from="1497362906593" duration="8234000" />
+      <workItem from="1497362906593" duration="8530000" />
+      <workItem from="1497449688421" duration="2059000" />
+      <workItem from="1497452240035" duration="5000" />
+      <workItem from="1497798488786" duration="5000" />
+      <workItem from="1497798698514" duration="137000" />
+      <workItem from="1498230777305" duration="8000" />
     </task>
     <task id="LOCAL-00001" summary="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()">
       <created>1497016852809</created>
@@ -716,45 +650,51 @@
       <option name="project" value="LOCAL" />
       <updated>1497283159226</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Code review, add more comments, update DOC comments about Charger src.">
+      <created>1497371843222</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1497371843222</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48328000" />
+    <option name="totallyTimeSpent" value="50838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23020063" sideWeight="0.5229167" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23020063" sideWeight="0.525" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23020063" sideWeight="0.475" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23020063" sideWeight="0.47708333" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13229166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22916667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.004223865" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34846884" sideWeight="0.4875" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.004223865" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -770,7 +710,8 @@
     <MESSAGE value="Fix bugs, add comments in match function" />
     <MESSAGE value="Add function in OperManager: public void addAugmentedGraphObjects (Graph currentGraph, Graph consequent) so that the consequent part of a rule now can be inferred (cloned) in CGs after applying rules. But the code looks ugly. May be we need to create another class to handle this." />
     <MESSAGE value="Fix bugs in public void addAugmentedGraphObjects (Graph currentGraph, Graph consequent) arrow direction was wrong&#10;Also add a method called checkConsequentExisiting in OperManager, making sure that the consequent is not there in current graph before applying rules. So far it worked fine.&#10;Fix a bug in our famous match method, instead of using if n == null to tell there is not match, we add an int called isMatch&#10;We also modify the removeFromGraph method in Graph class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs in public void addAugmentedGraphObjects (Graph currentGraph, Graph consequent) arrow direction was wrong&#10;Also add a method called checkConsequentExisiting in OperManager, making sure that the consequent is not there in current graph before applying rules. So far it worked fine.&#10;Fix a bug in our famous match method, instead of using if n == null to tell there is not match, we add an int called isMatch&#10;We also modify the removeFromGraph method in Graph class." />
+    <MESSAGE value="Code review, add more comments, update DOC comments about Charger src." />
+    <option name="LAST_COMMIT_MESSAGE" value="Code review, add more comments, update DOC comments about Charger src." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -787,34 +728,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#OperManager#0;class#OperManager#0" expanded="true" />
-            <element signature="method#makeMenus#0;class#OperManager#0" expanded="true" />
-            <element signature="method#getValue#0;class#3506:3886" expanded="true" />
-            <element signature="method#getValue#0;class#4023:4411" expanded="true" />
-            <element signature="method#setMenuItems#0;class#OperManager#0" expanded="true" />
-            <element signature="method#finalize#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionValidate#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionAttachOntologyLabel#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionShowInternals#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionDeleteOntologyLabel#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionMaxJoinWithOpenGraphs#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionJoinWithOpenGraphsBROKEN#0;class#OperManager#0" expanded="true" />
-            <element signature="method#joinReferents#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionMakeGeneric#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionCommitToKB#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionRelationMatching#0;class#OperManager#0" expanded="true" />
-            <element signature="method#matchMasterToOpenGraphs#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionBestRelationMatching#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionApplyRules#0;class#OperManager#0" expanded="true" />
-            <element signature="method#checkConsequentExisting#0;class#OperManager#0" expanded="true" />
-            <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
-            <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
-            <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-            <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
-            <element signature="method#match#0;class#OperManager#0" expanded="true" />
-            <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -822,52 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51645">
           <caret line="1565" column="106" lean-forward="false" selection-start-line="1565" selection-start-column="106" selection-end-line="1565" selection-end-column="106" />
-          <folding>
-            <element signature="method#graphConstructor#0;class#Graph#0" expanded="true" />
-            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#setCenter#1;class#Graph#0" expanded="true" />
-            <element signature="method#setTextLabelPos#0;class#Graph#0" expanded="true" />
-            <element signature="method#print#0;class#Graph#0" expanded="true" />
-            <element signature="method#getShape#0;class#Graph#0" expanded="true" />
-            <element signature="method#getShapeForDrawing#0;class#Graph#0" expanded="true" />
-            <element signature="method#getRegionAvailableForContent#0;class#Graph#0" expanded="true" />
-            <element signature="method#setRegionAvailableForContent#0;class#Graph#0" expanded="true" />
-            <element signature="method#drawBorder#0;class#Graph#0" expanded="true" />
-            <element signature="method#draw#0;class#Graph#0" expanded="true" />
-            <element signature="method#insertInCharGerGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#removeFromGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#forceDeepMove#0;class#Graph#0" expanded="true" />
-            <element signature="method#forceMoveGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#moveGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#insertObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#setTextLabel#0;class#Graph#0" expanded="true" />
-            <element signature="method#resizeForContents#0;class#Graph#0" expanded="true" />
-            <element signature="method#nestedWithin#0;class#Graph#0" expanded="true" />
-            <element signature="method#containsGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#handleContextLinks#0;class#Graph#0" expanded="true" />
-            <element signature="method#findByID#0;class#Graph#0" expanded="true" />
-            <element signature="method#abandonObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#finalize#0;class#Graph#0" expanded="true" />
-            <element signature="method#getBriefSummary#0;class#Graph#0" expanded="true" />
-            <element signature="method#getContentBounds#0;class#Graph#0" expanded="true" />
-            <element signature="method#getDisplayBounds#0;class#Graph#0" expanded="true" />
-            <element signature="method#moveGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#isEmpty#0;class#Graph#0" expanded="true" />
-            <element signature="method#safeString#0;class#Graph#0" expanded="true" />
-            <element signature="method#safeString2#0;class#Graph#0" expanded="true" />
-            <element signature="method#toStringDeep#0;class#Graph#0" expanded="true" />
-            <element signature="method#dispose#0;class#Graph#0" expanded="true" />
-            <element signature="method#getGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateConceptSubgraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#addHistory#0;class#Graph#0" expanded="true" />
-            <element signature="method#findTypeDescriptors#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllTypeDescriptors#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="true" />
-            <element signature="method#unCommitFromKnowledgeBase#0;class#Graph#0" expanded="true" />
-            <element signature="method#addAugmentedGraphObjects#0;class#Graph#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -875,7 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,7 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,7 +763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -906,7 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -914,7 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -922,7 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
           <caret line="106" column="72" lean-forward="true" selection-start-line="106" selection-start-column="72" selection-end-line="106" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -930,7 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="83" column="13" lean-forward="false" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -938,7 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="3323" column="0" lean-forward="false" selection-start-line="3323" selection-start-column="0" selection-end-line="3323" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -953,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-326">
           <caret line="40" column="32" lean-forward="true" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -961,7 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
           <caret line="349" column="0" lean-forward="true" selection-start-line="349" selection-start-column="0" selection-end-line="349" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -969,10 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
           <caret line="46" column="24" lean-forward="false" selection-start-line="46" selection-start-column="24" selection-end-line="46" selection-end-column="24" />
-          <folding>
-            <element signature="e#3410#3411#0" expanded="true" />
-            <element signature="e#3440#3441#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -980,29 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="40" column="37" lean-forward="false" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="37" />
-          <folding>
-            <element signature="method#GEdge#0;class#GEdge#0" expanded="true" />
-            <element signature="method#GEdge#1;class#GEdge#0" expanded="true" />
-            <element signature="method#setColor#0;class#GEdge#0" expanded="true" />
-            <element signature="method#getArrowHeadLength#0;class#GEdge#0" expanded="true" />
-            <element signature="method#getArrowHeadAngle#0;class#GEdge#0" expanded="true" />
-            <element signature="method#initializeArrowHead#0;class#GEdge#0" expanded="true" />
-            <element signature="method#drawBorder#0;class#GEdge#0" expanded="true" />
-            <element signature="method#abandonObject#0;class#GEdge#0" expanded="true" />
-            <element signature="method#detachFromGNodes#0;class#GEdge#0" expanded="true" />
-            <element signature="method#finalize#0;class#GEdge#0" expanded="true" />
-            <element signature="method#placeEdge#0;class#GEdge#0" expanded="true" />
-            <element signature="method#getObjectShapeForClipping#0;class#GEdge#0" expanded="true" />
-            <element signature="method#makeArrowPoints#0;class#GEdge#0" expanded="true" />
-            <element signature="method#makeArrowPoints#1;class#GEdge#0" expanded="true" />
-            <element signature="method#drawArrowHead#0;class#GEdge#0" expanded="true" />
-            <element signature="method#findClippingPoint#0;class#GEdge#0" expanded="true" />
-            <element signature="method#findClippingPointRectangle#0;class#GEdge#0" expanded="true" />
-            <element signature="method#findClippingPointShape#0;class#GEdge#0" expanded="true" />
-            <element signature="method#areLinked#0;class#GEdge#0" expanded="true" />
-            <element signature="method#linkedTo#0;class#GEdge#0" expanded="true" />
-            <element signature="method#howLinked#0;class#GEdge#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="859" column="56" lean-forward="false" selection-start-line="859" selection-start-column="56" selection-end-line="859" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1018,17 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="298" column="63" lean-forward="false" selection-start-line="298" selection-start-column="63" selection-end-line="298" selection-end-column="63" />
-          <folding>
-            <element signature="method#PreferencesWriter#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#intPrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#floatPrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#doublePrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#StringPrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#booleanPrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#textAndFillDefaultToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#colorPrefToString#0;class#PreferencesWriter#0" expanded="false" />
-            <element signature="method#savePreferences#0;class#PreferencesWriter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1036,73 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="1390" column="38" lean-forward="false" selection-start-line="1390" selection-start-column="38" selection-end-line="1390" selection-end-column="38" />
-          <folding>
-            <element signature="method#EditFrame#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#EditFrame#1;class#EditFrame#0" expanded="true" />
-            <element signature="method#finalize#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setupComponents#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#attachGraphToFrame#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#run#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisWindowClosing#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisWindowActivated#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisWindowOpened#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisWindowDeactivated#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setup#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#tearDown#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setupCanvasScrollPane#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#actionPerformed#0;class#29167:29290" expanded="true" />
-            <element signature="method#actionPerformed#0;class#29345:29468" expanded="true" />
-            <element signature="method#actionPerformed#0;class#29526:29649" expanded="true" />
-            <element signature="method#actionPerformed#0;class#29706:29829" expanded="true" />
-            <element signature="method#setupMenus#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setMenuItems#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setEditFrameSizes#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#refreshBorders#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisFocusGained#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisFocusLost#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#identifyComponent#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#keyPressed#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#keyReleased#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#keyTyped#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#scaled#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#antiscaled#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#antiscaled#1;class#EditFrame#0" expanded="true" />
-            <element signature="method#mousePressed#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseReleased#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseClicked#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#doDoubleClick#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseEntered#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseExited#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseDragged#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#mouseMoved#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#onTopOfObject#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#onTopOfGNode#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#insideGNode#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#insideGEdge#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#includeContextMembers#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#includeContextMembers#1;class#EditFrame#0" expanded="true" />
-            <element signature="method#setSelectedGraphObjects#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#moveSelectedObjects#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#addToSelection#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#takeFromSelection#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#resetSelection#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#summarizeSelection#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#fixToolbarDisplay#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#makeContext#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#unMakeContext#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#entireGraphSelected#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setMyCursor#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setMyFont#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#clearStatus#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#displayOneLiner#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#componentResized#0;class#HandleCompEvents#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#closeOut#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#performCheckSaved#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#renameGraphInFrame#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#thisComponentResized#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#refreshDescriptorPanel#0;class#EditFrame#0" expanded="true" />
-            <element signature="method#setupDescriptorPanel#0;class#EditFrame#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1117,60 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
           <caret line="80" column="71" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48432">
-          <caret line="111" column="22" lean-forward="true" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
-          <folding>
-            <element signature="method#graphConstructor#0;class#Graph#0" expanded="true" />
-            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#setCenter#1;class#Graph#0" expanded="true" />
-            <element signature="method#setTextLabelPos#0;class#Graph#0" expanded="true" />
-            <element signature="method#print#0;class#Graph#0" expanded="true" />
-            <element signature="method#getShape#0;class#Graph#0" expanded="true" />
-            <element signature="method#getShapeForDrawing#0;class#Graph#0" expanded="true" />
-            <element signature="method#getRegionAvailableForContent#0;class#Graph#0" expanded="true" />
-            <element signature="method#setRegionAvailableForContent#0;class#Graph#0" expanded="true" />
-            <element signature="method#drawBorder#0;class#Graph#0" expanded="true" />
-            <element signature="method#draw#0;class#Graph#0" expanded="true" />
-            <element signature="method#insertInCharGerGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#removeFromGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#forceDeepMove#0;class#Graph#0" expanded="true" />
-            <element signature="method#forceMoveGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#moveGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#insertObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#setTextLabel#0;class#Graph#0" expanded="true" />
-            <element signature="method#resizeForContents#0;class#Graph#0" expanded="true" />
-            <element signature="method#nestedWithin#0;class#Graph#0" expanded="true" />
-            <element signature="method#containsGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#handleContextLinks#0;class#Graph#0" expanded="true" />
-            <element signature="method#findByID#0;class#Graph#0" expanded="true" />
-            <element signature="method#abandonObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#finalize#0;class#Graph#0" expanded="true" />
-            <element signature="method#getBriefSummary#0;class#Graph#0" expanded="true" />
-            <element signature="method#getContentBounds#0;class#Graph#0" expanded="true" />
-            <element signature="method#getDisplayBounds#0;class#Graph#0" expanded="true" />
-            <element signature="method#moveGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#isEmpty#0;class#Graph#0" expanded="true" />
-            <element signature="method#safeString#0;class#Graph#0" expanded="true" />
-            <element signature="method#safeString2#0;class#Graph#0" expanded="true" />
-            <element signature="method#toStringDeep#0;class#Graph#0" expanded="true" />
-            <element signature="method#dispose#0;class#Graph#0" expanded="true" />
-            <element signature="method#getGraphObjects#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateConceptSubgraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#addHistory#0;class#Graph#0" expanded="true" />
-            <element signature="method#findTypeDescriptors#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllTypeDescriptors#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="true" />
-            <element signature="method#unCommitFromKnowledgeBase#0;class#Graph#0" expanded="true" />
-            <element signature="method#addAugmentedGraphObjects#0;class#Graph#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1178,13 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="98" column="46" lean-forward="true" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
-          <folding>
-            <element signature="method#initComponents#0;class#RulesSelectionFrame#0" expanded="true" />
-            <element signature="method#windowActivated#0;class#10635:10905" expanded="true" />
-            <element signature="method#ApplySelectedRulesActionPerformed#0;class#RulesSelectionFrame#0" expanded="true" />
-            <element signature="method#QuitButtonActionPerformed#0;class#RulesSelectionFrame#0" expanded="true" />
-            <element signature="method#GraphDisplayListMouseClicked#0;class#RulesSelectionFrame#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1192,10 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1997">
           <caret line="1531" column="116" lean-forward="true" selection-start-line="1531" selection-start-column="116" selection-end-line="1531" selection-end-column="116" />
-          <folding>
-            <element signature="e#61135#61136#0" expanded="true" />
-            <element signature="e#61199#61200#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1203,9 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="723" column="37" lean-forward="false" selection-start-line="723" selection-start-column="37" selection-end-line="723" selection-end-column="37" />
-          <folding>
-            <element signature="method#setChangedContent#0;class#EditManager#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1213,42 +903,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="592" column="36" lean-forward="true" selection-start-line="592" selection-start-column="36" selection-end-line="592" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1539">
-          <caret line="1217" column="59" lean-forward="true" selection-start-line="1217" selection-start-column="59" selection-end-line="1217" selection-end-column="59" />
-          <folding>
-            <element signature="method#OperManager#0;class#OperManager#0" expanded="true" />
-            <element signature="method#makeMenus#0;class#OperManager#0" expanded="true" />
-            <element signature="method#getValue#0;class#3506:3886" expanded="true" />
-            <element signature="method#getValue#0;class#4023:4411" expanded="true" />
-            <element signature="method#setMenuItems#0;class#OperManager#0" expanded="true" />
-            <element signature="method#finalize#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionValidate#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionAttachOntologyLabel#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionShowInternals#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionDeleteOntologyLabel#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionMaxJoinWithOpenGraphs#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionJoinWithOpenGraphsBROKEN#0;class#OperManager#0" expanded="true" />
-            <element signature="method#joinReferents#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionMakeGeneric#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionCommitToKB#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionRelationMatching#0;class#OperManager#0" expanded="true" />
-            <element signature="method#matchMasterToOpenGraphs#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionBestRelationMatching#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionSelectRules#0;class#OperManager#0" expanded="true" />
-            <element signature="method#performActionApplyRules#0;class#OperManager#0" expanded="true" />
-            <element signature="method#checkConsequentExisting#0;class#OperManager#0" expanded="true" />
-            <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
-            <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
-            <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-            <element signature="method#match#0;class#OperManager#0" expanded="true" />
-            <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="334">
+          <caret line="958" column="5" lean-forward="true" selection-start-line="958" selection-start-column="5" selection-end-line="958" selection-end-column="5" />
         </state>
       </provider>
     </entry>

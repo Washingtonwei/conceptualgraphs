@@ -886,7 +886,7 @@ public class OperManager {
      * @param rule
      * @return true if the current CG has the consequent part of the rule to be applied
      */
-    public boolean checkConsequentExisting(Graph graph, Rule rule) {
+    public boolean isConsequentExistent(Graph graph, Rule rule) {
         Iterator iter = rule.getConsequent().graphObjects();
         GraphObject go = null;
 
@@ -910,17 +910,15 @@ public class OperManager {
         // concepts that share the same type
         if (graph.conceptHashStore.containsKey(type)) {
             Graph cg = graph.conceptHashStore.get(type);
-            System.out.println("About to match consequent in the current CG:");
+            System.out.println("Looking for Consequent pattern in the current CG:");
             for (GraphObject go1 : cg.objectHashStore.values()) {
                 if (match((GNode) go1, c)) {
                     return true;
                 }
             }
-            return false;
-        } else {
-            System.out.println("No consequent is found in the current CG");
-            return false;
         }
+        System.out.println("No consequent is found in the current CG");
+        return false;
     }
 
     /**
@@ -947,7 +945,7 @@ public class OperManager {
         // }
 
         //if the consequent of a rule is already in the current CG, there is no need to apply the rule
-        if (!checkConsequentExisting(graph, r)) {
+        if (!isConsequentExistent(graph, r)) {
             // look for the structure of antecedent of r in the conceptHashStore of
             // graph and update the current graph with consequent of r
 
@@ -1009,6 +1007,7 @@ public class OperManager {
 
     /**
      * Given a CG, adding the consequent part graph of rule to it.
+     *
      * @param currentGraph
      * @param rule
      */
@@ -1022,6 +1021,7 @@ public class OperManager {
     /**
      * Clone consequent into currentGraph
      * Deep copy
+     *
      * @param currentGraph
      * @param consequent
      */
@@ -1232,7 +1232,7 @@ public class OperManager {
     private boolean match(GNode nG, GNode nR) {
 
         int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is a mismatch is found
-                     //then, stop immediately
+        //then, stop immediately
         /*
             before matching nG and nR, create data structures to keep track of
             discovered and visited nodes
@@ -1359,7 +1359,7 @@ public class OperManager {
     /**
      * return a rule object that contains the Antecedent and Consequent contexts
      * as two graphs
-     *
+     * <p>
      * I think if there is a coref link from outside to inside of a context, it is treated as the same graph
      * We need to figure this out
      * TODO

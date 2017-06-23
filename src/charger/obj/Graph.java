@@ -665,6 +665,9 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
             //Global.info( "Removing object " + go.objectID + " from graph " + this.objectID );
 
             //by Bingyang Wei
+            /*
+            When a Concept is removed from the graph, it is also removed from conceptHashStore
+             */
             if(go instanceof Concept){
                 Graph chs = ((Graph) conceptHashStore.get(((Concept) go).getTypeLabel()));
                 if(chs != null) {

@@ -1078,135 +1078,137 @@ public class OperManager {
             for (Object o : edgesR) {
                 GEdge edge = (GEdge) o;
                 GEdge edge_cpy = null;
+                //if o is not coref, we are not copying coref and coref linked nodes
+                if(!(o instanceof Coref)) {
+                    if (n == edge.fromObj) {
+                        //if the node at toObj is NOT already discovered
+                        //we need create a copy of it
+                        if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
+                            discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
 
-                if (n == edge.fromObj) {
-                    //if the node at toObj is NOT already discovered
-                    //we need create a copy of it
-                    if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
-                        discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
+                            if (edge.toObj instanceof Graph) {
+                                //TODO
+                                addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj);
+                            } else if (edge.toObj instanceof Concept) {
+                                Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
+                                Concept concept_cpy = new Concept();
+                                concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                                concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                                concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                                concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                                concept_cpy.setBackground(Color.gray);
 
-                        if (edge.toObj instanceof Graph) {
-                            //TODO
-                            addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj);
-                        } else if (edge.toObj instanceof Concept) {
-                            Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
-                            Concept concept_cpy = new Concept();
-                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
-                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
-                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
-                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                            concept_cpy.setBackground(Color.gray);
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(n_cpy, concept_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(n_cpy, concept_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
 
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(n_cpy, concept_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(n_cpy, concept_cpy);
-                                currentGraph.insertObject(edge_cpy);
+                                q1.add((Concept) edge.toObj);
+                                q2.add(concept_cpy);
+
+                            } else if (edge.toObj instanceof Relation) {
+                                Relation relationRuleNeighbor = (Relation) edge.toObj;
+                                Relation relation_cpy = new Relation();
+                                relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                                relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                                relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                                relation_cpy.setBackground(Color.gray);
+
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(n_cpy, relation_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(n_cpy, relation_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
+
+                                q1.add((Relation) edge.toObj);
+                                q2.add(relation_cpy);
+
+                            } else if (edge.toObj instanceof Actor) {
+                                Actor actorRuleNeighbor = (Actor) edge.toObj;
+                                Actor actor_cpy = new Actor();
+                                actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                                actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                                actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                                actor_cpy.setBackground(Color.gray);
+
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(n_cpy, actor_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(n_cpy, actor_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
+                                q1.add((Actor) edge.toObj);
+                                q2.add(actor_cpy);
                             }
-
-                            q1.add((Concept) edge.toObj);
-                            q2.add(concept_cpy);
-
-                        } else if (edge.toObj instanceof Relation) {
-                            Relation relationRuleNeighbor = (Relation) edge.toObj;
-                            Relation relation_cpy = new Relation();
-                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
-                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
-                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                            relation_cpy.setBackground(Color.gray);
-
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(n_cpy, relation_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(n_cpy, relation_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            }
-
-                            q1.add((Relation) edge.toObj);
-                            q2.add(relation_cpy);
-
-                        } else if (edge.toObj instanceof Actor) {
-                            Actor actorRuleNeighbor = (Actor) edge.toObj;
-                            Actor actor_cpy = new Actor();
-                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
-                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
-                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                            actor_cpy.setBackground(Color.gray);
-
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(n_cpy, actor_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(n_cpy, actor_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            }
-                            q1.add((Actor) edge.toObj);
-                            q2.add(actor_cpy);
                         }
-                    }
-                } else {//if n == edge.toObj
-                    //if the node at fromObj is NOT already discovered
-                    //we need create a copy of it
-                    if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
-                        discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
-                        if (edge.fromObj instanceof Graph) {
-                            //TODO
-                            addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj);
-                        } else if (edge.fromObj instanceof Concept) {
-                            Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
-                            Concept concept_cpy = new Concept();
-                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
-                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
-                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
-                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                            concept_cpy.setBackground(Color.gray);
+                    } else {//if n == edge.toObj
+                        //if the node at fromObj is NOT already discovered
+                        //we need create a copy of it
+                        if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
+                            discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
+                            if (edge.fromObj instanceof Graph) {
+                                //TODO
+                                addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj);
+                            } else if (edge.fromObj instanceof Concept) {
+                                Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
+                                Concept concept_cpy = new Concept();
+                                concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                                concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                                concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                                concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                                concept_cpy.setBackground(Color.gray);
 
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(concept_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(concept_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(concept_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(concept_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
+                                q1.add((Concept) edge.fromObj);
+                                q2.add(concept_cpy);
+
+                            } else if (edge.fromObj instanceof Relation) {
+                                Relation relationRuleNeighbor = (Relation) edge.fromObj;
+                                Relation relation_cpy = new Relation();
+                                relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                                relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                                relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                                relation_cpy.setBackground(Color.gray);
+
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(relation_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(relation_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
+                                q1.add((Relation) edge.fromObj);
+                                q2.add(relation_cpy);
+                            } else if (edge.fromObj instanceof Actor) {
+                                Actor actorRuleNeighbor = (Actor) edge.fromObj;
+                                Actor actor_cpy = new Actor();
+                                actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                                actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                                actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                                actor_cpy.setBackground(Color.gray);
+
+                                if (edge instanceof Arrow) {
+                                    edge_cpy = new Arrow(actor_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                } else if (edge instanceof Coref) {
+                                    edge_cpy = new Coref(actor_cpy, n_cpy);
+                                    currentGraph.insertObject(edge_cpy);
+                                }
+                                q1.add((Actor) edge.fromObj);
+                                q2.add(actor_cpy);
                             }
-                            q1.add((Concept) edge.fromObj);
-                            q2.add(concept_cpy);
-
-                        } else if (edge.fromObj instanceof Relation) {
-                            Relation relationRuleNeighbor = (Relation) edge.fromObj;
-                            Relation relation_cpy = new Relation();
-                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
-                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
-                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                            relation_cpy.setBackground(Color.gray);
-
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(relation_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(relation_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            }
-                            q1.add((Relation) edge.fromObj);
-                            q2.add(relation_cpy);
-                        } else if (edge.fromObj instanceof Actor) {
-                            Actor actorRuleNeighbor = (Actor) edge.fromObj;
-                            Actor actor_cpy = new Actor();
-                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
-                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
-                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                            actor_cpy.setBackground(Color.gray);
-
-                            if (edge instanceof Arrow) {
-                                edge_cpy = new Arrow(actor_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            } else if (edge instanceof Coref) {
-                                edge_cpy = new Coref(actor_cpy, n_cpy);
-                                currentGraph.insertObject(edge_cpy);
-                            }
-                            q1.add((Actor) edge.fromObj);
-                            q2.add(actor_cpy);
                         }
                     }
                 }
@@ -1261,12 +1263,14 @@ public class OperManager {
             GNode nGraph = q1.remove();
 
             // get all neighbors of nRule, FROM in fromListR and TO in toListR
-            ArrayList fromListR = nRule.getLinkedNodes(GEdge.Direction.FROM);
-            ArrayList toListR = nRule.getLinkedNodes(GEdge.Direction.TO);
+            //This will also include coref linked nodes
+            ArrayList fromListR = nRule.getArrowLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListR = nRule.getArrowLinkedNodes(GEdge.Direction.TO);
 
             // get all neighbors of nGraph, FROM in fromListG and TO in toListG
-            ArrayList fromListG = nGraph.getLinkedNodes(GEdge.Direction.FROM);
-            ArrayList toListG = nGraph.getLinkedNodes(GEdge.Direction.TO);
+            //This will also include coref linked nodes
+            ArrayList fromListG = nGraph.getArrowLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListG = nGraph.getArrowLinkedNodes(GEdge.Direction.TO);
 
             // match fromListR to fromListG
             /*
@@ -1277,34 +1281,34 @@ public class OperManager {
              */
             for (Object o : fromListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRuleNeighbor is a neighbor of nRule
+                    // if this is the first time we discover this node in rule graph
+                    if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                            && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                        discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
 
-                // if this is the first time we discover this node in rule graph
-                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
-                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
-                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
-
-                    // see if we can find a matching concept in fromListG for nodeRuleNeighbor
-                    GNode n = null;
-                    boolean isMatch = false;
-                    for (Object object : fromListG) {
-                        n = (GNode) object;
-                        if (!visited1.containsKey(n.objectID.toString())
-                                && !discovered1.containsKey(n.objectID.toString())
-                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
-                            discovered1.put(n.objectID.toString(), n);
-                            isMatch = true;
-                            break;//if we find one, break
+                        // see if we can find a matching concept in fromListG for nodeRuleNeighbor
+                        GNode n = null;
+                        boolean isMatch = false;
+                        for (Object object : fromListG) {
+                            n = (GNode) object;
+                            if (!visited1.containsKey(n.objectID.toString())
+                                    && !discovered1.containsKey(n.objectID.toString())
+                                    && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
+                                discovered1.put(n.objectID.toString(), n);
+                                isMatch = true;
+                                break;//if we find one, break
+                            }
                         }
+                        // after we traverse through from list, we didn't find a
+                        // match,terminate everything
+                        if (!isMatch) {
+                            flag = 1;
+                            break;
+                        }
+                        q2.add(nodeRuleNeighbor);
+                        q1.add(n);
                     }
-                    // after we traverse through from list, we didn't find a
-                    // match,terminate everything
-                    if (!isMatch) {
-                        flag = 1;
-                        break;
-                    }
-                    q2.add(nodeRuleNeighbor);
-                    q1.add(n);
-                }
+
             }
 
             //no need to verify the toListR
@@ -1314,34 +1318,33 @@ public class OperManager {
             // match toListR to toListG
             for (Object o : toListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRule is a neighbor of nRule
+                    // if this is the first time we discover this node in rule graph
+                    if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                            && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                        discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
 
-                // if this is the first time we discover this node in rule graph
-                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
-                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
-                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
-
-                    // see if we can find a matching concept in toListG for nodeRuleNeighbor
-                    GNode n = null;
-                    boolean isMatch = false;
-                    for (Object object : toListG) {
-                        n = (GNode) object;
-                        if (!visited1.containsKey(n.objectID.toString())
-                                && !discovered1.containsKey(n.objectID.toString())
-                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
-                            discovered1.put(n.objectID.toString(), n);
-                            isMatch = true;
+                        // see if we can find a matching concept in toListG for nodeRuleNeighbor
+                        GNode n = null;
+                        boolean isMatch = false;
+                        for (Object object : toListG) {
+                            n = (GNode) object;
+                            if (!visited1.containsKey(n.objectID.toString())
+                                    && !discovered1.containsKey(n.objectID.toString())
+                                    && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
+                                discovered1.put(n.objectID.toString(), n);
+                                isMatch = true;
+                                break;
+                            }
+                        }
+                        // after we traverse through tolist, we didn't find a
+                        // match,terminate everything
+                        if (!isMatch) {
+                            flag = 1;
                             break;
                         }
+                        q2.add(nodeRuleNeighbor);
+                        q1.add(n);
                     }
-                    // after we traverse through tolist, we didn't find a
-                    // match,terminate everything
-                    if (!isMatch) {
-                        flag = 1;
-                        break;
-                    }
-                    q2.add(nodeRuleNeighbor);
-                    q1.add(n);
-                }
             }
 
             //After match fromListR to fromListG, toListR to toListG, we can add nRule and nGraph to visited queues
@@ -1351,6 +1354,23 @@ public class OperManager {
 
         //if the flag is still 0, we find a match
         if (flag == 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Returns true if nRule and nodeRuleNeighbor are equivalent concept, in other words, they are linked through a coref link
+     * @param nRule
+     * @param nodeRuleNeighbor
+     * @return
+     */
+    private boolean isCorefLinkedNode(GNode nRule, GNode nodeRuleNeighbor) {
+        ArrayList<GEdge> edges = nRule.getEdges();
+
+
+
+        if(true)
             return true;
         else
             return false;

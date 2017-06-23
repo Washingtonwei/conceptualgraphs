@@ -58,7 +58,7 @@ abstract public class GNode extends GraphObject  {
      * Some reference that helps describe this node. Currently used for a
      * TypeDescriptor
      *
-     * @see charger.obj.AbstractTypeDescriptor
+     * see charger.obj.AbstractTypeDescriptor
      */
     protected ArrayList descriptors = new ArrayList();
 
@@ -136,6 +136,33 @@ abstract public class GNode extends GraphObject  {
             } else if ( ge.howLinked( this ) == GEdge.Direction.FROM ) {
                 if ( direction == GEdge.Direction.TO ) {
                     holder.add( ge.toObj );
+                }
+            }
+        }
+        return holder;
+    }
+
+    /**
+     * Returns a list of GNodes that are either "input" or "output" to the
+     * target node, except coref linked nodes
+     * This one is different from get LinkedNodes which returns everything
+     * @param direction
+     * @return
+     */
+    public ArrayList getArrowLinkedNodes( GEdge.Direction direction ) {
+        ArrayList holder = new ArrayList();
+        Iterator iter = getEdges().iterator();
+        while ( iter.hasNext() ) {
+            GEdge ge = (GEdge)iter.next();
+            if(!(ge instanceof Coref)) {
+                if (ge.howLinked(this) == GEdge.Direction.TO) {
+                    if (direction == GEdge.Direction.FROM) {
+                        holder.add(ge.fromObj);
+                    }
+                } else if (ge.howLinked(this) == GEdge.Direction.FROM) {
+                    if (direction == GEdge.Direction.TO) {
+                        holder.add(ge.toObj);
+                    }
                 }
             }
         }

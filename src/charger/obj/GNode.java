@@ -459,6 +459,20 @@ abstract public class GNode extends GraphObject  {
         }
     }
 
+    /**
+     * By Bingyang Wei
+     * Returns true if this node is linked to equivalenet nodes through a coref link
+     * @return
+     */
+    public boolean hasCorefEdge() {
+        ArrayList<GEdge> edges = getEdges();
+        for (GEdge e: edges) {
+            if (e instanceof Coref)
+                return true;
+        }
+        return false;
+    }
+
 //    public boolean commitToKnowledgeBase( kb.KnowledgeBase kb ) {
 //        return true;
 //    }

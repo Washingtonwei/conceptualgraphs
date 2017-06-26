@@ -914,7 +914,7 @@ public class OperManager {
             for (GraphObject go1 : cg.objectHashStore.values()) {
                 //if there is a match, we need to add the consequent part of the rule to the current CG
                 HashMap<GNode, GNode> match = match((GNode) go1, c);
-                if(match != null){
+                if (match != null) {
                     return true;
                 }
             }
@@ -1002,7 +1002,7 @@ public class OperManager {
         for (GraphObject go : cg.objectHashStore.values()) {
             //if there is a match, we need to add the consequent part of the rule to the current CG
             HashMap<GNode, GNode> match = match((GNode) go, c);
-            if(match != null){
+            if (match != null) {
                 addConsequent(ef.TheGraph, rule, match);
             }
         }
@@ -1032,7 +1032,8 @@ public class OperManager {
      * @param match
      */
     public void addAugmentedGraphObjects(Graph currentGraph, Graph consequent, HashMap<GNode, GNode> match) {
-        // first, obtain a random GNode from consequent graph
+        // first, obtain a random GNode from consequent graph, this node cannot be a concept with a coref link
+        //It may be a concept, relation or actor
         Iterator iter = consequent.graphObjects();
         GraphObject go = null;
 
@@ -1041,22 +1042,17 @@ public class OperManager {
             //Since graph is a kind of concept, we need to rule it out first
             if (go instanceof Graph) {
                 continue;
-            } else if (go instanceof Concept) {
-                break;
+            } else if (go instanceof GNode) {
+                if (((GNode) go).hasCorefEdge())
+                    continue;
+                else
+                    break;
             } else {
                 continue;
             }
         }
-        Concept c = (Concept) go;//one concept in consequent graph
+        //when we get here, we get one GNode, go, which may be concept, relation or actor
 
-        Concept c_cpy = new Concept();
-        c_cpy.setTextLabel(c.getTextLabel());
-        c_cpy.setReferent(c.getReferent());
-        c_cpy.setTypeLabel(c.getTypeLabel());
-        c_cpy.setCenter(c.getCenter());
-        c_cpy.setBackground(Color.gray);
-
-        // before matching go and c, create data structures to keep track of
         // discovered and visited nodes
         //1 is for consequent graph
         //2 is for clone
@@ -1067,12 +1063,45 @@ public class OperManager {
         Queue<GNode> q1 = new LinkedList<GNode>();
         Queue<GNode> q2 = new LinkedList<GNode>();
 
-        discovered1.put(c.objectID.toString(), c);
-        discovered2.put(c_cpy.objectID.toString(), c_cpy);
+        //we need to make sure what object go is
+        if (go instanceof Concept) {
+            Concept c = (Concept) go;//one concept in consequent graph
+            Concept c_cpy = new Concept();
+            c_cpy.setTextLabel(c.getTextLabel());
+            c_cpy.setReferent(c.getReferent());
+            c_cpy.setTypeLabel(c.getTypeLabel());
+            c_cpy.setCenter(c.getCenter());
+            c_cpy.setBackground(Color.gray);
+            discovered1.put(c.objectID.toString(), c);
+            discovered2.put(c_cpy.objectID.toString(), c_cpy);
+            q1.add(c);
+            q2.add(c_cpy);
+        } else if (go instanceof Relation) {
+            Relation r = (Relation) go;//one concept in consequent graph
+            Relation r_cpy = new Relation();
+            r_cpy.setTextLabel(r.getTextLabel());
+            r_cpy.setTypeLabel(r.getTypeLabel());
+            r_cpy.setCenter(r.getCenter());
+            r_cpy.setBackground(Color.gray);
+            discovered1.put(r.objectID.toString(), r);
+            discovered2.put(r_cpy.objectID.toString(), r_cpy);
+            q1.add(r);
+            q2.add(r_cpy);
+        } else {
+            Actor a = (Actor) go;//one concept in consequent graph
+            Concept a_cpy = new Concept();
+            a_cpy.setTextLabel(a.getTextLabel());
+            a_cpy.setTypeLabel(a.getTypeLabel());
+            a_cpy.setCenter(a.getCenter());
+            a_cpy.setBackground(Color.gray);
+            discovered1.put(a.objectID.toString(), a);
+            discovered2.put(a_cpy.objectID.toString(), a_cpy);
+            q1.add(a);
+            q2.add(a_cpy);
+        }
 
-        q1.add(c);
-        q2.add(c_cpy);
-
+        //At this point, we have a good start, we find a node in consequent which does not has any coref link
+        //we also made a copy of it, then we put both nodes in two queues
         while (!q1.isEmpty()) {
             GNode n = q1.remove();
             GNode n_cpy = q2.remove();
@@ -1085,11 +1114,16 @@ public class OperManager {
                 GEdge edge = (GEdge) o;
                 GEdge edge_cpy = null;
                 //if o is not coref, we are not copying coref linked nodes, see else part
-                if(!(o instanceof Coref)) {
+                if (!(o instanceof Coref)) {
                     if (n == edge.fromObj) {
+                        if (((GNode) (edge.toObj)).hasCorefEdge()) {
+                            Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.toObj));
+                            edge_cpy = new Arrow(n_cpy, match.get(cc));
+                            currentGraph.insertObject(edge_cpy);
+                        }
                         //if the node at toObj is NOT already discovered
                         //we need create a copy of it
-                        if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
+                        else if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
                             discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
 
                             if (edge.toObj instanceof Graph) {
@@ -1154,9 +1188,14 @@ public class OperManager {
                             }
                         }
                     } else {//if n == edge.toObj
-                        //if the node at fromObj is NOT already discovered
+                        if (((GNode) (edge.fromObj)).hasCorefEdge()) {
+                            Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.fromObj));
+                            edge_cpy = new Arrow(match.get(cc), n_cpy);
+                            currentGraph.insertObject(edge_cpy);
+
+                        }//if the node at fromObj is NOT already discovered
                         //we need create a copy of it
-                        if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
+                        else if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
                             discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
                             if (edge.fromObj instanceof Graph) {
                                 //TODO
@@ -1217,29 +1256,29 @@ public class OperManager {
                             }
                         }
                     }
-                }else{//if the edge we are copying is a coref, then we are linking it to the graph to which we applied this rule
+                } else {//if the edge we are copying is a coref, then we are linking it to the graph to which we applied this rule
                     Concept cc = null;
                     if (n == edge.fromObj) {
-                        ArrayList<GEdge> edges = ((GNode)(edge.toObj)).getEdges();//only two edges
-                        for (GEdge e:edges) {
-                            if(e.fromObj != n){//if this is the edge that connects outside concept to concept in antecedent
-                                if(e.fromObj != edge.toObj){
-                                    cc = (Concept)e.fromObj;
-                                }else{
-                                    cc= (Concept)e.toObj;
+                        ArrayList<GEdge> edges = ((GNode) (edge.toObj)).getEdges();//only two edges
+                        for (GEdge e : edges) {
+                            if (e.fromObj != n) {//if this is the edge that connects outside concept to concept in antecedent
+                                if (e.fromObj != edge.toObj) {
+                                    cc = (Concept) e.fromObj;
+                                } else {
+                                    cc = (Concept) e.toObj;
                                 }
                             }
                         }
                         edge_cpy = new Coref(n_cpy, match.get(cc));
                         currentGraph.insertObject(edge_cpy);
                     } else {//if n == edge.toObj
-                        ArrayList<GEdge> edges = ((GNode)(edge.fromObj)).getEdges();//only two edges
-                        for (GEdge e:edges) {
-                            if(e.toObj != n){//if this is the edge that connects outside concept to concept in antecedent
-                                if(e.fromObj != edge.fromObj){
-                                    cc = (Concept)e.fromObj;
-                                }else{
-                                    cc= (Concept)e.toObj;
+                        ArrayList<GEdge> edges = ((GNode) (edge.fromObj)).getEdges();//only two edges
+                        for (GEdge e : edges) {
+                            if (e.toObj != n) {//if this is the edge that connects outside concept to concept in antecedent
+                                if (e.fromObj != edge.fromObj) {
+                                    cc = (Concept) e.fromObj;
+                                } else {
+                                    cc = (Concept) e.toObj;
                                 }
                             }
                         }
@@ -1256,6 +1295,47 @@ public class OperManager {
             currentGraph.insertObject(n_cpy);//add this GNode to the current graph, edges have already been added in above code
         }//end of while
     }//end of method
+
+    /**
+     * Given a concept in Consequent of a rule, this function returns the corresponding concept in the Antecedent (connected by coref)
+     * @param fromObj
+     * @return
+     */
+    private Concept getEquivalentNodeInAntecedent(GNode n) {
+        GEdge corefEdge = null;
+        ArrayList<GEdge> edges1 = n.getEdges();//only two edges
+        for (GEdge e : edges1) {
+            if (e instanceof Coref) {
+                corefEdge = e;
+                break;
+            }
+        }
+        Concept cc = null;
+        if (n == corefEdge.fromObj) {
+            ArrayList<GEdge> edges = ((GNode) (corefEdge.toObj)).getEdges();//only two edges
+            for (GEdge e : edges) {
+                if (e.fromObj != n) {//if this is the edge that connects outside concept to concept in antecedent
+                    if (e.fromObj != corefEdge.toObj) {
+                        cc = (Concept) e.fromObj;
+                    } else {
+                        cc = (Concept) e.toObj;
+                    }
+                }
+            }
+        } else {//if n == corefEdge.toObj
+            ArrayList<GEdge> edges = ((GNode) (corefEdge.fromObj)).getEdges();//only two edges
+            for (GEdge e : edges) {
+                if (e.toObj != n) {//if this is the edge that connects outside concept to concept in antecedent
+                    if (e.fromObj != corefEdge.fromObj) {
+                        cc = (Concept) e.fromObj;
+                    } else {
+                        cc = (Concept) e.toObj;
+                    }
+                }
+            }
+        }
+        return cc;
+    }
 
     /**
      * Core subgraph isomorphism algorithm. Looks for the antecedent pattern in Graph cg
@@ -1325,33 +1405,33 @@ public class OperManager {
              */
             for (Object o : fromListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRuleNeighbor is a neighbor of nRule
-                    // if this is the first time we discover this node in rule graph
-                    if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
-                            && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
-                        discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
 
-                        // see if we can find a matching concept in fromListG for nodeRuleNeighbor
-                        GNode n = null;
-                        boolean isMatch = false;
-                        for (Object object : fromListG) {
-                            n = (GNode) object;
-                            if (!visited1.containsKey(n.objectID.toString())
-                                    && !discovered1.containsKey(n.objectID.toString())
-                                    && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
-                                discovered1.put(n.objectID.toString(), n);
-                                isMatch = true;
-                                break;//if we find one, break
-                            }
+                    // see if we can find a matching concept in fromListG for nodeRuleNeighbor
+                    GNode n = null;
+                    boolean isMatch = false;
+                    for (Object object : fromListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
+                            break;//if we find one, break
                         }
-                        // after we traverse through from list, we didn't find a
-                        // match,terminate everything
-                        if (!isMatch) {
-                            flag = 1;
-                            break;
-                        }
-                        q2.add(nodeRuleNeighbor);
-                        q1.add(n);
                     }
+                    // after we traverse through from list, we didn't find a
+                    // match,terminate everything
+                    if (!isMatch) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRuleNeighbor);
+                    q1.add(n);
+                }
 
             }
 
@@ -1362,32 +1442,32 @@ public class OperManager {
             // match toListR to toListG
             for (Object o : toListR) {
                 GNode nodeRuleNeighbor = (GNode) o;// nodeRule is a neighbor of nRule
-                    // if this is the first time we discover this node in rule graph
-                    if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
-                            && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
-                        discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
-                        // see if we can find a matching concept in toListG for nodeRuleNeighbor
-                        GNode n = null;
-                        boolean isMatch = false;
-                        for (Object object : toListG) {
-                            n = (GNode) object;
-                            if (!visited1.containsKey(n.objectID.toString())
-                                    && !discovered1.containsKey(n.objectID.toString())
-                                    && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
-                                discovered1.put(n.objectID.toString(), n);
-                                isMatch = true;
-                                break;
-                            }
-                        }
-                        // after we traverse through tolist, we didn't find a
-                        // match,terminate everything
-                        if (!isMatch) {
-                            flag = 1;
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
+                    // see if we can find a matching concept in toListG for nodeRuleNeighbor
+                    GNode n = null;
+                    boolean isMatch = false;
+                    for (Object object : toListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTypeLabel().equals(nodeRuleNeighbor.getTypeLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
                             break;
                         }
-                        q2.add(nodeRuleNeighbor);
-                        q1.add(n);
                     }
+                    // after we traverse through tolist, we didn't find a
+                    // match,terminate everything
+                    if (!isMatch) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRuleNeighbor);
+                    q1.add(n);
+                }
             }
 
             //After match fromListR to fromListG, toListR to toListG, we can add nRule and nGraph to visited queues
@@ -1399,8 +1479,7 @@ public class OperManager {
         //if the flag is still 0, we find a match
         if (flag == 0) {
             return match;
-        }
-        else
+        } else
             return null;
     }
 

@@ -877,16 +877,30 @@ public class OperManager {
     }
 
     /**
-     * Before we apply a rule to a CG, we need to verify the current CG doesn't already
+     * Once we find a match to the antecedent
+     * Before we add consequent, we need to verify the current CG doesn't already
      * have the consequent part of the rule to be applied.
      * If so, we apply the rule,
      * otherwise, we don't apply the rule
      *
      * @param graph
      * @param rule
-     * @return true if the current CG has the consequent part of the rule to be applied
+     * @param m key is node in antecedent, value is node in graph
+     * @return true if the current CG has the consequent part of the rule
      */
-    public boolean isConsequentExistent(Graph graph, Rule rule) {
+    public boolean isConsequentExistent(Graph graph, Rule rule, HashMap<GNode, GNode> m) {
+        System.out.println("Looking for Consequent pattern in the current CG:");
+        //Instantiate the consequent of the rule
+        //We are using two HashMaps,
+        //1. m: key is node in antecedent, value is node in graph
+        //2. rule.getEquivlentConcepts(): key is node in antecedent, value is node in consequent
+        for (GNode gNode : rule.getEquivlentConcepts().keySet()) {
+            System.out.println("+++++++++++++++++++");
+            System.out.println(m.get(gNode).getTextLabel());
+            System.out.println("+++++++++++++++++++");
+            rule.getEquivlentConcepts().get(gNode).setTextLabel(m.get(gNode).getTextLabel());
+        }
+
         Iterator iter = rule.getConsequent().graphObjects();
         GraphObject go = null;
 
@@ -910,12 +924,12 @@ public class OperManager {
         // concepts that share the same type
         if (graph.conceptHashStore.containsKey(type)) {
             Graph cg = graph.conceptHashStore.get(type);
-            System.out.println("Looking for Consequent pattern in the current CG:");
             for (GraphObject go1 : cg.objectHashStore.values()) {
-                //if there is a match, we need to add the consequent part of the rule to the current CG
-                HashMap<GNode, GNode> match = match((GNode) go1, c);
-                if (match != null) {
-                    return true;
+                //if there is a match, we need not to add the consequent part of the rule to the current CG
+                if(go1.getTextLabel().equals(c.getTextLabel())) {
+                    if (matchConsequent((GNode) go1, c)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -930,60 +944,41 @@ public class OperManager {
      * @param rule  rule is in the form of if...then...
      */
     public void applyRule(Graph graph, Graph rule) {
-
-        //The rule graph is parsed to a Rule object r which contains an antecedent and a consequent
+        //The rule graph is parsed to a Rule object r which contains an antecedent, a consequent and a hash map to map equivalent concepts from antecedent to consequent
         Rule r = parseRuleGraph(rule);
 
-        // This snippet can print the concepts and relations in Antecedent
-        // Iterator iter = r.getAntecedent().graphObjects();
-        // while (iter.hasNext()) {
-        // GraphObject go = (GraphObject) iter.next();
-        // if (go instanceof Graph) {
-        //
-        // } else if (go instanceof GNode) {
-        // String text = go.getTextLabel();
-        // System.out.println(text + " ");
-        // }
-        // }
+        // look for the structure of antecedent of r in the conceptHashStore of
+        // graph and update the current graph with consequent of r
 
-        //if the consequent of a rule is already in the current CG, there is no need to apply the rule
-        if (!isConsequentExistent(graph, r)) {
-            // look for the structure of antecedent of r in the conceptHashStore of
-            // graph and update the current graph with consequent of r
+        // first, obtain a random concept from the antecedent of the rule
+        Iterator iter = r.getAntecedent().graphObjects();
+        GraphObject go = null;
 
-            // first, obtain a random concept from the antecedent of the rule
-            Iterator iter = r.getAntecedent().graphObjects();
-            GraphObject go = null;
-
-            while (iter.hasNext()) {
-                go = (GraphObject) iter.next();
-                //Since graph is a kind of concept, we need to rule it out first
-                if (go instanceof Graph) {
-                    continue;
-                } else if (go instanceof Concept) {
-                    break;
-                } else {
-                    continue;
-                }
+        while (iter.hasNext()) {
+            go = (GraphObject) iter.next();
+            //Since graph is a kind of concept, we need to rule it out first
+            if (go instanceof Graph) {
+                continue;
+            } else if (go instanceof Concept) {
+                break;
+            } else {
+                continue;
             }
-            Concept c = (Concept) go;
+        }
+        Concept c = (Concept) go;
 
-            // second, get the type of c
-            String type = c.getTypeLabel();
+        // second, get the type of c
+        String type = c.getTypeLabel();
 
             /*
-            third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of concepts           that share the same typeight now, we haven't consider subtype and supertype e.g. if a graph only has              subtype Student, and we are trying to apply a rule that only has supertype Person, we ought to apply              it, but this method is NOT doing that right now, this is a TODO
+            third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of concepts that share the same typeight now, we haven't consider subtype and supertype e.g. if a graph only has subtype Student, and we are trying to apply a rule that only has supertype Person, we ought to apply it, but this method is NOT doing that right now, this is a TODO
              */
-            if (graph.conceptHashStore.containsKey(type)) {
-                //cg has all concepts that share the exact same type
-                Graph cg = graph.conceptHashStore.get(type);
-                matchAll(cg, c, r);
-            } else {
-                System.out.println("Cannot apply this rule.");
-            }
-
+        if (graph.conceptHashStore.containsKey(type)) {
+            //cg has all concepts that share the exact same type
+            Graph cg = graph.conceptHashStore.get(type);
+            matchAll(cg, c, r);
         } else {
-            System.out.println("This rule doesn't need to be applied, either it has been applied or the consequent is already in the current CG");
+            System.out.println("Cannot apply this rule.");
         }
     }
 
@@ -1001,9 +996,15 @@ public class OperManager {
         // we want to investigate from concept go
         for (GraphObject go : cg.objectHashStore.values()) {
             //if there is a match, we need to add the consequent part of the rule to the current CG
+            //before we do that, we need to verify if the consequent is already in the graph or not,
+            //if so, there is no need to add the consequent
             HashMap<GNode, GNode> match = match((GNode) go, c);
             if (match != null) {
-                addConsequent(ef.TheGraph, rule, match);
+                if (!isConsequentExistent(ef.TheGraph, rule, match)) {
+                    addConsequent(ef.TheGraph, rule, match);
+                } else {
+                    System.out.println("This rule doesn't need to be applied, either it has been applied or the consequent is already in the current CG");
+                }
             }
         }
     }
@@ -1298,6 +1299,7 @@ public class OperManager {
 
     /**
      * Given a concept in Consequent of a rule, this function returns the corresponding concept in the Antecedent (connected by coref)
+     *
      * @param fromObj
      * @return
      */
@@ -1338,16 +1340,16 @@ public class OperManager {
     }
 
     /**
-     * Core subgraph isomorphism algorithm. Looks for the antecedent pattern in Graph cg
-     * Starting from a concept c of the antecedent of the rule, this method traverse both graphs to see
+     * Core subgraph isomorphism algorithm. Looks for the pattern in Graph cg
+     * Starting from a concept c of the rule, this method traverse both graphs to see
      * if a match exists or not.
      *
      * @param nG a node in a conceptual graph
-     * @param nR a node in the antecedent of a rule
-     * @return true if a subgraph match is found
+     * @param nR a node in the rule
+     * @return
      */
     private HashMap<GNode, GNode> match(GNode nG, GNode nR) {
-
+        //match will be returned, a node in rule matches a node in graph
         HashMap<GNode, GNode> match = new HashMap<GNode, GNode>();
 
         int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is a mismatch is found
@@ -1434,7 +1436,6 @@ public class OperManager {
                 }
 
             }
-
             //no need to verify the toListR
             if (flag == 1)
                 break;
@@ -1484,18 +1485,159 @@ public class OperManager {
     }
 
     /**
-     * return a rule object that contains the Antecedent and Consequent contexts
-     * as two graphs
-     * <p>
-     * I think if there is a coref link from outside to inside of a context, it is treated as the same graph
-     * We need to figure this out
-     * TODO
+     * This method looks exactly the same as match method, the difference is that, match method is used to match types, but this one is used to match text in nodes.
+     * So this method is more strict than match method, since both type and referent have to match.
      *
-     * @param rule
+     * @param nG
+     * @param nR
      * @return
+     */
+    private boolean matchConsequent(GNode nG, GNode nR) {
+        int flag = 0;// flag is 0 if no mismatch is found, flag is 1 is a mismatch is found
+        //then, stop immediately
+        /*
+            before matching nG and nR, create data structures to keep track of
+            discovered and visited nodes
+            1 is for graph
+            2 is for antecedent of the rule
+         */
+        HashMap<String, GNode> discovered1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> discovered2 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited1 = new HashMap<String, GNode>();
+        HashMap<String, GNode> visited2 = new HashMap<String, GNode>();
+
+        //FIFO queue, this queue is used to record the order we traverse both graphs
+        //This is useful when we later on try to augment the consequent part of the rule
+        //we need to relate the antecedent concept to the concept in the graph
+        Queue<GNode> pattern1 = new LinkedList<GNode>();
+        Queue<GNode> pattern2 = new LinkedList<GNode>();
+
+        //FIFO queue
+        Queue<GNode> q1 = new LinkedList<GNode>();
+        Queue<GNode> q2 = new LinkedList<GNode>();
+
+        //First nodes discovered in graph and antecedent are the nG and nR
+        discovered1.put(nG.objectID.toString(), nG);
+        discovered2.put(nR.objectID.toString(), nR);
+
+        //Since they are also matched, we put them on queues
+        q1.add(nG);
+        q2.add(nR);
+
+        //this while loop is used to find the match, but once a mismatch is found (flag == 1), break
+        while (!q2.isEmpty() && flag == 0) {
+            GNode nRule = q2.remove();
+            GNode nGraph = q1.remove();
+
+            // get all neighbors of nRule, FROM in fromListR and TO in toListR
+            //This will also include coref linked nodes
+            ArrayList fromListR = nRule.getArrowLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListR = nRule.getArrowLinkedNodes(GEdge.Direction.TO);
+
+            // get all neighbors of nGraph, FROM in fromListG and TO in toListG
+            //This will also include coref linked nodes
+            ArrayList fromListG = nGraph.getArrowLinkedNodes(GEdge.Direction.FROM);
+            ArrayList toListG = nGraph.getArrowLinkedNodes(GEdge.Direction.TO);
+
+            // match fromListR to fromListG
+            /*
+            There are two ways that this for loop terminate:
+            1. for each concept in fromListR, we can find a match in fromListG
+            2. for one concept in fromListR, we cannot find a match, this makes flag == 1
+            so even though the next for loop aobut toListR is OK, we are not accepting it.
+             */
+            for (Object o : fromListR) {
+                GNode nodeRuleNeighbor = (GNode) o;// nodeRuleNeighbor is a neighbor of nRule
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
+
+                    // see if we can find a matching concept in fromListG for nodeRuleNeighbor
+                    GNode n = null;
+                    boolean isMatch = false;
+                    for (Object object : fromListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTextLabel().equals(nodeRuleNeighbor.getTextLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
+                            break;//if we find one, break
+                        }
+                    }
+                    // after we traverse through from list, we didn't find a
+                    // match,terminate everything
+                    if (!isMatch) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRuleNeighbor);
+                    q1.add(n);
+                }
+            }
+            //no need to verify the toListR
+            if (flag == 1)
+                break;
+
+            // match toListR to toListG
+            for (Object o : toListR) {
+                GNode nodeRuleNeighbor = (GNode) o;// nodeRule is a neighbor of nRule
+                // if this is the first time we discover this node in rule graph
+                if (!visited2.containsKey(nodeRuleNeighbor.objectID.toString())
+                        && !discovered2.containsKey(nodeRuleNeighbor.objectID.toString())) {
+                    discovered2.put(nodeRuleNeighbor.objectID.toString(), nodeRuleNeighbor);
+                    // see if we can find a matching concept in toListG for nodeRuleNeighbor
+                    GNode n = null;
+                    boolean isMatch = false;
+                    for (Object object : toListG) {
+                        n = (GNode) object;
+                        if (!visited1.containsKey(n.objectID.toString())
+                                && !discovered1.containsKey(n.objectID.toString())
+                                && n.getTextLabel().equals(nodeRuleNeighbor.getTextLabel())) {
+                            discovered1.put(n.objectID.toString(), n);
+                            isMatch = true;
+                            break;
+                        }
+                    }
+                    // after we traverse through tolist, we didn't find a
+                    // match,terminate everything
+                    if (!isMatch) {
+                        flag = 1;
+                        break;
+                    }
+                    q2.add(nodeRuleNeighbor);
+                    q1.add(n);
+                }
+            }
+
+            //After match fromListR to fromListG, toListR to toListG, we can add nRule and nGraph to visited queues
+            visited2.put(nRule.objectID.toString(), nRule);
+            visited1.put(nGraph.objectID.toString(), nGraph);
+        }//end of while loop
+
+        //if the flag is still 0, we find a match
+        if (flag == 0) {
+            return true;
+        } else
+            return false;
+    }
+
+    /**
+     * return a rule object that contains the Antecedent, Consequent contexts
+     * as two graphs and a hash map which maps equivalent concept from antecedent to consequent
+     * <p>
+     *
+     * @param rule as a graph
+     * @return Rule object
      */
     private Rule parseRuleGraph(Graph rule) {
         Rule result = new Rule();
+        //this list is used to collect concepts that belong neither to antecedent nor consequent
+        //such concepts are used to coref link concepts in antecedent and consequent
+        ArrayList<Concept> equivalentConceptList = new ArrayList<>();
+
+        //the following snippet is used to separate antecedent and consequent
         Iterator iter = rule.graphObjects();
         while (iter.hasNext()) {
             GraphObject go = (GraphObject) iter.next();
@@ -1512,9 +1654,27 @@ public class OperManager {
                     result.setConsequent(g);
                 }
             } else if (go instanceof Concept) {
-                // figure out co-reference!!!
-                // TODO
+                equivalentConceptList.add((Concept) go);
             }
+        }
+        //at this point, the rule has been splitted into antecedent graph, consequent graph
+        //and equivalentConceptList has a list of concepts outside the two contexts, they connect equivalent concept from antecedent to concept in consequent
+
+        for (Concept c : equivalentConceptList) {
+            ArrayList<GNode> list = c.getLinkedNodes();//the size is always 2
+
+            Concept conceptFromAntecedent = null;
+            Concept conceptFromConsequent = null;
+
+            //the for loop will loop only twice
+            for (GNode gNode : list) {
+                if (result.getAntecedent().objectHashStore.containsKey(gNode.objectID.toString())) {
+                    conceptFromAntecedent = (Concept) gNode;
+                } else {
+                    conceptFromConsequent = (Concept) gNode;
+                }
+            }
+            result.getEquivlentConcepts().put(conceptFromAntecedent, conceptFromConsequent);
         }
         return result;
     }

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45d69f91-02ed-44af-9003-dbcaa302dfde" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/obj/GNode.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/obj/GNode.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/OperManager.java" afterPath="$PROJECT_DIR$/src/charger/OperManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/obj/GNode.java" afterPath="$PROJECT_DIR$/src/charger/obj/GNode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/obj/Rule.java" afterPath="$PROJECT_DIR$/src/charger/obj/Rule.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,105 +23,26 @@
       <file leaf-file-name="OperManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="1188" column="25" lean-forward="true" selection-start-line="1188" selection-start-column="25" selection-end-line="1188" selection-end-column="25" />
+            <state relative-caret-position="-253">
+              <caret line="891" column="80" lean-forward="false" selection-start-line="891" selection-start-column="80" selection-end-line="891" selection-end-column="80" />
               <folding>
-                <element signature="e#11815#11822#0" expanded="true" />
-                <element signature="method#isConsequentExistent#0;class#OperManager#0" expanded="true" />
                 <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
                 <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
                 <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-                <element signature="e#44724#44739#0" expanded="true" />
-                <element signature="e#44799#44814#0" expanded="true" />
-                <element signature="e#44871#44886#0" expanded="true" />
-                <element signature="e#44943#44958#0" expanded="true" />
-                <element signature="e#45002#45009#0" expanded="true" />
-                <element signature="e#45053#45060#0" expanded="true" />
+                <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
                 <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
                 <element signature="method#match#0;class#OperManager#0" expanded="true" />
-                <element signature="e#60874#60888#0" expanded="true" />
-                <element signature="e#61288#61303#0" expanded="true" />
-                <element signature="e#61363#61378#0" expanded="true" />
-                <element signature="e#61435#61450#0" expanded="true" />
-                <element signature="e#61507#61522#0" expanded="true" />
-                <element signature="e#61826#61833#0" expanded="true" />
-                <element signature="e#61883#61890#0" expanded="true" />
-                <element signature="e#61956#61963#0" expanded="true" />
-                <element signature="e#62007#62014#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GEdge.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/GEdge.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-              <folding>
-                <element signature="method#howLinked#0;class#GEdge#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Arrow.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/Arrow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Relation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/Relation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KnowledgeBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/kb/KnowledgeBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1287">
-              <caret line="47" column="7" lean-forward="false" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/GraphObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="992" column="20" lean-forward="false" selection-start-line="992" selection-start-column="20" selection-end-line="992" selection-end-column="20" />
-              <folding>
-                <element signature="method#commitToKnowledgeBase#0;class#GraphObject#0" expanded="true" />
-                <element signature="method#unCommitFromKnowledgeBase#0;class#GraphObject#0" expanded="true" />
-                <element signature="method#getOutermostGraph#0;class#GraphObject#0" expanded="true" />
-                <element signature="e#37394#37395#0" expanded="true" />
-                <element signature="e#37426#37427#0" expanded="true" />
-                <element signature="method#setLabelFont#0;class#GraphObject#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2178">
-              <caret line="95" column="71" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
-              <folding>
-                <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-                <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-                <element signature="method#getAllGraphs#0;class#Graph#0" expanded="true" />
-                <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="true" />
+                <element signature="e#61230#61244#0" expanded="true" />
+                <element signature="e#61644#61659#0" expanded="true" />
+                <element signature="e#61719#61734#0" expanded="true" />
+                <element signature="e#61791#61806#0" expanded="true" />
+                <element signature="e#61863#61878#0" expanded="true" />
+                <element signature="e#62182#62189#0" expanded="true" />
+                <element signature="e#62239#62246#0" expanded="true" />
+                <element signature="e#62312#62319#0" expanded="true" />
+                <element signature="e#62363#62370#0" expanded="true" />
+                <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
+                <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,6 +73,8 @@
       <find>commitToKnowledgeBase</find>
       <find>isCorefLinkedNode</find>
       <find>hasCorefEdge</find>
+      <find>conceptHashStore</find>
+      <find>objectHash</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -175,8 +101,9 @@
         <option value="$PROJECT_DIR$/src/charger/Global.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/Graph.java" />
         <option value="$PROJECT_DIR$/src/kb/KnowledgeBase.java" />
-        <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/GNode.java" />
+        <option value="$PROJECT_DIR$/src/charger/obj/Rule.java" />
+        <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
       </list>
     </option>
   </component>
@@ -208,6 +135,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -280,33 +208,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obj" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -778,7 +683,8 @@
       <workItem from="1497798488786" duration="5000" />
       <workItem from="1497798698514" duration="137000" />
       <workItem from="1498230777305" duration="14492000" />
-      <workItem from="1498484275765" duration="7415000" />
+      <workItem from="1498484275765" duration="7696000" />
+      <workItem from="1498656342898" duration="7796000" />
     </task>
     <task id="LOCAL-00001" summary="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()">
       <created>1497016852809</created>
@@ -850,11 +756,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498256482158</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Modified addAugmentedGraphObjects: now, we pick a node without coref link to start the copying process, and the duplicate concepts will not longer copied in the target CG.&#10;This is a great progress.&#10;Add a new method hasCorefEdge in GNode class&#10;Add a new method getEquivalentNodeInAntecedent in OperManger class.">
+      <created>1498492107419</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1498492107419</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72737000" />
+    <option name="totallyTimeSpent" value="80814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -870,12 +783,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34530094" sideWeight="0.26302084" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12460401" sideWeight="0.46666667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.218585" sideWeight="0.46666667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -939,24 +852,11 @@
     <MESSAGE value="Change function names, add comments." />
     <MESSAGE value="1. Now, we can apply a rule ignoring coref links. More work needs to be done to relate consequent and antecedent concepts linked through coref.&#10;Add a new function: getArrowLinkedNodes()&#10;change addAugmentedGraphObjects()&#10;2. I also added a field in class KnowledgeBase, it is intended to keep track of equivalent concepts, but we haven't done anything about it." />
     <MESSAGE value="1. Now, we can apply a rule considering coref links. We successfully relate consequent and antecedent concepts linked through coref. &#10;2.match() now returns the matched pattern between antecedent and the CG&#10;3. Modified several functions: matchAll, addConsequent, addAugmentedGraphObjects() now accept one more parameter: the matched pattern returned by match()" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. Now, we can apply a rule considering coref links. We successfully relate consequent and antecedent concepts linked through coref. &#10;2.match() now returns the matched pattern between antecedent and the CG&#10;3. Modified several functions: matchAll, addConsequent, addAugmentedGraphObjects() now accept one more parameter: the matched pattern returned by match()" />
+    <MESSAGE value="Modified addAugmentedGraphObjects: now, we pick a node without coref link to start the copying process, and the duplicate concepts will not longer copied in the target CG.&#10;This is a great progress.&#10;Add a new method hasCorefEdge in GNode class&#10;Add a new method getEquivalentNodeInAntecedent in OperManger class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified addAugmentedGraphObjects: now, we pick a node without coref link to start the copying process, and the duplicate concepts will not longer copied in the target CG.&#10;This is a great progress.&#10;Add a new method hasCorefEdge in GNode class&#10;Add a new method getEquivalentNodeInAntecedent in OperManger class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/charger/OperManager.java</url>
-          <line>1003</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/charger/OperManager.java</url>
-          <line>1058</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
@@ -971,28 +871,111 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#11815#11822#0" expanded="true" />
-            <element signature="method#isConsequentExistent#0;class#OperManager#0" expanded="true" />
             <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
             <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
             <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-            <element signature="e#44724#44739#0" expanded="true" />
-            <element signature="e#44799#44814#0" expanded="true" />
-            <element signature="e#44871#44886#0" expanded="true" />
-            <element signature="e#44943#44958#0" expanded="true" />
-            <element signature="e#45002#45009#0" expanded="true" />
-            <element signature="e#45053#45060#0" expanded="true" />
+            <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
             <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
             <element signature="method#match#0;class#OperManager#0" expanded="true" />
-            <element signature="e#60874#60888#0" expanded="true" />
-            <element signature="e#61288#61303#0" expanded="true" />
-            <element signature="e#61363#61378#0" expanded="true" />
-            <element signature="e#61435#61450#0" expanded="true" />
-            <element signature="e#61507#61522#0" expanded="true" />
-            <element signature="e#61826#61833#0" expanded="true" />
-            <element signature="e#61883#61890#0" expanded="true" />
-            <element signature="e#61956#61963#0" expanded="true" />
-            <element signature="e#62007#62014#0" expanded="true" />
+            <element signature="e#61230#61244#0" expanded="true" />
+            <element signature="e#61644#61659#0" expanded="true" />
+            <element signature="e#61719#61734#0" expanded="true" />
+            <element signature="e#61791#61806#0" expanded="true" />
+            <element signature="e#61863#61878#0" expanded="true" />
+            <element signature="e#62182#62189#0" expanded="true" />
+            <element signature="e#62239#62246#0" expanded="true" />
+            <element signature="e#62312#62319#0" expanded="true" />
+            <element signature="e#62363#62370#0" expanded="true" />
+            <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/GEdge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4422">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+          <folding>
+            <element signature="method#howLinked#0;class#GEdge#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Arrow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1221">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/kb/KnowledgeBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1287">
+          <caret line="47" column="7" lean-forward="false" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/GraphObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19338">
+          <caret line="992" column="20" lean-forward="false" selection-start-line="992" selection-start-column="20" selection-end-line="992" selection-end-column="20" />
+          <folding>
+            <element signature="method#commitToKnowledgeBase#0;class#GraphObject#0" expanded="true" />
+            <element signature="method#unCommitFromKnowledgeBase#0;class#GraphObject#0" expanded="true" />
+            <element signature="method#getOutermostGraph#0;class#GraphObject#0" expanded="true" />
+            <element signature="e#37394#37395#0" expanded="true" />
+            <element signature="e#37426#37427#0" expanded="true" />
+            <element signature="method#setLabelFont#0;class#GraphObject#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2178">
+          <caret line="95" column="71" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
+          <folding>
+            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
+            <element signature="method#forgetObject#0;class#Graph#0" expanded="false" />
+            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="false" />
+            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
+            <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
+            <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
+            <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#match#0;class#OperManager#0" expanded="true" />
+            <element signature="e#61230#61244#0" expanded="true" />
+            <element signature="e#61644#61659#0" expanded="true" />
+            <element signature="e#61719#61734#0" expanded="true" />
+            <element signature="e#61791#61806#0" expanded="true" />
+            <element signature="e#61863#61878#0" expanded="true" />
+            <element signature="e#62182#62189#0" expanded="true" />
+            <element signature="e#62239#62246#0" expanded="true" />
+            <element signature="e#62312#62319#0" expanded="true" />
+            <element signature="e#62363#62370#0" expanded="true" />
+            <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1011,9 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1353">
           <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#1588#1589#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1024,6 +1004,7 @@
           <folding>
             <element signature="method#getLinkedNodes#0;class#GNode#0" expanded="true" />
             <element signature="method#getArrowLinkedNodes#0;class#GNode#0" expanded="true" />
+            <element signature="method#hasCorefEdge#0;class#GNode#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1068,9 +1049,9 @@
           <caret line="95" column="71" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
           <folding>
             <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="true" />
+            <element signature="method#forgetObject#0;class#Graph#0" expanded="false" />
+            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="false" />
+            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1247,49 +1228,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2178">
-          <caret line="95" column="71" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
-          <folding>
-            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#getAllGraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Graph#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Rule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/kb/KnowledgeBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1287">
-          <caret line="47" column="7" lean-forward="false" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/obj/GraphObjectID.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#1588#1589#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Relation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1306,7 +1248,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/obj/GraphObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
+        <state relative-caret-position="19338">
           <caret line="992" column="20" lean-forward="false" selection-start-line="992" selection-start-column="20" selection-end-line="992" selection-end-column="20" />
           <folding>
             <element signature="method#commitToKnowledgeBase#0;class#GraphObject#0" expanded="true" />
@@ -1319,9 +1261,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/kb/KnowledgeBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="811">
+          <caret line="47" column="7" lean-forward="false" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Arrow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/obj/GEdge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
+        <state relative-caret-position="33">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
             <element signature="method#howLinked#0;class#GEdge#0" expanded="true" />
@@ -1329,53 +1295,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="673" column="34" lean-forward="false" selection-start-line="673" selection-start-column="24" selection-end-line="673" selection-end-column="34" />
+          <folding>
+            <element signature="e#4259#4274#0" expanded="true" />
+            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/obj/GNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="462" column="22" lean-forward="false" selection-start-line="462" selection-start-column="22" selection-end-line="462" selection-end-column="22" />
+        <state relative-caret-position="234">
+          <caret line="146" column="22" lean-forward="false" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="22" />
           <folding>
             <element signature="method#getLinkedNodes#0;class#GNode#0" expanded="true" />
+            <element signature="method#getLinkedNodes#1;class#GNode#0" expanded="true" />
             <element signature="method#getArrowLinkedNodes#0;class#GNode#0" expanded="true" />
             <element signature="method#hasCorefEdge#0;class#GNode#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Arrow.java">
+    <entry file="file://$PROJECT_DIR$/src/charger/obj/Rule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="264">
+          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <element signature="e#667#668#0" expanded="true" />
+            <element signature="e#698#699#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="1188" column="25" lean-forward="true" selection-start-line="1188" selection-start-column="25" selection-end-line="1188" selection-end-column="25" />
+        <state relative-caret-position="-253">
+          <caret line="891" column="80" lean-forward="false" selection-start-line="891" selection-start-column="80" selection-end-line="891" selection-end-column="80" />
           <folding>
-            <element signature="e#11815#11822#0" expanded="true" />
-            <element signature="method#isConsequentExistent#0;class#OperManager#0" expanded="true" />
             <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
             <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
             <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-            <element signature="e#44724#44739#0" expanded="true" />
-            <element signature="e#44799#44814#0" expanded="true" />
-            <element signature="e#44871#44886#0" expanded="true" />
-            <element signature="e#44943#44958#0" expanded="true" />
-            <element signature="e#45002#45009#0" expanded="true" />
-            <element signature="e#45053#45060#0" expanded="true" />
+            <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
             <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
             <element signature="method#match#0;class#OperManager#0" expanded="true" />
-            <element signature="e#60874#60888#0" expanded="true" />
-            <element signature="e#61288#61303#0" expanded="true" />
-            <element signature="e#61363#61378#0" expanded="true" />
-            <element signature="e#61435#61450#0" expanded="true" />
-            <element signature="e#61507#61522#0" expanded="true" />
-            <element signature="e#61826#61833#0" expanded="true" />
-            <element signature="e#61883#61890#0" expanded="true" />
-            <element signature="e#61956#61963#0" expanded="true" />
-            <element signature="e#62007#62014#0" expanded="true" />
+            <element signature="e#61230#61244#0" expanded="true" />
+            <element signature="e#61644#61659#0" expanded="true" />
+            <element signature="e#61719#61734#0" expanded="true" />
+            <element signature="e#61791#61806#0" expanded="true" />
+            <element signature="e#61863#61878#0" expanded="true" />
+            <element signature="e#62182#62189#0" expanded="true" />
+            <element signature="e#62239#62246#0" expanded="true" />
+            <element signature="e#62312#62319#0" expanded="true" />
+            <element signature="e#62363#62370#0" expanded="true" />
+            <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
           </folding>
         </state>
       </provider>

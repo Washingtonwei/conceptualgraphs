@@ -150,10 +150,8 @@ public class OperManager {
             ef.emgr.makeNewMenuItem(ef.examineMenu, VerifyInternalLabel, 0);
             ef.emgr.makeNewMenuItem(ef.examineMenu, "Select Rules", 0);
             ef.emgr.makeNewMenuItem(ef.operateMenu, CommitToKBLabel, 0);
-            ef.operateMenu.getItem(ef.operateMenu.getItemCount() - 1).setEnabled(false);
+            //ef.operateMenu.getItem(ef.operateMenu.getItemCount() - 1).setEnabled(false);
 
-            //makeNewMenuItem( ef.operateMenu, "Create KB... (unimplemented)", 0 );
-            //ef.operateMenu.getItem(ef.operateMenu.getItemCount()-1).setEnabled( false );
         }
         ef.operateMenu.addSeparator();
 
@@ -703,11 +701,14 @@ public class OperManager {
     }
 
     /**
-     * At the moment, doesn't do anything. Should it?
+     * By Bingyang Wei
+     * Commit everything to the KB
      *
      * @param g
      */
     public void performActionCommitToKB(Graph g) {
+
+
     }
 
     /**
@@ -847,9 +848,10 @@ public class OperManager {
      * @param theGraph By Bingyang Wei
      */
     public void performActionSelectRules(Graph theGraph) {
-        // first, generate concept subgraph for the current CG
-        //concept subgraph is a new field I added to class Graph
-        theGraph.generateConceptSubgraphs();
+        // first, generate same type concept subgraph and equivalent concept for the current CG
+        //same type concept subgraph and equivalent concept is a new field I added to class Graph
+        theGraph.generateSameTypeConceptSubgraphs();
+        theGraph.generateEquivalentConceptSubgraphs();
         // second, start up a wizard to select rules and pass the current Edit Frame to the new frame
         try {
             Global.RuleSelectionFrame = new RulesSelectionFrame(ef);
@@ -885,7 +887,7 @@ public class OperManager {
      *
      * @param graph
      * @param rule
-     * @param m key is node in antecedent, value is node in graph
+     * @param m     key is node in antecedent, value is node in graph
      * @return true if the current CG has the consequent part of the rule
      */
     public boolean isConsequentExistent(Graph graph, Rule rule, HashMap<GNode, GNode> m) {
@@ -922,11 +924,11 @@ public class OperManager {
 
         // third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of
         // concepts that share the same type
-        if (graph.conceptHashStore.containsKey(type)) {
-            Graph cg = graph.conceptHashStore.get(type);
+        if (graph.sameTypeConceptHashStore.containsKey(type)) {
+            Graph cg = graph.sameTypeConceptHashStore.get(type);
             for (GraphObject go1 : cg.objectHashStore.values()) {
                 //if there is a match, we need not to add the consequent part of the rule to the current CG
-                if(go1.getTextLabel().equals(c.getTextLabel())) {
+                if (go1.getTextLabel().equals(c.getTextLabel())) {
                     if (matchConsequent((GNode) go1, c)) {
                         return true;
                     }
@@ -973,9 +975,9 @@ public class OperManager {
             /*
             third, look up this type in Graph graph's conceptHashStore, the returned value is a graph of concepts that share the same typeight now, we haven't consider subtype and supertype e.g. if a graph only has subtype Student, and we are trying to apply a rule that only has supertype Person, we ought to apply it, but this method is NOT doing that right now, this is a TODO
              */
-        if (graph.conceptHashStore.containsKey(type)) {
+        if (graph.sameTypeConceptHashStore.containsKey(type)) {
             //cg has all concepts that share the exact same type
-            Graph cg = graph.conceptHashStore.get(type);
+            Graph cg = graph.sameTypeConceptHashStore.get(type);
             matchAll(cg, c, r);
         } else {
             System.out.println("Cannot apply this rule.");
@@ -1027,6 +1029,10 @@ public class OperManager {
     /**
      * Clone consequent into currentGraph based on the match info
      * Deep copy
+     * During copying, we need to check several things:
+     * 1. coref linked concepts, those will not be copied (the original CG is augmented)
+     * 2. concept with type and referent, e.g. Person:@forall, or Person: Jim in consequent of a rule
+     * that means we have to find that concept in the original CG, if it is already there, augment instead of create another concept.
      *
      * @param currentGraph
      * @param consequent
@@ -1064,7 +1070,7 @@ public class OperManager {
         Queue<GNode> q1 = new LinkedList<GNode>();
         Queue<GNode> q2 = new LinkedList<GNode>();
 
-        //we need to make sure what object go is
+        //we need to make sure what this selected GNode go is
         if (go instanceof Concept) {
             Concept c = (Concept) go;//one concept in consequent graph
             Concept c_cpy = new Concept();
@@ -1088,7 +1094,7 @@ public class OperManager {
             discovered2.put(r_cpy.objectID.toString(), r_cpy);
             q1.add(r);
             q2.add(r_cpy);
-        } else {
+        } else if (go instanceof Actor) {
             Actor a = (Actor) go;//one concept in consequent graph
             Concept a_cpy = new Concept();
             a_cpy.setTextLabel(a.getTextLabel());
@@ -1101,192 +1107,177 @@ public class OperManager {
             q2.add(a_cpy);
         }
 
-        //At this point, we have a good start, we find a node in consequent which does not has any coref link
+        //At this point, we have a good start, we find a node in consequent which does not has any coref link, this node may be a concept, relation or actor
         //we also made a copy of it, then we put both nodes in two queues
+        //and start out copying process
         while (!q1.isEmpty()) {
             GNode n = q1.remove();
             GNode n_cpy = q2.remove();
 
             ArrayList edgesR = n.getEdges();//many edges here
-            ArrayList edgesG = n_cpy.getEdges();//empty the first time
+            ArrayList edgesG = n_cpy.getEdges();//empty at the first time
 
             //go over every edge
             for (Object o : edgesR) {
                 GEdge edge = (GEdge) o;
                 GEdge edge_cpy = null;
-                //if o is not coref, we are not copying coref linked nodes, see else part
-                if (!(o instanceof Coref)) {
-                    if (n == edge.fromObj) {
-                        if (((GNode) (edge.toObj)).hasCorefEdge()) {
-                            Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.toObj));
-                            edge_cpy = new Arrow(n_cpy, match.get(cc));
-                            currentGraph.insertObject(edge_cpy);
-                        }
-                        //if the node at toObj is NOT already discovered
-                        //we need create a copy of it
-                        else if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
-                            discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
+                if (n == edge.fromObj) {
+                    //if the neigbor of n has coref link, then we don't have to copy this neigbor
+                    if (((GNode) (edge.toObj)).hasCorefEdge()) {
+                        Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.toObj));
+                        edge_cpy = new Arrow(n_cpy, match.get(cc));
+                        currentGraph.insertObject(edge_cpy);
+                    }
+                    //if the neigbor of n already exisits in original CG (currentGraph), we don't have to copy it again
+                    else if (currentGraph.equivalentConceptHashStore.containsKey(((GNode) (edge.toObj)).getTextLabel())) {
+                        Concept cc = currentGraph.equivalentConceptHashStore.get(((GNode) (edge.toObj)).getTextLabel()).get(0);//we get the first concept
+                        System.out.println("+=+=+=+=+=+=+=");
+                        edge_cpy = new Arrow(n_cpy, cc);
+                        currentGraph.insertObject(edge_cpy);
+                    }
+                    //if the node at toObj is NOT already discovered
+                    //we need create a copy of it
+                    else if (!visited1.containsKey(edge.toObj.objectID.toString()) && !discovered1.containsKey(edge.toObj.objectID.toString())) {
+                        discovered1.put(edge.toObj.objectID.toString(), (GNode) edge.toObj);
 
-                            if (edge.toObj instanceof Graph) {
-                                //TODO
-                                addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj, match);
-                            } else if (edge.toObj instanceof Concept) {
-                                Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
-                                Concept concept_cpy = new Concept();
-                                concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
-                                concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
-                                concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
-                                concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                                concept_cpy.setBackground(Color.gray);
+                        if (edge.toObj instanceof Graph) {
+                            //TODO
+                            addAugmentedGraphObjects(currentGraph, (Graph) edge.toObj, match);
+                        } else if (edge.toObj instanceof Concept) {
+                            Concept conceptRuleNeighbor = (Concept) edge.toObj;// nodeRuleNeighbor is a neighbor of nRule
+                            Concept concept_cpy = new Concept();
+                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                            concept_cpy.setBackground(Color.gray);
 
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(n_cpy, concept_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(n_cpy, concept_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-
-                                q1.add((Concept) edge.toObj);
-                                q2.add(concept_cpy);
-
-                            } else if (edge.toObj instanceof Relation) {
-                                Relation relationRuleNeighbor = (Relation) edge.toObj;
-                                Relation relation_cpy = new Relation();
-                                relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
-                                relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
-                                relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                                relation_cpy.setBackground(Color.gray);
-
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(n_cpy, relation_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(n_cpy, relation_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-
-                                q1.add((Relation) edge.toObj);
-                                q2.add(relation_cpy);
-
-                            } else if (edge.toObj instanceof Actor) {
-                                Actor actorRuleNeighbor = (Actor) edge.toObj;
-                                Actor actor_cpy = new Actor();
-                                actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
-                                actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
-                                actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                                actor_cpy.setBackground(Color.gray);
-
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(n_cpy, actor_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(n_cpy, actor_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-                                q1.add((Actor) edge.toObj);
-                                q2.add(actor_cpy);
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, concept_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, concept_cpy);
+                                currentGraph.insertObject(edge_cpy);
                             }
-                        }
-                    } else {//if n == edge.toObj
-                        if (((GNode) (edge.fromObj)).hasCorefEdge()) {
-                            Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.fromObj));
-                            edge_cpy = new Arrow(match.get(cc), n_cpy);
-                            currentGraph.insertObject(edge_cpy);
 
-                        }//if the node at fromObj is NOT already discovered
-                        //we need create a copy of it
-                        else if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
-                            discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
-                            if (edge.fromObj instanceof Graph) {
-                                //TODO
-                                addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj, match);
-                            } else if (edge.fromObj instanceof Concept) {
-                                Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
-                                Concept concept_cpy = new Concept();
-                                concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
-                                concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
-                                concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
-                                concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
-                                concept_cpy.setBackground(Color.gray);
+                            q1.add((Concept) edge.toObj);
+                            q2.add(concept_cpy);
 
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(concept_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(concept_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-                                q1.add((Concept) edge.fromObj);
-                                q2.add(concept_cpy);
+                        } else if (edge.toObj instanceof Relation) {
+                            Relation relationRuleNeighbor = (Relation) edge.toObj;
+                            Relation relation_cpy = new Relation();
+                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                            relation_cpy.setBackground(Color.gray);
 
-                            } else if (edge.fromObj instanceof Relation) {
-                                Relation relationRuleNeighbor = (Relation) edge.fromObj;
-                                Relation relation_cpy = new Relation();
-                                relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
-                                relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
-                                relation_cpy.setCenter(relationRuleNeighbor.getCenter());
-                                relation_cpy.setBackground(Color.gray);
-
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(relation_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(relation_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-                                q1.add((Relation) edge.fromObj);
-                                q2.add(relation_cpy);
-                            } else if (edge.fromObj instanceof Actor) {
-                                Actor actorRuleNeighbor = (Actor) edge.fromObj;
-                                Actor actor_cpy = new Actor();
-                                actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
-                                actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
-                                actor_cpy.setCenter(actorRuleNeighbor.getCenter());
-                                actor_cpy.setBackground(Color.gray);
-
-                                if (edge instanceof Arrow) {
-                                    edge_cpy = new Arrow(actor_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                } else if (edge instanceof Coref) {
-                                    edge_cpy = new Coref(actor_cpy, n_cpy);
-                                    currentGraph.insertObject(edge_cpy);
-                                }
-                                q1.add((Actor) edge.fromObj);
-                                q2.add(actor_cpy);
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, relation_cpy);
+                                currentGraph.insertObject(edge_cpy);
                             }
+
+                            q1.add((Relation) edge.toObj);
+                            q2.add(relation_cpy);
+
+                        } else if (edge.toObj instanceof Actor) {
+                            Actor actorRuleNeighbor = (Actor) edge.toObj;
+                            Actor actor_cpy = new Actor();
+                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                            actor_cpy.setBackground(Color.gray);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(n_cpy, actor_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Actor) edge.toObj);
+                            q2.add(actor_cpy);
                         }
                     }
-                } else {//if the edge we are copying is a coref, then we are linking it to the graph to which we applied this rule
-                    Concept cc = null;
-                    if (n == edge.fromObj) {
-                        ArrayList<GEdge> edges = ((GNode) (edge.toObj)).getEdges();//only two edges
-                        for (GEdge e : edges) {
-                            if (e.fromObj != n) {//if this is the edge that connects outside concept to concept in antecedent
-                                if (e.fromObj != edge.toObj) {
-                                    cc = (Concept) e.fromObj;
-                                } else {
-                                    cc = (Concept) e.toObj;
-                                }
-                            }
-                        }
-                        edge_cpy = new Coref(n_cpy, match.get(cc));
+                } else {//if n == edge.toObj
+                    if (((GNode) (edge.fromObj)).hasCorefEdge()) {
+                        Concept cc = getEquivalentNodeInAntecedent((GNode) (edge.fromObj));
+                        edge_cpy = new Arrow(match.get(cc), n_cpy);
                         currentGraph.insertObject(edge_cpy);
-                    } else {//if n == edge.toObj
-                        ArrayList<GEdge> edges = ((GNode) (edge.fromObj)).getEdges();//only two edges
-                        for (GEdge e : edges) {
-                            if (e.toObj != n) {//if this is the edge that connects outside concept to concept in antecedent
-                                if (e.fromObj != edge.fromObj) {
-                                    cc = (Concept) e.fromObj;
-                                } else {
-                                    cc = (Concept) e.toObj;
-                                }
-                            }
-                        }
-                        edge_cpy = new Coref(n_cpy, match.get(cc));
+
+                    }
+                    //if the neigbor of n already exisits in original CG (currentGraph), we don't have to copy it again
+                    else if (currentGraph.equivalentConceptHashStore.containsKey(((GNode) (edge.fromObj)).getTextLabel())) {
+                        Concept cc = currentGraph.equivalentConceptHashStore.get(((GNode) (edge.fromObj)).getTextLabel()).get(0);//we get the first concept
+                        edge_cpy = new Arrow(cc, n_cpy);
                         currentGraph.insertObject(edge_cpy);
+                    }
+                    //if the node at fromObj is NOT already discovered
+                    //we need create a copy of it
+                    else if (!visited1.containsKey(edge.fromObj.objectID.toString()) && !discovered1.containsKey(edge.fromObj.objectID.toString())) {
+                        discovered1.put(edge.fromObj.objectID.toString(), (GNode) edge.fromObj);
+                        if (edge.fromObj instanceof Graph) {
+                            //TODO
+                            addAugmentedGraphObjects(currentGraph, (Graph) edge.fromObj, match);
+                        } else if (edge.fromObj instanceof Concept) {
+                            Concept conceptRuleNeighbor = (Concept) edge.fromObj;// nodeRuleNeighbor is a neighbor of nRule
+                            Concept concept_cpy = new Concept();
+                            concept_cpy.setTextLabel(conceptRuleNeighbor.getTextLabel());
+                            concept_cpy.setReferent(conceptRuleNeighbor.getReferent());
+                            concept_cpy.setTypeLabel(conceptRuleNeighbor.getTypeLabel());
+                            concept_cpy.setCenter(conceptRuleNeighbor.getCenter());
+                            concept_cpy.setBackground(Color.gray);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(concept_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(concept_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Concept) edge.fromObj);
+                            q2.add(concept_cpy);
+
+                        } else if (edge.fromObj instanceof Relation) {
+                            Relation relationRuleNeighbor = (Relation) edge.fromObj;
+                            Relation relation_cpy = new Relation();
+                            relation_cpy.setTextLabel(relationRuleNeighbor.getTextLabel());
+                            relation_cpy.setTypeLabel(relationRuleNeighbor.getTypeLabel());
+                            relation_cpy.setCenter(relationRuleNeighbor.getCenter());
+                            relation_cpy.setBackground(Color.gray);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(relation_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(relation_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Relation) edge.fromObj);
+                            q2.add(relation_cpy);
+                        } else if (edge.fromObj instanceof Actor) {
+                            Actor actorRuleNeighbor = (Actor) edge.fromObj;
+                            Actor actor_cpy = new Actor();
+                            actor_cpy.setTextLabel(actorRuleNeighbor.getTextLabel());
+                            actor_cpy.setTypeLabel(actorRuleNeighbor.getTypeLabel());
+                            actor_cpy.setCenter(actorRuleNeighbor.getCenter());
+                            actor_cpy.setBackground(Color.gray);
+
+                            if (edge instanceof Arrow) {
+                                edge_cpy = new Arrow(actor_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            } else if (edge instanceof Coref) {
+                                edge_cpy = new Coref(actor_cpy, n_cpy);
+                                currentGraph.insertObject(edge_cpy);
+                            }
+                            q1.add((Actor) edge.fromObj);
+                            q2.add(actor_cpy);
+                        }
                     }
                 }
+
                 //add edge_cpy to n_cpy
                 if (edge_cpy != null)
                     n_cpy.getEdges().add(edge_cpy);
@@ -1299,6 +1290,8 @@ public class OperManager {
 
     /**
      * Given a concept in Consequent of a rule, this function returns the corresponding concept in the Antecedent (connected by coref)
+     * This method can be simplified, since we already keep track of equivalent concepts in a graph
+     * TODO
      *
      * @param fromObj
      * @return
@@ -1485,7 +1478,7 @@ public class OperManager {
     }
 
     /**
-     * This method looks exactly the same as match method, the difference is that, match method is used to match types, but this one is used to match text in nodes.
+     * This method looks exactly the same as match method, the difference is that, match is used to match types, but this one is used to match text in nodes.
      * So this method is more strict than match method, since both type and referent have to match.
      *
      * @param nG

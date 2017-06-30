@@ -21,23 +21,6 @@ public class KnowledgeBase {
     private TypeHierarchy conceptHierarchy;
     private TypeHierarchy relationHierarchy;
     private MarkerSet markerSet = null;
-
-    /*
-    By Bingyang Wei
-    First of all, charger.obj.Concept (graphic shape) and concept (logic) are different things in this comment.
-    equivalentConceptHashStore stores the coref info about a graph:
-
-    key is string "type:referent", representing the only concept (logic)
-    value is a collection of graphic shapes (charger.obj.Concept objects) that represent the same concept (logic).
-
-    The charger.obj.Concept class is more of a graphic sense: we can have many charger.obj.Concept objects with the same type and referent in the same graph, but there exits only one concept,
-    in other words, the equivalentConceptHashStore's length is the number of different concepts in the current graph, but one concept may appear at different context many times, but they all are one concept.
-    For example:
-    Person:tom -> Person:a, Person:b, Person:tom
-    Person:jim -> Person:d
-    Person:tim -> Person:e
-     */
-    private HashMap<String, ArrayList<Concept>> equivalentConceptHashStore = new HashMap<String, ArrayList<Concept>>(10);
     
     /**
      * Creates an "empty" knowledge base.

@@ -108,10 +108,27 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
      * concepts in it.
      * E.g. String is Person (which is a type of a concept), Graph includes all concepts that are of type Person
      * The reason I added this field is for the convenience of applying rules to the current graph
-     *
+     * <p>
      * By Bingyang Wei
      */
-    public HashMap<String, Graph> conceptHashStore = new HashMap<String, Graph>(10);
+    public HashMap<String, Graph> sameTypeConceptHashStore = new HashMap<String, Graph>(10);
+
+    /*
+    By Bingyang Wei
+    First of all, charger.obj.Concept (graphic shape) and concept (logic) are different things in this comment.
+    equivalentConceptHashStore stores the coref info about a graph:
+
+    key is string "type:referent", representing the only concept (logic), it is the text in a box
+    value is a collection of graphic shapes (charger.obj.Concept objects) that represent the same concept (logic).
+
+    The charger.obj.Concept class is more of a graphic sense: we can have many charger.obj.Concept objects with the same type and referent in the same graph, but there exits only one concept,
+    in other words, the equivalentConceptHashStore's length is the number of different concepts in the current graph, but one concept may appear at different context many times, but they all are one concept.
+    For example:
+    Person:tom -> Person:a, Person:b, Person:tom
+    Person:jim -> Person:d
+    Person:tim -> Person:e
+     */
+    public HashMap<String, ArrayList<Concept>> equivalentConceptHashStore = new HashMap<String, ArrayList<Concept>>(10);
 
     /**
      * The actual width of the context's displayed border; included in its
@@ -607,6 +624,28 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
     public void insertInCharGerGraph(GraphObject go) {
         go.ownerGraph = this;
         objectHashStore.put(go.objectID.toString(), go);
+
+        //by Bingyang Wei
+        //we also modify equivalentConceptHashStore
+        //the reason we do this is a rule may be applied multiple times during one inference
+        //the newly inferred concept must be added to equivalentConceptHashStore, so subsequent application of rule can use, instead of adding unncessary duplicates
+        if (go instanceof Graph) {
+
+        } else if (go instanceof Concept) {
+            String text = ((Concept) go).getTextLabel();
+            if (equivalentConceptHashStore.containsKey(text)) {
+                equivalentConceptHashStore.get(text).add(((Concept) go));
+                System.out.println(((Concept) go).getTextLabel() + " " + go.objectID.toString() + " is added into equivalentConceptHashStore! " + text);
+            } else {
+                ArrayList<Concept> conceptList = new ArrayList<>();
+                conceptList.add((Concept) go);
+                equivalentConceptHashStore.put(text, conceptList);
+                System.out.println("Concept###" + text + "  is added into sameTypeConceptHashStore!");
+                System.out.println(((Concept) go).getTextLabel() + " " + go.objectID.toString() + " is added into equivalentConceptHashStore! " + text);
+            }
+        }
+
+
 //        Global.info( "Adding object " + go.objectID + " to graph " + this.objectID );
     }
 
@@ -652,7 +691,6 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
         } catch (KBException ex) {
             Global.warning(ex.getMessage() + " on object " + ex.getSource().toString());
             //Logger.getLogger( CanvasPanel.class.getName() ).log( Level.SEVERE, null, ex );
-
         }
 
         int old = 0;
@@ -666,14 +704,27 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
 
             //by Bingyang Wei
             /*
-            When a Concept is removed from the graph, it is also removed from conceptHashStore
+            When a Concept is removed from the graph, it is also removed from sameTypeConceptHashStore and equivalentConceptHashStore
              */
-            if(go instanceof Concept){
-                Graph chs = ((Graph) conceptHashStore.get(((Concept) go).getTypeLabel()));
-                if(chs != null) {
+            if (go instanceof Concept) {
+                Graph chs = ((Graph) sameTypeConceptHashStore.get(((Concept) go).getTypeLabel()));
+                if (chs != null) {
                     chs.objectHashStore.remove(go.objectID.toString());
-                    System.out.println("Concept " + ((Concept) go).getReferent() + " is removed from conceptHashStore");
+                    System.out.println("Concept " + ((Concept) go).getReferent() + " is removed from sameTypeConceptHashStore");
                 }
+
+                ArrayList<Concept> a = equivalentConceptHashStore.get(((Concept) go).getTextLabel());
+                if (a != null) {
+                    for (Iterator<Concept> iterator = a.iterator(); iterator.hasNext(); ) {
+                        Concept c = iterator.next();
+                        if (c.objectID.toString().equals(go.objectID.toString())) {
+                            iterator.remove();//attention: we have to use iterator's remove, not a.remove, since this
+                                              //will cause concurrent modification exception.
+                            System.out.println("Concept " + ((Concept) go).getReferent() + " is removed from equivalentConceptHashStore");
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -838,7 +889,7 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
             v.add(((GEdge) go).fromObj);
             try {
                 Graph dominant = GraphObject.findDominantContext(v);
-                if(dominant != null)
+                if (dominant != null)
                     dominant.insertInCharGerGraph(go);
                 else
                     insertInCharGerGraph(go);
@@ -855,7 +906,6 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
         } catch (KBException ex) {
             Global.warning(ex.getMessage() + " on object " + ex.getSource().toString());
             //Logger.getLogger( Graph.class.getName() ).log( Level.SEVERE, null, ex );
-
         }
 
     }
@@ -1553,30 +1603,57 @@ public class Graph extends Concept implements Printable, kb.KnowledgeSource { //
     }
 
     /**
-     * populate conceptHashStore of the current graph
-     * See conceptHashStore for the reason
+     * populate sameTypeConceptHashStore of the current graph
+     * See sameTypeConceptHashStore for reason
      * by Bingyang Wei
      */
-    public void generateConceptSubgraphs() {
+    public void generateSameTypeConceptSubgraphs() {
         Iterator iter = this.graphObjects();
         //check each GNode object one by one, we are only intereted in Graph and Concept object
         while (iter.hasNext()) {
             GraphObject go = (GraphObject) iter.next();
             if (go instanceof Graph) {
-                ((Graph) go).generateConceptSubgraphs();
+                ((Graph) go).generateSameTypeConceptSubgraphs();
             } else if (go instanceof Concept) {
                 //get the type of this concept
                 String type = ((Concept) go).getTypeLabel();
                 //if this type has been seen before
-                if (conceptHashStore.containsKey(type)) {
-                    ((Graph) conceptHashStore.get(type)).objectHashStore.put(go.objectID.toString(), go);
-                    System.out.println(((Concept) go).getReferent() + " is added into conceptHashStore!");
+                if (sameTypeConceptHashStore.containsKey(type)) {
+                    ((Graph) sameTypeConceptHashStore.get(type)).objectHashStore.put(go.objectID.toString(), go);
+                    System.out.println(((Concept) go).getReferent() + " is added into sameTypeConceptHashStore!");
                 } else {
                     Graph g = new Graph();
                     g.objectHashStore.put(go.objectID.toString(), go);
-                    conceptHashStore.put(type, g);
-                    System.out.println("Type   " + type + "  is added into conceptHashStore!");
-                    System.out.println(((Concept) go).getReferent() + " is added into conceptHashStore!");
+                    sameTypeConceptHashStore.put(type, g);
+                    System.out.println("Type   " + type + "  is added into sameTypeConceptHashStore!");
+                    System.out.println(((Concept) go).getReferent() + " is added into sameTypeConceptHashStore!");
+                }
+            }
+        }
+    }
+
+    /**
+     * populate equivalentHashStore of the current graph
+     * by Bingyang Wei
+     */
+    public void generateEquivalentConceptSubgraphs() {
+        DeepIterator iter;
+        iter = new DeepIterator(this);
+        while (iter.hasNext()) {
+            GraphObject n = (GraphObject) iter.next();
+            if (n instanceof Graph) {
+
+            } else if (n instanceof Concept) {
+                String text = ((Concept) n).getTextLabel();
+                if (equivalentConceptHashStore.containsKey(text)) {
+                    equivalentConceptHashStore.get(text).add(((Concept) n));
+                    System.out.println(((Concept) n).getTextLabel() + " " + n.objectID.toString() + " is added into equivalentConceptHashStore! " + text);
+                } else {
+                    ArrayList<Concept> conceptList = new ArrayList<>();
+                    conceptList.add((Concept) n);
+                    equivalentConceptHashStore.put(text, conceptList);
+                    System.out.println("Concept###" + text + "  is added into sameTypeConceptHashStore!");
+                    System.out.println(((Concept) n).getTextLabel() + " " + n.objectID.toString() + " is added into equivalentConceptHashStore! " + text);
                 }
             }
         }

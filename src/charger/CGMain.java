@@ -1,5 +1,7 @@
 package charger;
 
+import craft.Craft;
+
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -156,7 +158,6 @@ public class CGMain {
 
         CGMain me = new CGMain();
         charger.Global.setup(me, graphFolder, diagnostics );	// tell Charger who its controlling process is.
-        
 
 
         splash.setVisible(false);

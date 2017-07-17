@@ -57,6 +57,7 @@ public class TextProperties extends Properties {
         super.put( "ExamineMenuLabel", "Examine" );
         super.put( "OperationMenuLabel", "Operation" );
         super.put( "WindowMenuLabel", "Window" );
+        super.put( "UML2CGsMenuLabel", "UML2CGs" );
 
         // primarily file menu items
         super.put( "NewWindowLabel", "New" );

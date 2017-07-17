@@ -162,7 +162,9 @@ public class EditFrame extends JFrame
     public  JMenu changeFontItem = new JMenu( Global.strs( "ChangeFontLabel" ), true );
     public JMenu changeColorMenu = new JMenu( Global.strs( "ChangeColorLabel" ), true );
     public JMenu windowMenu = new JMenu( Global.strs( "WindowMenuLabel" ), true );
-    
+    //by Bingyang Wei
+    public JMenu UML2CGsMenu = new JMenu( Global.strs( "UML2CGsMenuLabel" ), true ); 	// a tear-off menu??
+
     public  JMenuItem BackToHubCmdItem = new JMenuItem( Global.strs( "BackToHubCmdLabel" ) );
     public  JMenuItem UndoItem = new JMenuItem( Global.strs( "UndoLabel" ) );
     public  JMenuItem RedoItem = new JMenuItem( Global.strs( "RedoLabel" ) );
@@ -771,6 +773,9 @@ public class EditFrame extends JFrame
         }
         editFrameMenuBar.add( operateMenu );
         editFrameMenuBar.add( windowMenu );
+
+        //by Bingyang Wei
+        editFrameMenuBar.add( UML2CGsMenu );
     }
 
     public void windowMenuActionPerformed() {

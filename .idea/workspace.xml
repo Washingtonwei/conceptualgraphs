@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="45d69f91-02ed-44af-9003-dbcaa302dfde" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/CGMain.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/CGMain.class" />
+    <list default="true" id="45d69f91-02ed-44af-9003-dbcaa302dfde" name="Default" comment="Add a new menu item, called UML2CGs, so our functions will no longer be mixed with the original Charger menus.&#10;Under this menu items, there are two sub items, one is select rules which was under Examine menu item;&#10;second one is UML to CGs conversion.&#10;This will start a new frame:&#10;Add a new frame, called UMLDiagramSelectionFrame, users can only select files with xmi as extension.&#10;Up to now, we have successfully import an xmi file, parse it and get the DOM structure, print UML classes, attributes, operations to the screen.&#10;Next step, we are going to convert this DOM file to real CGs.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GIF/UML_logo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/charger/UML_logo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/charger/DOMExtractor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/charger/UMLDiagramSelectionFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$1.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$2.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$3.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$4.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$5.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$6.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$7.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$7.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$HandleCompEvents.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$HandleCompEvents.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$ManageWinEvents.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame$ManageWinEvents.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditFrame.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$10.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$10.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$11.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$11.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$12.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$12.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$8.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$8.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$9.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager$9.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/EditManager.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/EditManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global$1.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global$2.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global$VERSION___4_0_6b_2014_11_30_.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global$VERSION___4_0_6b_2014_11_30_.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/Global.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/Global.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/OperManager$1.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/OperManager$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/OperManager$2.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/OperManager$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/OperManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/TextProperties.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/TextProperties.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/charger/obj/Graph.class" afterPath="$PROJECT_DIR$/out/production/Charger/charger/obj/Graph.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Charger/kb/KnowledgeBase.class" afterPath="$PROJECT_DIR$/out/production/Charger/kb/KnowledgeBase.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/CGMain.java" afterPath="$PROJECT_DIR$/src/charger/CGMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/EditFrame.java" afterPath="$PROJECT_DIR$/src/charger/EditFrame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/EditManager.java" afterPath="$PROJECT_DIR$/src/charger/EditManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/FileFormat.java" afterPath="$PROJECT_DIR$/src/charger/FileFormat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/Global.java" afterPath="$PROJECT_DIR$/src/charger/Global.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/OperManager.java" afterPath="$PROJECT_DIR$/src/charger/OperManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/obj/Graph.java" afterPath="$PROJECT_DIR$/src/charger/obj/Graph.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kb/KnowledgeBase.java" afterPath="$PROJECT_DIR$/src/kb/KnowledgeBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/charger/TextProperties.java" afterPath="$PROJECT_DIR$/src/charger/TextProperties.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,34 +51,58 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OperManager.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
+      <file leaf-file-name="UMLDiagramSelectionFrame.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/charger/UMLDiagramSelectionFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5338">
-              <caret line="1213" column="56" lean-forward="false" selection-start-line="1213" selection-start-column="56" selection-end-line="1213" selection-end-column="56" />
+            <state relative-caret-position="125">
+              <caret line="355" column="60" lean-forward="true" selection-start-line="355" selection-start-column="60" selection-end-line="355" selection-end-column="60" />
               <folding>
-                <element signature="method#makeMenus#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionMaxJoinWithOpenGraphs#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionCommitToKB#0;class#OperManager#0" expanded="true" />
-                <element signature="method#performActionSelectRules#0;class#OperManager#0" expanded="true" />
-                <element signature="method#isConsequentExistent#0;class#OperManager#0" expanded="true" />
-                <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
-                <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
-                <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
-                <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
-                <element signature="method#match#0;class#OperManager#0" expanded="true" />
-                <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
-                <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
+                <element signature="e#1370#1380#0" expanded="true" />
+                <element signature="method#UMLDiagramSelectionFrame#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#initComponents#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="e#5721#5722#0" expanded="true" />
+                <element signature="e#5778#5779#0" expanded="true" />
+                <element signature="e#6042#6043#0" expanded="true" />
+                <element signature="e#6102#6103#0" expanded="true" />
+                <element signature="e#6363#6364#0" expanded="true" />
+                <element signature="e#6420#6421#0" expanded="true" />
+                <element signature="e#8650#8760#0" expanded="true" />
+                <element signature="e#8759#8760#0" expanded="true" />
+                <element signature="e#10214#10373#0" expanded="true" />
+                <element signature="e#10372#10373#0" expanded="true" />
+                <element signature="method#accept#0;class#12339:12545" expanded="true" />
+                <element signature="method#ConvertSelectedClassDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#ConvertSelectedSequenceDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#ConvertSelectedStateDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#openNamedFiles#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#GraphDisplayListMouseClicked#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+                <element signature="method#ConvertAllUMLDiagramsPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
+      <file leaf-file-name="Global.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/charger/Global.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="850" column="0" lean-forward="false" selection-start-line="850" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
+            <state relative-caret-position="-889">
+              <caret line="96" column="33" lean-forward="false" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
+              <folding>
+                <element signature="method#setup#0;class#Global#0" expanded="true" />
+                <element signature="method#performActionPageSetup#0;class#Global#0" expanded="true" />
+                <element signature="method#acceptCGXFileName#0;class#Global#0" expanded="true" />
+                <element signature="method#acceptXMIFileName#0;class#Global#0" expanded="true" />
+                <element signature="method#openRuleInNewFrame#0;class#Global#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileInputStream.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/FileInputStream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="194" column="0" lean-forward="false" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -60,24 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mouseclick</find>
-      <find>delete</find>
-      <find>abandonObject</find>
-      <find>emgr</find>
-      <find>currentGraph</find>
-      <find>deepi</find>
-      <find>copy</find>
-      <find>xoffsetForCopy</find>
-      <find>new Arrow</find>
-      <find>remove</find>
-      <find>generateConceptSubgraphs</find>
-      <find>QuitButton</find>
-      <find>performActionApplyRules</find>
-      <find>openRuleInNewFrame</find>
-      <find>coref</find>
-      <find>commitToKnowledgeBase</find>
-      <find>isCorefLinkedNode</find>
-      <find>hasCorefEdge</find>
       <find>conceptHashStore</find>
       <find>objectHash</find>
       <find>CommitToKBLabel</find>
@@ -90,6 +124,24 @@
       <find>insert</find>
       <find>sameTypeConceptHashStore</find>
       <find>equivalentConceptHashStore</find>
+      <find>menu</find>
+      <find>UML2CGsMenu</find>
+      <find>LocaleStrings</find>
+      <find>makeNewMenuItem</find>
+      <find>examineMenu</find>
+      <find>rules</find>
+      <find>openNamedFiles</find>
+      <find>ConvertSelectedClassDiagramsActionPerformed</find>
+      <find>selection</find>
+      <find>GraphDisplayListMouseClicked</find>
+      <find>folder</find>
+      <find>GraphFolderLabel</find>
+      <find>Label</find>
+      <find>GraphDisplayList</find>
+      <find>extension</find>
+      <find>xml</find>
+      <find>filename</find>
+      <find>xmi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,6 +153,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/charger/UMLDiagramSelectionFrame.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/charger/EditFrame.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/kb/ConceptManager.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/charger/EditManager.java" root0="SKIP_INSPECTION" />
@@ -111,16 +164,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/charger/EditFrame.java" />
-        <option value="$PROJECT_DIR$/src/charger/EditManager.java" />
         <option value="$PROJECT_DIR$/src/charger/RulesSelectionFrame.java" />
-        <option value="$PROJECT_DIR$/src/charger/Global.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/GNode.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/Rule.java" />
         <option value="$PROJECT_DIR$/src/kb/KnowledgeBase.java" />
         <option value="$PROJECT_DIR$/src/charger/CGMain.java" />
         <option value="$PROJECT_DIR$/src/charger/obj/Graph.java" />
+        <option value="$PROJECT_DIR$/src/charger/EditFrame.java" />
+        <option value="$PROJECT_DIR$/src/charger/TextProperties.java" />
+        <option value="$PROJECT_DIR$/src/charger/EditManager.java" />
         <option value="$PROJECT_DIR$/src/charger/OperManager.java" />
+        <option value="$PROJECT_DIR$/src/charger/DOMProperties.java" />
+        <option value="$PROJECT_DIR$/src/charger/FileFormat.java" />
+        <option value="$PROJECT_DIR$/src/charger/UMLDiagramSelectionFrame.java" />
+        <option value="$PROJECT_DIR$/src/charger/DOMExtractor.java" />
+        <option value="$PROJECT_DIR$/src/charger/Global.java" />
       </list>
     </option>
   </component>
@@ -152,6 +210,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,54 +252,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="craft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="charger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="obj" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -251,13 +269,18 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
-    <property name="SearchEverywhereHistoryKey" value="xoffsetForCopy&#9;PSI&#9;JAVA://charger.EditFrame#xoffsetForCopy" />
+    <property name="SearchEverywhereHistoryKey" value="text&#9;FILE&#9;file://C:/Users/bingyang.wei/Desktop/MSU/Research/Charger/src/charger/TextProperties.java&#10;xoffsetForCopy&#9;PSI&#9;JAVA://charger.EditFrame#xoffsetForCopy" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="charger" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger\obj" />
-      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger" />
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger" />
       <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src" />
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger" />
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\GIF" />
+      <recent name="C:\Users\bingyang.wei\Desktop\MSU\Research\Charger\src\charger\obj" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -715,7 +738,9 @@
       <workItem from="1498484275765" duration="7696000" />
       <workItem from="1498656342898" duration="8120000" />
       <workItem from="1498746399571" duration="9166000" />
-      <workItem from="1498831599968" duration="6835000" />
+      <workItem from="1498831599968" duration="7811000" />
+      <workItem from="1499003127418" duration="172000" />
+      <workItem from="1500305154122" duration="10717000" />
     </task>
     <task id="LOCAL-00001" summary="Add a field to store a list of subgraphs of the original graph, a new method: public void generateConceptSubgraphs()">
       <created>1497016852809</created>
@@ -801,11 +826,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498665160630</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="The flow is, we first match antecedent using type match, if true, we instantiate the consequent using the matched graph concepts and then match consequent using text label match, if not (that means we need to apply this rule), we can add consequent to the graph.&#10;For example, if a graph has two sets of subgraphs with same structure, the rule will be applied twice instead of once. this is an improvement over previous versions.&#10;&#10;While the method addAugmentedGraphObjects is copying the instantiated consequent to the original CG, we need to in the consequent, look for coref linked concepts and concepts already exist in the original CG. We modified method addAugmentedGraphObjects to make sure already exisitent concepts will not be copied again.&#10;&#10;Modified removeFromGraph method in Graph class, when a concept is removed, it is also removed from conceptHashStore and equivalentConceptHashStore (use iterator remove rather than arraylist remove to avoid current modification exception)&#10;&#10;Modified insertInCharGerGraph in Graph class line 624 is changed, when a concept is added, we also add it into equivalentConceptHashStore, we are not adding it to the sameTypeConceptHashStore since that may cause the rule to be applied over and over during one inference action.&#10;&#10;generateEquivalentConceptSubgraphs">
+      <created>1498839245577</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1498839245577</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97139000" />
+    <option name="totallyTimeSpent" value="109004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -820,58 +852,27 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34530094" sideWeight="0.26302084" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18585005" sideWeight="0.46666667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23653643" sideWeight="0.46666667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13833158" sideWeight="0.7369792" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.004223865" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34530094" sideWeight="0.26302084" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13833158" sideWeight="0.7369792" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09926082" sideWeight="0.49791667" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2935586" sideWeight="0.46666667" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.004223865" sideWeight="0.49583334" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13833158" sideWeight="0.7369792" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -892,7 +893,8 @@
     <MESSAGE value="1. Now, we can apply a rule considering coref links. We successfully relate consequent and antecedent concepts linked through coref. &#10;2.match() now returns the matched pattern between antecedent and the CG&#10;3. Modified several functions: matchAll, addConsequent, addAugmentedGraphObjects() now accept one more parameter: the matched pattern returned by match()" />
     <MESSAGE value="Modified addAugmentedGraphObjects: now, we pick a node without coref link to start the copying process, and the duplicate concepts will not longer copied in the target CG.&#10;This is a great progress.&#10;Add a new method hasCorefEdge in GNode class&#10;Add a new method getEquivalentNodeInAntecedent in OperManger class." />
     <MESSAGE value="THe flow is, we first match antecedent using type match, if true, we instantiate the consequent using the matched graph concepts and then match consequent using text label match, if not, we can add consequent to the graph.&#10;For example, if a graph has two sets of subgraphs with same structure, the rule will be applied twice instead of once. this is an improvement over previous versions.&#10;&#10;Modified isConsequentExistent a lot, now we are match &quot;exact&quot; concepts (compare their text labels, not just type label)&#10;Add a new field in Rule, which keeps track of equivalent concepts from antecedent to consequent.&#10;Add a new method, getLinkedNodes()&#10;Add a new method, matchConsequent, which is very similar to match method.&#10;Modified parseRuleGraph which considers the coref info in a rule graph." />
-    <option name="LAST_COMMIT_MESSAGE" value="THe flow is, we first match antecedent using type match, if true, we instantiate the consequent using the matched graph concepts and then match consequent using text label match, if not, we can add consequent to the graph.&#10;For example, if a graph has two sets of subgraphs with same structure, the rule will be applied twice instead of once. this is an improvement over previous versions.&#10;&#10;Modified isConsequentExistent a lot, now we are match &quot;exact&quot; concepts (compare their text labels, not just type label)&#10;Add a new field in Rule, which keeps track of equivalent concepts from antecedent to consequent.&#10;Add a new method, getLinkedNodes()&#10;Add a new method, matchConsequent, which is very similar to match method.&#10;Modified parseRuleGraph which considers the coref info in a rule graph." />
+    <MESSAGE value="The flow is, we first match antecedent using type match, if true, we instantiate the consequent using the matched graph concepts and then match consequent using text label match, if not (that means we need to apply this rule), we can add consequent to the graph.&#10;For example, if a graph has two sets of subgraphs with same structure, the rule will be applied twice instead of once. this is an improvement over previous versions.&#10;&#10;While the method addAugmentedGraphObjects is copying the instantiated consequent to the original CG, we need to in the consequent, look for coref linked concepts and concepts already exist in the original CG. We modified method addAugmentedGraphObjects to make sure already exisitent concepts will not be copied again.&#10;&#10;Modified removeFromGraph method in Graph class, when a concept is removed, it is also removed from conceptHashStore and equivalentConceptHashStore (use iterator remove rather than arraylist remove to avoid current modification exception)&#10;&#10;Modified insertInCharGerGraph in Graph class line 624 is changed, when a concept is added, we also add it into equivalentConceptHashStore, we are not adding it to the sameTypeConceptHashStore since that may cause the rule to be applied over and over during one inference action.&#10;&#10;generateEquivalentConceptSubgraphs" />
+    <option name="LAST_COMMIT_MESSAGE" value="The flow is, we first match antecedent using type match, if true, we instantiate the consequent using the matched graph concepts and then match consequent using text label match, if not (that means we need to apply this rule), we can add consequent to the graph.&#10;For example, if a graph has two sets of subgraphs with same structure, the rule will be applied twice instead of once. this is an improvement over previous versions.&#10;&#10;While the method addAugmentedGraphObjects is copying the instantiated consequent to the original CG, we need to in the consequent, look for coref linked concepts and concepts already exist in the original CG. We modified method addAugmentedGraphObjects to make sure already exisitent concepts will not be copied again.&#10;&#10;Modified removeFromGraph method in Graph class, when a concept is removed, it is also removed from conceptHashStore and equivalentConceptHashStore (use iterator remove rather than arraylist remove to avoid current modification exception)&#10;&#10;Modified insertInCharGerGraph in Graph class line 624 is changed, when a concept is added, we also add it into equivalentConceptHashStore, we are not adding it to the sameTypeConceptHashStore since that may cause the rule to be applied over and over during one inference action.&#10;&#10;generateEquivalentConceptSubgraphs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,125 +907,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Concept.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4554">
-          <caret line="281" column="62" lean-forward="true" selection-start-line="281" selection-start-column="62" selection-end-line="281" selection-end-column="62" />
-          <folding>
-            <element signature="method#getTypeLabel#0;class#Concept#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Concept#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2178">
-          <caret line="95" column="71" lean-forward="false" selection-start-line="95" selection-start-column="71" selection-end-line="95" selection-end-column="71" />
-          <folding>
-            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#removeFromGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateSameTypeConceptSubgraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateEquivalentConceptSubgraphs#0;class#Graph#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/obj/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51645">
-          <caret line="1565" column="106" lean-forward="false" selection-start-line="1565" selection-start-column="106" selection-end-line="1565" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/CGMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/CGMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/CGMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/repgrid/xml/package.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/PragmaticSense.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/CGRule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/IOManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="83" column="13" lean-forward="false" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="3323" column="0" lean-forward="false" selection-start-line="3323" selection-start-column="0" selection-end-line="3323" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/xml/CGXParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="859" column="56" lean-forward="false" selection-start-line="859" selection-start-column="56" selection-end-line="859" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/prefs/PreferencesWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14">
           <caret line="298" column="63" lean-forward="false" selection-start-line="298" selection-start-column="63" selection-end-line="298" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/HubFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="80" column="71" lean-forward="true" selection-start-line="79" selection-start-column="0" selection-end-line="80" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -1073,9 +960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-          <folding>
-            <element signature="method#howLinked#0;class#GEdge#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1139,11 +1023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="56" column="11" lean-forward="false" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
-          <folding>
-            <element signature="method#getLinkedNodes#0;class#GNode#0" expanded="true" />
-            <element signature="method#getArrowLinkedNodes#0;class#GNode#0" expanded="true" />
-            <element signature="method#hasCorefEdge#0;class#GNode#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1158,10 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="649">
           <caret line="148" column="17" lean-forward="true" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
-          <folding>
-            <element signature="method#getTypeLabel#0;class#Concept#0" expanded="true" />
-            <element signature="method#commitToKnowledgeBase#0;class#Concept#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1179,31 +1054,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/Global.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="244" column="28" lean-forward="false" selection-start-line="244" selection-start-column="28" selection-end-line="244" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/craft/package.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/CGMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="160" column="8" lean-forward="false" selection-start-line="160" selection-start-column="8" selection-end-line="160" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/EditManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1604">
-          <caret line="1296" column="25" lean-forward="false" selection-start-line="1296" selection-start-column="11" selection-end-line="1296" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1225,14 +1079,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/charger/EditFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-548">
-          <caret line="2146" column="34" lean-forward="true" selection-start-line="2146" selection-start-column="34" selection-end-line="2146" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -1240,12 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1155">
           <caret line="44" column="25" lean-forward="false" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
-          <folding>
-            <element signature="method#commitToKnowledgeBase#0;class#GraphObject#0" expanded="true" />
-            <element signature="method#unCommitFromKnowledgeBase#0;class#GraphObject#0" expanded="true" />
-            <element signature="method#getOutermostGraph#0;class#GraphObject#0" expanded="true" />
-            <element signature="method#setLabelFont#0;class#GraphObject#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1253,11 +1093,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="92" column="8" lean-forward="false" selection-start-line="92" selection-start-column="8" selection-end-line="117" selection-end-column="9" />
-          <folding>
-            <element signature="e#1892#1900#0" expanded="false" />
-            <element signature="method#GraphMetrics#0;class#GraphMetrics#0" expanded="false" />
-            <element signature="method#showOneMetric#0;class#GraphMetrics#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1265,12 +1100,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2244">
           <caret line="94" column="3" lean-forward="false" selection-start-line="94" selection-start-column="3" selection-end-line="94" selection-end-column="3" />
-          <folding>
-            <element signature="method#getConceptTable#1;class#ConceptManager#0" expanded="true" />
-            <element signature="method#getAll#0;class#ConceptManager#0" expanded="true" />
-            <element signature="method#getAllConcepts#0;class#ConceptManager#0" expanded="true" />
-            <element signature="method#getBinaryRelationTuples#0;class#ConceptManager#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1278,16 +1107,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="33">
           <caret line="53" column="4" lean-forward="false" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
-          <folding>
-            <element signature="method#KnowledgeBase#0;class#KnowledgeBase#0" expanded="true" />
-            <element signature="method#init#0;class#KnowledgeBase#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
+        <state relative-caret-position="17259">
           <caret line="850" column="0" lean-forward="false" selection-start-line="850" selection-start-column="0" selection-end-line="850" selection-end-column="0" />
           <folding />
         </state>
@@ -1297,23 +1122,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="714" column="0" lean-forward="true" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/EditToolbar.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Hashtable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="360" column="26" lean-forward="false" selection-start-line="360" selection-start-column="26" selection-end-line="360" selection-end-column="26" />
           <folding>
-            <element signature="method#setOwnerFrame#0;class#Graph#0" expanded="false" />
-            <element signature="method#insertInCharGerGraph#0;class#Graph#0" expanded="true" />
-            <element signature="method#insertObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#forgetObject#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateSameTypeConceptSubgraphs#0;class#Graph#0" expanded="true" />
-            <element signature="method#generateEquivalentConceptSubgraphs#0;class#Graph#0" expanded="true" />
+            <element signature="method#get#0;class#Hashtable#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="968" column="29" lean-forward="true" selection-start-line="968" selection-start-column="29" selection-end-line="968" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/HubFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="270" column="18" lean-forward="false" selection-start-line="270" selection-start-column="14" selection-end-line="270" selection-end-column="18" />
+          <folding>
+            <element signature="method#HubFrame#0;class#HubFrame#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/EditFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9190">
+          <caret line="771" column="48" lean-forward="true" selection-start-line="771" selection-start-column="48" selection-end-line="771" selection-end-column="48" />
+          <folding>
+            <element signature="e#30674#30675#0" expanded="true" />
+            <element signature="e#30738#30739#0" expanded="true" />
+            <element signature="method#closeOut#0;class#EditFrame#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/EditManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="725" column="74" lean-forward="false" selection-start-line="725" selection-start-column="47" selection-end-line="725" selection-end-column="74" />
+          <folding>
+            <element signature="method#makeNewMenuItem#0;class#EditManager#0" expanded="true" />
+            <element signature="method#performActionDisplayMetrics#0;class#EditManager#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/charger/OperManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5338">
-          <caret line="1213" column="56" lean-forward="false" selection-start-line="1213" selection-start-column="56" selection-end-line="1213" selection-end-column="56" />
+        <state relative-caret-position="335">
+          <caret line="1702" column="15" lean-forward="false" selection-start-line="1702" selection-start-column="11" selection-end-line="1702" selection-end-column="15" />
           <folding>
             <element signature="method#makeMenus#0;class#OperManager#0" expanded="true" />
+            <element signature="e#11857#11864#0" expanded="true" />
             <element signature="method#performActionMaxJoinWithOpenGraphs#0;class#OperManager#0" expanded="true" />
             <element signature="method#performActionCommitToKB#0;class#OperManager#0" expanded="true" />
             <element signature="method#performActionSelectRules#0;class#OperManager#0" expanded="true" />
@@ -1321,10 +1195,188 @@
             <element signature="method#applyRule#0;class#OperManager#0" expanded="true" />
             <element signature="method#matchAll#0;class#OperManager#0" expanded="true" />
             <element signature="method#addConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="method#addAugmentedGraphObjects#0;class#OperManager#0" expanded="true" />
+            <element signature="e#45675#45690#0" expanded="true" />
+            <element signature="e#45750#45765#0" expanded="true" />
+            <element signature="e#45822#45837#0" expanded="true" />
+            <element signature="e#45894#45909#0" expanded="true" />
+            <element signature="e#45953#45960#0" expanded="true" />
+            <element signature="e#46004#46011#0" expanded="true" />
             <element signature="method#getEquivalentNodeInAntecedent#0;class#OperManager#0" expanded="true" />
             <element signature="method#match#0;class#OperManager#0" expanded="true" />
+            <element signature="e#60934#60948#0" expanded="true" />
+            <element signature="e#61348#61363#0" expanded="true" />
+            <element signature="e#61423#61438#0" expanded="true" />
+            <element signature="e#61495#61510#0" expanded="true" />
+            <element signature="e#61567#61582#0" expanded="true" />
+            <element signature="e#61886#61893#0" expanded="true" />
+            <element signature="e#61943#61950#0" expanded="true" />
+            <element signature="e#62016#62023#0" expanded="true" />
+            <element signature="e#62067#62074#0" expanded="true" />
             <element signature="method#matchConsequent#0;class#OperManager#0" expanded="true" />
+            <element signature="e#68093#68108#0" expanded="true" />
+            <element signature="e#68168#68183#0" expanded="true" />
+            <element signature="e#68240#68255#0" expanded="true" />
+            <element signature="e#68312#68327#0" expanded="true" />
+            <element signature="e#68631#68638#0" expanded="true" />
+            <element signature="e#68688#68695#0" expanded="true" />
+            <element signature="e#68761#68768#0" expanded="true" />
+            <element signature="e#68812#68819#0" expanded="true" />
             <element signature="method#parseRuleGraph#0;class#OperManager#0" expanded="true" />
+            <element signature="method#performActionConvertUMLDiagramToCGs#0;class#OperManager#0" expanded="true" />
+            <element signature="method#performConvertClassDiagramAction#0;class#OperManager#0" expanded="true" />
+            <element signature="method#performConvertSequenceDiagramAction#0;class#OperManager#0" expanded="true" />
+            <element signature="method#performConvertStateDiagramAction#0;class#OperManager#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/CGMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="159" column="26" lean-forward="false" selection-start-line="159" selection-start-column="26" selection-end-line="159" selection-end-column="26" />
+          <folding>
+            <element signature="method#CGMain#0;class#CGMain#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/util/CGButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="method#CGButton#0;class#CGButton#0" expanded="true" />
+            <element signature="method#CGButton#1;class#CGButton#0" expanded="true" />
+            <element signature="method#init#0;class#CGButton#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/FocusAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="957">
+          <caret line="51" column="22" lean-forward="false" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/WindowEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1089">
+          <caret line="58" column="13" lean-forward="false" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/ListSelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1436">
+          <caret line="45" column="17" lean-forward="false" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/db/DatabaseFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1828">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding>
+            <element signature="method#DatabaseFrame#0;class#DatabaseFrame#0" expanded="true" />
+            <element signature="method#initComponents#0;class#DatabaseFrame#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/FileFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="46" column="22" lean-forward="false" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="22" />
+          <folding>
+            <element signature="method#FileFormat#0;class#FileFormat#0" expanded="true" />
+            <element signature="e#2472#2473#0" expanded="true" />
+            <element signature="e#2504#2505#0" expanded="true" />
+            <element signature="method#FileFormatOf#0;class#FileFormat#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/xml/parsers/DocumentBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/Global.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-889">
+          <caret line="96" column="33" lean-forward="false" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
+          <folding>
+            <element signature="method#setup#0;class#Global#0" expanded="true" />
+            <element signature="method#performActionPageSetup#0;class#Global#0" expanded="true" />
+            <element signature="method#acceptCGXFileName#0;class#Global#0" expanded="true" />
+            <element signature="method#acceptXMIFileName#0;class#Global#0" expanded="true" />
+            <element signature="method#openRuleInNewFrame#0;class#Global#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/DOMExtractor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="279" column="32" lean-forward="true" selection-start-line="279" selection-start-column="32" selection-end-line="279" selection-end-column="32" />
+          <folding>
+            <element signature="method#echo#0;class#DOMExtractor#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/FileInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="194" column="0" lean-forward="false" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/TextProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+          <folding>
+            <element signature="method#TextProperties#0;class#TextProperties#0" expanded="true" />
+            <element signature="method#setupEN#0;class#TextProperties#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/charger/UMLDiagramSelectionFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="355" column="60" lean-forward="true" selection-start-line="355" selection-start-column="60" selection-end-line="355" selection-end-column="60" />
+          <folding>
+            <element signature="e#1370#1380#0" expanded="true" />
+            <element signature="method#UMLDiagramSelectionFrame#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#initComponents#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="e#5721#5722#0" expanded="true" />
+            <element signature="e#5778#5779#0" expanded="true" />
+            <element signature="e#6042#6043#0" expanded="true" />
+            <element signature="e#6102#6103#0" expanded="true" />
+            <element signature="e#6363#6364#0" expanded="true" />
+            <element signature="e#6420#6421#0" expanded="true" />
+            <element signature="e#8650#8760#0" expanded="true" />
+            <element signature="e#8759#8760#0" expanded="true" />
+            <element signature="e#10214#10373#0" expanded="true" />
+            <element signature="e#10372#10373#0" expanded="true" />
+            <element signature="method#accept#0;class#12339:12545" expanded="true" />
+            <element signature="method#ConvertSelectedClassDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#ConvertSelectedSequenceDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#ConvertSelectedStateDiagramsActionPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#openNamedFiles#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#GraphDisplayListMouseClicked#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
+            <element signature="method#ConvertAllUMLDiagramsPerformed#0;class#UMLDiagramSelectionFrame#0" expanded="true" />
           </folding>
         </state>
       </provider>

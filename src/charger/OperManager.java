@@ -6,6 +6,7 @@ import kb.matching.BinaryRelationMatch;
 import kb.matching.AbstractTupleMatcher;
 import charger.util.*;
 import charger.obj.*;
+import org.w3c.dom.Document;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -148,11 +149,16 @@ public class OperManager {
             ef.emgr.makeNewMenuItem(ef.examineMenu, "Show Internals", 0);
             ef.emgr.makeNewMenuItem(ef.examineMenu, ValidateCmdLabel, 0);
             ef.emgr.makeNewMenuItem(ef.examineMenu, VerifyInternalLabel, 0);
-            ef.emgr.makeNewMenuItem(ef.examineMenu, "Select Rules", 0);
             ef.emgr.makeNewMenuItem(ef.operateMenu, CommitToKBLabel, 0);
             //ef.operateMenu.getItem(ef.operateMenu.getItemCount() - 1).setEnabled(false);
-
         }
+
+        //by Bingyang Wei
+        //make a menu item to select which rules to apply to the current graph
+        ef.emgr.makeNewMenuItem(ef.UML2CGsMenu, "Select Rules", 0);
+        ef.emgr.makeNewMenuItem(ef.UML2CGsMenu, "Convert UML Diagrams to CGs", 0);
+
+
         ef.operateMenu.addSeparator();
 
         ef.operateMenu.add(operationMakeTypeHierarchy);
@@ -1671,5 +1677,31 @@ public class OperManager {
         }
         return result;
     }
+
+    /**
+     * The method is called once the menu item, "Convert UML Diagrams to CGs" is clicked
+     * This will open a file wizard to let user select which UML diagram (in xmi format) to convert
+     * @param theGraph
+     */
+    public void performActionConvertUMLDiagramToCGs(Graph theGraph) {
+
+        // start up a wizard to select UML diagrams and pass the current Edit Frame to the new frame
+        try {
+            Global.UMLDiagramSelectionFrame = new UMLDiagramSelectionFrame(ef);
+        } catch (ExceptionInInitializerError e) {
+            charger.Global.error("UMLFrame.setup error: can't create UML frame: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void performConvertClassDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+    }
+
+    public void performConvertSequenceDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+    }
+
+    public void performConvertStateDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+    }
+
     // end by Bingyang Wei
 } // class end

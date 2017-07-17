@@ -13,7 +13,6 @@ import charger.util.Util;
 import charger.util.WindowManager;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -23,12 +22,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
 import java.awt.print.PrinterJob;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Calendar;
@@ -45,7 +39,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+
 import mm.MMAnalysisMgr;
+import org.w3c.dom.Document;
 
 
 /*
@@ -91,6 +87,26 @@ public class Global {
      * The full version name; e.g., "3.5b1"
      */
     public static final String CharGerVersion = "4.0.6b";
+
+    //this method returns the document structure of UML xmi file
+    public static Document getDocumentFromXMI(String filename) {
+        File sourceFile = null;
+        File sourceAbsoluteFile = null;
+        File sourceDirectoryFile = Global.GraphFolderFile;
+
+        if ( filename != null ) {
+            sourceFile = new File( filename );
+            if ( sourceFile.isAbsolute() ) {
+                sourceAbsoluteFile = sourceFile;
+            } else {
+                sourceAbsoluteFile = new File( sourceDirectoryFile, sourceFile.getName() );
+            }
+            sourceDirectoryFile = sourceAbsoluteFile.getParentFile();
+        } else {
+            sourceAbsoluteFile = queryForGraphFile( sourceDirectoryFile );
+        }
+        return DOMExtractor.extract(sourceAbsoluteFile);
+    }
 
     /**
      * An empty class whose name should be kept updated to the current version.
@@ -291,6 +307,11 @@ public class Global {
      * This frame is very similar to HubFrame, but just for picking rules ro app
      */
     public static RulesSelectionFrame RuleSelectionFrame;
+    /**
+     * By Bingyang Wei
+     * This frame is very similar to HubFrame, but just for picking UML diagram to convert to CGs
+     */
+    public static UMLDiagramSelectionFrame UMLDiagramSelectionFrame;
 
     /**
      * keep a global page format instance for all the editing windows to use
@@ -1422,6 +1443,27 @@ public class Global {
             return false;
         }
     }
+    /**
+     * Checks for strings ending in UML xmi extension, but not starting with ".". Used in
+     * <b>accept</b> methods required in various file filters. Treats all names
+     * as lower case.
+     *
+     * @see FileFormat
+     *
+     * @return true if the file meets the criteria; false otherwise.
+     */
+    public static boolean acceptXMIFileName( String name ) {
+        String n = name.toLowerCase();
+        if ( n.startsWith( "." ) ) {
+            return false;
+        }
+        if ( n.endsWith( "." + FileFormat.UML.extension() ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     /**
      * Checks for strings ending in ".cgif" or "CGIF", but not starting with

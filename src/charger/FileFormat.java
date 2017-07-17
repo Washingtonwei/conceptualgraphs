@@ -16,6 +16,7 @@ public enum FileFormat {
 
     DEFAULT( "cgx", "Charger v3/v4 (.cgx)", Family.TEXT ), // same as CHARGER4
     CHARGER4( "cgx", "Charger v3/v4 (.cgx)", Family.TEXT ), //  format based on XML
+    UML( "xmi", "UML (.xmi)", Family.TEXT ), //  format based on XML
     CHARGER2( "cg", "Charger v1.0-v2.9", Family.TEXT ), // "native" text format prior to version 3.0
     CHARGER3( "cgx", "Charger v3.0-v3.8", Family.TEXT), // "native" XML based format up to version 3.9
     CGIF2007( "cgif", "CGIF 2007 (.cgif)", Family.TEXT ), // CGIF format based on the ISO/IEC 24707:2007 Annex B standard

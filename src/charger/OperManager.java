@@ -1,6 +1,9 @@
 package charger;
 
 import charger.EditingChangeState.EditChange;
+import charger.UML2CGs.ClassDiagram2CGsConverter;
+import charger.UML2CGs.SequenceDiagram2CGsConverter;
+import charger.UML2CGs.StateDiagram2CGsConverter;
 import charger.exception.CGContextException;
 import kb.matching.BinaryRelationMatch;
 import kb.matching.AbstractTupleMatcher;
@@ -71,6 +74,11 @@ public class OperManager {
     public JMenuItem operationMakeTypeHierarchy = new JMenuItem(kb.ConceptManager.makeTypeHierarchyAction);
     public JMenuItem operationBinaryRelationMatching = null;
     public JMenuItem operationBestBinaryRelationMatching = null;
+
+    //By Bingyang Wei
+    private ClassDiagram2CGsConverter classDiagram2CGsConverter;
+    private SequenceDiagram2CGsConverter sequenceDiagram2CGsConverter;
+    private StateDiagram2CGsConverter stateDiagram2CGsConverter;
 
     public OperManager(EditFrame outerFrame) {
         // Link to the outer frame
@@ -1695,12 +1703,18 @@ public class OperManager {
     }
 
     public void performConvertClassDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+        classDiagram2CGsConverter = new ClassDiagram2CGsConverter(theGraph, documents);
+        classDiagram2CGsConverter.convert();
     }
 
     public void performConvertSequenceDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+        sequenceDiagram2CGsConverter = new SequenceDiagram2CGsConverter(theGraph, documents);
+        sequenceDiagram2CGsConverter.convert();
     }
 
     public void performConvertStateDiagramAction(Graph theGraph, ArrayList<Document> documents) {
+        stateDiagram2CGsConverter = new StateDiagram2CGsConverter(theGraph, documents);
+        stateDiagram2CGsConverter.convert();
     }
 
     // end by Bingyang Wei

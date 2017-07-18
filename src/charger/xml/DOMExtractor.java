@@ -1,4 +1,4 @@
-package charger;/*
+package charger.xml;/*
  * The Apache Software License, Version 1.1
  *
  *
@@ -291,9 +291,6 @@ public class DOMExtractor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        echo(doc);
-
         return doc;
     }
 

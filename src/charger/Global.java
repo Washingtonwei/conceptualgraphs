@@ -40,6 +40,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
+import charger.xml.DOMExtractor;
 import mm.MMAnalysisMgr;
 import org.w3c.dom.Document;
 
